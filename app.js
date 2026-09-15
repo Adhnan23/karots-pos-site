@@ -260,3 +260,8 @@ getJSON("data/themes.json").then((d) => {
   buildPalette(d.themes || []);
   applyPalette();
 }).catch(() => {});
+
+// Install as an app + cache the shell so the demos work offline.
+if ("serviceWorker" in navigator) {
+  addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}

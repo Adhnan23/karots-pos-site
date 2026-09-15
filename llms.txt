@@ -1,0 +1,54 @@
+# Karots POS
+
+> A self-hosted point-of-sale system for retail shops. One static binary backed
+> by PostgreSQL, runs on hardware you own — no monthly fee, no internet
+> dependency. Built for selling on credit, tracking lots and expiry, managing
+> suppliers and reconciling cash, with compile-time plugins per shop and
+> white-label branding.
+
+Site: https://pos.karots.lk/
+Built by: Sheik Adhnan (https://karots.lk) — available for freelance work.
+Contact: adhnanmsa@gmail.com · +94 76 962 6396 · https://github.com/Adhnan23
+
+## What it is
+- Self-hosted, offline-first POS. The till, inventory, cash and reports run on a
+  single machine or LAN; nothing stops working if a subscription lapses or the
+  internet drops.
+- One static binary + PostgreSQL. Installs on ordinary PCs (old ones included),
+  Windows or Linux. Supports thermal ESC/POS printers, cash drawers and scanners.
+
+## Core capabilities
+- Till & checkout: grouped product menu, scan or forgiving search, split payments
+  across cash/card/credit, instant change with change-kept rounding.
+- Credit customers: running balances with credit limits and manager override,
+  collections, customer statements.
+- Inventory: batches/lots with FEFO costing, expiry warnings at the till,
+  categories at any depth, valuation, stock intake with label printing.
+- Suppliers, cash lockers and reconciliation, discounts, returns and warranty.
+- Reports: sales, profit by category (net revenue, COGS, profit, margin), peak
+  hours, losses & recovery.
+- Barcode labels: choose the top/bottom line fields and quantity; prints CODE128.
+- Plugins compiled in per shop (recharge, repairs, documents, clearance,
+  alternatives, AI catalog and more). White-label skins and receipt styles.
+
+## Pricing (LKR; USD approximate)
+- Offline Software: one-time LKR 35,000 (~$120).
+- Complete Setup: LKR 100,000 (~$335) — most complete.
+- Online: LKR 20,000 (~$70) setup + LKR 2,000 (~$7) / month.
+- First month of support free; training free; custom features extra.
+
+## FAQ
+Q: Does it need the internet?
+A: No — it is offline-first and runs on your own PC or local network.
+
+Q: What does it run on?
+A: Ordinary PCs on Windows or Linux, with thermal ESC/POS printers, cash drawers
+   and barcode scanners.
+
+Q: Can it sell on credit?
+A: Yes — credit customers with limits, split payments and supplier accounts are
+   core features.
+
+Q: Is it customizable?
+A: Yes — features are compiled in per shop as plugins, and the look is
+   white-labelled. Custom features are available on request.

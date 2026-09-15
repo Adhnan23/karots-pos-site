@@ -6,15 +6,32 @@
   <title>Karots POS — self-hosted point of sale</title>
   <meta name="description" content="A self-hosted point-of-sale system for retail shops. One static binary, no monthly fee, no internet dependency. Built for credit customers, lots and expiry, suppliers and cash control.">
   <meta name="theme-color" content="#0F6B5C">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Sheik Adhnan">
+  <meta name="keywords" content="POS, point of sale, self-hosted POS, offline POS, retail software, billing software, inventory, thermal receipt, Sri Lanka POS, Karots POS">
   <link rel="canonical" href="https://pos.karots.lk/">
 
-  <!-- Open Graph — add og:image once a product screenshot exists. -->
+  <!-- Open Graph (link-share preview card) -->
+  <meta property="og:site_name" content="Karots POS">
   <meta property="og:title" content="Karots POS — self-hosted point of sale">
   <meta property="og:description" content="Your till, your inventory, your server. Powerful offline-first POS with no monthly lock-in.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pos.karots.lk/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://pos.karots.lk/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Karots POS — your till, your inventory, your server.">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Karots POS — self-hosted point of sale">
+  <meta name="twitter:description" content="Your till, your inventory, your server. Offline-first POS with no monthly lock-in.">
+  <meta name="twitter:image" content="https://pos.karots.lk/og.png">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -27,6 +44,50 @@
       var t = localStorage.getItem("kpos-theme");
       if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
     } catch (e) {}
+  </script>
+
+  <!-- Structured data for search engines and AI crawlers (not shown on the
+       page). SoftwareApplication describes the product; FAQPage carries the
+       Q&A that assistants can quote when asked about Karots POS. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Karots POS",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Windows, Linux",
+    "url": "https://pos.karots.lk/",
+    "description": "A self-hosted point-of-sale system for retail shops: one static binary, PostgreSQL, no monthly fee and no internet dependency. Built for selling on credit, tracking lots and expiry, managing suppliers and reconciling cash — with compile-time plugins per shop and white-label branding.",
+    "offers": [
+      { "@type": "Offer", "name": "Offline Software", "price": "35000", "priceCurrency": "LKR" },
+      { "@type": "Offer", "name": "Complete Setup", "price": "100000", "priceCurrency": "LKR" },
+      { "@type": "Offer", "name": "Online", "price": "20000", "priceCurrency": "LKR" }
+    ],
+    "author": { "@type": "Person", "name": "Sheik Adhnan", "url": "https://karots.lk" },
+    "sameAs": ["https://github.com/Adhnan23"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is Karots POS?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Karots POS is a self-hosted point-of-sale system for retail shops. It ships as one static binary backed by PostgreSQL and runs on hardware you own — no monthly fee and no internet dependency." } },
+      { "@type": "Question", "name": "Does Karots POS need an internet connection?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. It is offline-first and runs entirely on your own PC or local network, so the till keeps working even if your connection drops or a subscription lapses." } },
+      { "@type": "Question", "name": "How much does Karots POS cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "There are three options: Offline Software as a one-time LKR 35,000; a Complete Setup at LKR 100,000; or an Online plan at LKR 20,000 setup plus LKR 2,000 per month. First month of support is free; USD prices are approximate." } },
+      { "@type": "Question", "name": "What hardware does Karots POS run on?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It runs on ordinary PCs — old machines included — on Windows or Linux, and supports thermal ESC/POS receipt printers, cash drawers and barcode scanners." } },
+      { "@type": "Question", "name": "Can Karots POS sell on credit and manage customer accounts?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Credit customers with limits, split payments across tenders, supplier accounts and cash reconciliation are core features, not add-ons." } },
+      { "@type": "Question", "name": "Is Karots POS customizable?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Features are compiled in per shop as plugins so each shop ships exactly what it needs, and the look is white-labelled. Custom features are available on request." } },
+      { "@type": "Question", "name": "Who builds Karots POS?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Karots POS is built by Sheik Adhnan (karots.lk), who is also available for freelance work — POS customizations, plugins, custom software, mobile apps and integrations." } }
+    ]
+  }
   </script>
 </head>
 <body>
