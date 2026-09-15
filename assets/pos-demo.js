@@ -50,7 +50,10 @@ export function initPosDemo(mount) {
       <div class="till-total-row"><span>Total</span><strong id="tillTotal">Rs 0</strong></div>
       <div class="till-pay">
         <label class="till-cash" for="tillCash"><span>Cash received</span>
-          <input id="tillCash" type="number" inputmode="numeric" min="0" step="10" placeholder="0"></label>
+          <input id="tillCash" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="0"></label>
+        <div class="till-keypad" id="tillPad">
+          ${["1","2","3","4","5","6","7","8","9","C","0","⌫"].map((k) => `<button type="button" class="pad-key${k === "C" || k === "⌫" ? " pad-fn" : ""}" data-key="${k}" aria-label="${k === "⌫" ? "Backspace" : k === "C" ? "Clear" : k}">${k}</button>`).join("")}
+        </div>
         <p class="till-status" id="tillStatus" aria-live="polite"></p>
         <div class="till-break" id="tillBreak" aria-live="polite"></div>
         <button class="btn btn-primary till-print" id="tillPrint" type="button" disabled>Print receipt</button>
@@ -65,6 +68,9 @@ export function initPosDemo(mount) {
   const cashEl = q("#tillCash"), statusEl = q("#tillStatus"), printBtn = q("#tillPrint");
   const slot = q("#tillSlot"), receipt = q("#tillReceipt"), breakEl = q("#tillBreak");
   const tearBtn = q("#tillTear");
+  // On touch devices, drive the amount from the on-screen keypad instead of the
+  // OS keyboard (readonly stops the native keyboard from popping up).
+  if (matchMedia("(pointer: coarse)").matches) cashEl.readOnly = true;
 
   const total = () => [...cart].reduce((s, [id, qty]) => s + item(id).price * qty, 0);
 
@@ -139,7 +145,7 @@ export function initPosDemo(mount) {
     const when = now.toLocaleDateString() + " " + now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     receipt.innerHTML = `
       <div class="r-center r-shop">KAROTS POS</div>
-      <div class="r-center r-small">Demo Store · Colombo</div>
+      <div class="r-center r-small">Demo Store · Kandakuliya, Puttalam</div>
       <div class="r-center r-small">Tel: +94 76 962 6396</div>
       <div class="r-hr"></div>
       <div class="r-row r-small"><span>Receipt:</span><span>${no}</span></div>
@@ -173,7 +179,15 @@ export function initPosDemo(mount) {
     if (step) return change(step.dataset.id, Number(step.dataset.step));
     if (e.target.closest("#tillReset")) return reset();
     if (e.target.closest("#tillTear")) return tear();
-    if (e.target.closest("#tillPrint")) print();
+    if (e.target.closest("#tillPrint")) return print();
+    const key = e.target.closest("[data-key]");
+    if (key) {
+      const k = key.dataset.key;
+      if (k === "C") cashEl.value = "";
+      else if (k === "⌫") cashEl.value = cashEl.value.slice(0, -1);
+      else if (cashEl.value.replace(/\D/g, "").length < 7) cashEl.value += k;
+      updatePay();
+    }
   });
   cashEl.addEventListener("input", updatePay);
   render();
