@@ -2,8 +2,8 @@
 // different motif so the page doesn't feel repetitive. All shapes use
 // currentColor with low opacity, so they inherit the active palette (and turn
 // white on the accent-filled demo band). app.js inflates any [data-art] span.
-const A = (inner, w = 520, h = 520) =>
-  `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" aria-hidden="true">${inner}</svg>`;
+const A = (inner, w = 520, h = 520, pa = "xMidYMid slice") =>
+  `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="${pa}" fill="none" stroke="currentColor" aria-hidden="true">${inner}</svg>`;
 
 const ART = {
   // Hero — concentric rings + a dot cluster + a tilted square.
@@ -33,10 +33,11 @@ const ART = {
     </pattern></defs>
     <rect width="520" height="520" fill="url(#art-grid)"/>`),
 
-  // Product — a large soft blob.
+  // Product — concentric rounded squares (nested "modules", clean not lumpy).
   blob: A(`
-    <path d="M300 70c70 0 150 40 160 120s-40 150-110 190-180 40-240-30-40-180 30-240 90-40 160-40z" fill="currentColor" fill-opacity=".06"/>
-    <path d="M300 130c50 0 108 28 120 82s-24 112-72 140" fill="none" stroke-width="2" stroke-opacity=".14"/>`),
+    <rect x="70" y="110" width="330" height="330" rx="52" fill="currentColor" fill-opacity=".05"/>
+    <rect x="140" y="180" width="250" height="250" rx="44" stroke-width="2" stroke-opacity=".13"/>
+    <rect x="210" y="250" width="150" height="150" rx="32" stroke-width="2" stroke-opacity=".10"/>`),
 
   // Plugins — scattered plus signs.
   plus: A(`
@@ -66,7 +67,7 @@ const ART = {
   wave: A(`
     <path d="M0 90 Q130 30 260 90 T520 90 V210 H0 Z" fill="currentColor" fill-opacity=".10"/>
     <path d="M0 120 Q130 60 260 120 T520 120" fill="none" stroke-width="2" stroke-opacity=".22"/>
-    <path d="M0 150 Q130 96 260 150 T520 150" fill="none" stroke-width="2" stroke-opacity=".14"/>`, 520, 210),
+    <path d="M0 150 Q130 96 260 150 T520 150" fill="none" stroke-width="2" stroke-opacity=".14"/>`, 520, 210, "none"),
 };
 
 export const art = (name) => ART[name] || "";

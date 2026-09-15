@@ -62,15 +62,21 @@
     <!-- Hero -->
     <section class="hero" aria-labelledby="hero-h">
       <span class="bg-art bg-art-hero" data-art="rings" aria-hidden="true"></span>
-      <div class="wrap">
-        <h1 id="hero-h">Your till, your inventory, your server.</h1>
-        <p class="subhead">Karots POS runs entirely on hardware you own — one static binary, no monthly fee, no internet dependency. Built for shops that sell on credit, track lots and expiry, and manage suppliers, not just ring up sales.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-primary js-demo-cta" href="#demo">Try the live demo →</a>
-          <a class="btn btn-secondary" href="#positioning">See what it replaces</a>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 id="hero-h">Your till, your inventory, your server.</h1>
+          <p class="subhead">Karots POS runs entirely on hardware you own — one static binary, no monthly fee, no internet dependency. Built for shops that sell on credit, track lots and expiry, and manage suppliers, not just ring up sales.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary js-demo-cta" href="#demo">Try the live demo →</a>
+            <a class="btn btn-secondary" href="#positioning">See what it replaces</a>
+          </div>
+          <div class="proof">
+            <span>Single binary</span><span>PostgreSQL</span><span>Thermal receipts</span><span>Windows &amp; Linux</span><span>Runs on old PCs</span>
+          </div>
         </div>
-        <div class="proof">
-          <span>Single binary</span><span>PostgreSQL</span><span>Thermal receipts</span><span>Windows &amp; Linux</span><span>Runs on old PCs</span>
+        <div class="hero-demo">
+          <div class="pos-demo" id="posDemo" aria-label="Mini point of sale — tap items to ring up a sale"></div>
+          <p class="hero-demo-cap">↑ A real mini till — tap items, take cash, print a receipt.</p>
         </div>
       </div>
     </section>
@@ -222,6 +228,13 @@
       </p>
     </div>
   </footer>
+
+  <!-- Sticky action bar, phones only (styles.css hides it above 640px). It
+       reuses the js-demo-cta / js-contact-cta hooks, so app.js wires it for free. -->
+  <div class="mobile-bar">
+    <a class="btn btn-secondary js-demo-cta" href="#demo">Live demo</a>
+    <a class="btn btn-primary js-contact-cta" data-subject="Karots POS — enquiry" href="mailto:">Get a quote</a>
+  </div>
 
   <script type="module" src="app.js"></script>
 </body>

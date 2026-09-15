@@ -64,7 +64,8 @@ section { padding-block: 96px; }
 .nav-links a { color: var(--ink-muted); font-weight: 600; font-size: .95rem; }
 .nav-links a:hover { color: var(--ink); text-decoration: none; }
 .nav-actions { display: flex; gap: 10px; align-items: center; margin-left: 8px; }
-.nav-toggle { display: none; }
+/* Higher specificity than .btn-icon so the hamburger stays hidden on desktop. */
+.nav .nav-toggle { display: none; }
 
 /* Palette picker */
 .palette-wrap { position: relative; }
@@ -95,7 +96,7 @@ section { padding-block: 96px; }
   .nav-links[hidden] { display: none !important; }
   .nav-links a { padding: 12px 0; width: 100%; border-bottom: 1px solid var(--border); }
   .nav-links .btn { margin-top: 12px; }
-  .nav-toggle { display: inline-flex; margin-left: auto; }
+  .nav .nav-toggle { display: inline-flex; margin-left: auto; }
 }
 
 /* ---- Buttons ---- */
@@ -112,9 +113,11 @@ section { padding-block: 96px; }
 .btn-secondary:hover { background: var(--accent-soft); }
 .btn.is-disabled { background: var(--accent-soft); color: var(--ink-muted); border-color: var(--border); cursor: not-allowed; pointer-events: none; }
 .btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
   min-height: 40px; width: 40px; padding: 0; border-radius: 8px;
   background: transparent; border: 1px solid var(--border); color: var(--ink-muted);
 }
+.btn-icon span { display: inline-flex; }
 .btn-icon:hover { color: var(--ink); border-color: var(--ink-muted); }
 .btn-icon svg { width: 18px; height: 18px; }
 
@@ -132,6 +135,104 @@ section { padding-block: 96px; }
 .proof span::before { content: "·"; margin-right: 20px; color: var(--border); }
 .proof span:first-child::before { content: none; }
 
+/* ---- Hero: copy + playable mini till ---- */
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 48px; align-items: center; }
+.hero-demo-cap { font-family: "IBM Plex Mono", monospace; font-size: .78rem; color: var(--ink-muted); margin: 12px 0 0; text-align: center; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.till { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 16px 44px rgba(0,0,0,.14); padding: 16px; }
+:root[data-theme="dark"] .till, :root:not([data-theme="light"]) .till { box-shadow: 0 16px 44px rgba(0,0,0,.4); }
+.till-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.till-brand { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+.till-demo-tag { font-family: "IBM Plex Mono", monospace; font-size: .62rem; letter-spacing: .08em; background: var(--accent-soft); color: var(--accent); padding: 2px 7px; border-radius: 4px; }
+.till-head-right { display: inline-flex; align-items: center; gap: 8px; }
+.till-reset { width: 26px; height: 26px; border: 1px solid var(--border); background: var(--bg); border-radius: 7px; color: var(--ink-muted); cursor: pointer; font-size: 1rem; line-height: 1; display: grid; place-items: center; }
+.till-reset:hover { border-color: var(--accent); color: var(--accent); }
+
+.till-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (max-width: 400px) { .till-items { grid-template-columns: repeat(2, 1fr); } }
+.till-item { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px; font: inherit; text-align: left; cursor: pointer; transition: transform .08s, border-color .15s; }
+.till-item:hover { border-color: var(--accent); }
+.till-item:active { transform: scale(.95); }
+.till-item-emoji { font-size: 1.35rem; line-height: 1.2; }
+.till-item-name { font-weight: 600; font-size: .84rem; color: var(--ink); }
+.till-item-price { font-family: "IBM Plex Mono", monospace; font-size: .76rem; color: var(--ink-muted); }
+
+.till-cart { margin-top: 12px; min-height: 40px; }
+.till-empty { color: var(--ink-muted); font-size: .85rem; margin: 8px 2px; }
+.till-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.till-line { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px; font-size: .88rem; }
+.till-line-name { color: var(--ink); }
+.till-line-qty { display: inline-flex; align-items: center; gap: 6px; }
+.till-step { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--ink); cursor: pointer; font-size: 1rem; line-height: 1; display: grid; place-items: center; }
+.till-step:hover { border-color: var(--accent); color: var(--accent); }
+.till-line-q { min-width: 14px; text-align: center; font-variant-numeric: tabular-nums; }
+.till-line-amt { font-family: "IBM Plex Mono", monospace; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.till-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+.till-total-row strong { font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.till-pay { margin-top: 12px; display: grid; gap: 8px; }
+.till-cash { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: .85rem; color: var(--ink-muted); }
+.till-cash input { width: 120px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--ink); font: inherit; font-family: "IBM Plex Mono", monospace; text-align: right; }
+.till-cash input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.till-status { margin: 0; min-height: 1.15em; font-family: "IBM Plex Mono", monospace; font-size: .82rem; }
+.till-status.is-short { color: #d64545; }
+.till-status.is-ok { color: var(--accent); font-weight: 600; }
+.till-break { display: flex; flex-wrap: wrap; gap: 6px; }
+.till-break:not(:empty) { margin: -2px 0 2px; }
+.till-chip { font-family: "IBM Plex Mono", monospace; font-size: .72rem; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 9px; }
+.till-chip b { font-weight: 700; }
+.till-print { width: 100%; }
+.till-print:disabled { opacity: .5; cursor: not-allowed; }
+
+/* A wall-mounted receipt printer: the paper rolls down out of its slot. */
+.printer {
+  position: relative; height: 22px; margin-top: 14px; z-index: 2;
+  border-radius: 9px 9px 4px 4px; background: linear-gradient(#3a4557, #1f2836);
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.2);
+}
+.printer::before { /* the slot mouth the paper feeds through */
+  content: ""; position: absolute; left: 14px; right: 14px; top: 9px; height: 4px;
+  border-radius: 3px; background: #0b1120; box-shadow: inset 0 1px 2px rgba(0,0,0,.9);
+}
+.printer::after { /* ready LED */
+  content: ""; position: absolute; right: 12px; top: 8px; width: 5px; height: 5px;
+  border-radius: 50%; background: #34d399; box-shadow: 0 0 6px #34d399;
+}
+.receipt-slot { overflow: hidden; max-height: 0; transition: max-height .9s cubic-bezier(.22,.75,.2,1); }
+.receipt-slot.open { max-height: 560px; }
+.receipt {
+  position: relative; background: #fff; color: #000; padding: 12px 14px 18px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.22); border-radius: 0 0 4px 4px;
+  font-family: "Courier New", ui-monospace, monospace; font-size: 12px; line-height: 1.35;
+  transform: translateY(-100%); transition: transform .9s cubic-bezier(.22,.75,.2,1);
+}
+.receipt-slot.open .receipt { transform: none; }
+/* Tear-off: the slip drops away before the sale resets. */
+.receipt-slot.open .receipt.torn { transform: translateY(120%) rotate(1.5deg); opacity: 0; transition: transform .46s ease-in, opacity .4s ease-in; }
+/* During the tear reset we snap to the fresh state without any slide/collapse. */
+.receipt-slot.no-anim, .receipt-slot.no-anim .receipt { transition: none !important; }
+.receipt::after { /* torn bottom edge */
+  content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 9px; background: #fff;
+  -webkit-mask: repeating-linear-gradient(-45deg, #000 0 5px, transparent 5px 10px);
+          mask: repeating-linear-gradient(-45deg, #000 0 5px, transparent 5px 10px);
+}
+/* Faithful to the POS web receipt (templates/pages/cashier/receipt.templ). */
+.receipt .r-center { text-align: center; }
+.receipt .r-right { text-align: right; }
+.receipt .r-cap { text-transform: capitalize; }
+.receipt .r-shop { font-size: 15px; font-weight: 700; }
+.receipt .r-small { font-size: 11px; }
+.receipt .r-tiny { font-size: 9.5px; } /* the printer's Font B — builder credit line */
+.receipt .r-hr { border-top: 1px dashed #000; margin: 5px 0; }
+.receipt .r-row { display: flex; justify-content: space-between; gap: 8px; }
+.receipt .r-total { font-weight: 700; font-size: 15px; margin: 6px 0; }
+.receipt .r-big { font-weight: 700; font-size: 15px; margin-top: 6px; }
+.receipt .r-items { width: 100%; border-collapse: collapse; }
+.receipt .r-items td { padding: 0; vertical-align: top; }
+.receipt .r-item-name td { padding-top: 3px; font-weight: 600; }
+
 /* ---- Positioning strip ---- */
 .positioning { background: var(--surface); border-block: 1px solid var(--border); }
 .pos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; }
@@ -147,11 +248,18 @@ section { padding-block: 96px; }
 .feature-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px 28px; }
 .feature-list.cols-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .feature-list.cols-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.feature-list li { position: relative; padding-left: 26px; color: var(--ink); }
-.feature-list li::before {
-  content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px;
-  border-radius: 2px; background: var(--accent); transform: translateY(-50%);
+.feature-list li {
+  position: relative; padding: 12px 14px 12px 34px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  transition: border-color .15s, transform .15s;
 }
+.feature-list li:hover { border-color: var(--accent); transform: translateY(-1px); }
+.feature-list li::before {
+  content: ""; position: absolute; left: 15px; top: 20px; width: 8px; height: 8px;
+  border-radius: 2px; background: var(--accent);
+}
+/* On the surface-toned plugins/hire bands, tiles need the base bg to stand out. */
+.plugins .feature-list li { background: var(--bg); }
 
 /* ---- Plugins (plugins.json) ---- */
 .plugins { background: var(--surface); border-block: 1px solid var(--border); }
@@ -228,7 +336,23 @@ section { padding-block: 96px; }
 
 /* ---- Flat abstract background art (one motif per section) ---- */
 section { position: relative; overflow: hidden; }
-.bg-art { position: absolute; z-index: 0; pointer-events: none; color: var(--accent); }
+.bg-art {
+  position: absolute; z-index: 0; pointer-events: none; color: var(--accent);
+  /* Dissolve the edges so pattern motifs read as soft washes, not hard boxes. */
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 42%, transparent 78%);
+          mask-image: radial-gradient(ellipse at center, #000 42%, transparent 78%);
+}
+/* Scroll-in entrance, pure CSS. The art is visible by default (above); only
+   browsers with scroll-driven animations play the reveal — nothing is ever
+   hidden waiting on JS. Skipped on phones and for reduced-motion. */
+@keyframes art-reveal { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes art-rise   { from { opacity: 0; transform: translateY(28px); }           to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) and (min-width: 641px) {
+  @supports (animation-timeline: view()) {
+    .bg-art { animation: art-reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 18%; }
+    .bg-art-demo { animation-name: art-rise; }
+  }
+}
 .bg-art svg { display: block; width: 100%; height: 100%; }
 .bg-art-hero        { top: -50px; right: -70px; width: min(64vw, 640px); height: min(64vw, 640px); }
 .bg-art-positioning { top: 0; right: 0; width: min(40vw, 300px); height: min(40vw, 300px); }
@@ -237,7 +361,8 @@ section { position: relative; overflow: hidden; }
 .bg-art-companion   { right: -50px; bottom: -50px; width: min(48vw, 340px); height: min(48vw, 340px); }
 .bg-art-deploy      { top: -50px; left: -50px; width: min(50vw, 400px); height: min(50vw, 400px); }
 .bg-art-pricing     { bottom: -90px; left: -90px; width: min(72vw, 560px); height: min(72vw, 560px); }
-.bg-art-demo        { left: 0; right: 0; bottom: 0; width: 100%; height: 200px; color: #fff; }
+.bg-art-demo        { left: 0; right: 0; bottom: 0; width: 100%; height: 200px; color: #fff; -webkit-mask-image: none; mask-image: none; }
+.bg-art-hire        { top: -40px; right: -50px; width: min(44vw, 320px); height: min(44vw, 320px); }
 @media (max-width: 640px) { .bg-art { opacity: .6; } }
 
 /* ---- Freelance / hire band ---- */
@@ -258,6 +383,8 @@ section { position: relative; overflow: hidden; }
 .footer nav a { color: var(--ink-muted); font-size: .9rem; font-weight: 600; }
 .footer nav a:hover { color: var(--ink); text-decoration: none; }
 .footer .contact { width: 100%; border-top: 1px solid var(--border); padding-top: 20px; color: var(--ink-muted); font-size: .9rem; }
+/* Keep each contact link whole so the phone number never breaks mid-digits. */
+.footer .contact a { white-space: nowrap; }
 
 /* ---- Scroll-in motion ---- */
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity .2s ease-out, transform .2s ease-out; }
@@ -269,3 +396,49 @@ section { position: relative; overflow: hidden; }
   background: var(--accent); color: #fff; padding: 8px 14px; border-radius: 6px; z-index: 100;
 }
 .skip-link:focus { left: 8px; }
+
+/* ---- Sticky mobile action bar (phones only; reuses demo + contact hooks) ---- */
+.mobile-bar { display: none; }
+
+/* ---- Mobile-native refinements: designed for a phone, not a shrunk desktop ---- */
+@media (max-width: 640px) {
+  section { padding-block: 48px; }
+  .hero { padding-block: 36px 44px; }
+  .section-head { margin-bottom: 24px; }
+  .hero .subhead, .section-head p.lead { font-size: 1rem; }
+
+  /* Full-width, stacked CTAs — the single biggest desktop→mobile tell. */
+  .hero-ctas, .hire-ctas { flex-direction: column; align-items: stretch; width: 100%; }
+  .hero-ctas .btn, .hire-ctas .btn, .demo .btn { width: 100%; }
+  .btn { min-height: 48px; }
+
+  /* Proof row as chips, not a dotted desktop sentence wrapping into debris. */
+  .proof { border-top: 0; padding-top: 12px; gap: 8px; }
+  .proof span { padding: 4px 11px; border: 1px solid var(--border); border-radius: 999px; font-size: .78rem; background: var(--surface); }
+  .proof span::before { content: none !important; }
+
+  /* Tighter cards + rhythm so sections read as panels, not squeezed columns. */
+  .card { padding: 18px; }
+  .plan { padding: 24px 18px; }
+  .card-grid, .companion-grid, .pricing-grid { gap: 14px; }
+  .feature-group + .feature-group { margin-top: 40px; }
+  .feature-list { gap: 10px; }
+  .hire-inner { gap: 18px; }
+
+  /* Leave room for the sticky bar and show it. */
+  body { padding-bottom: 76px; }
+  .mobile-bar {
+    display: flex; gap: 10px; position: fixed; z-index: 55; left: 0; right: 0; bottom: 0;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(8px);
+    border-top: 1px solid var(--border);
+  }
+  .mobile-bar .btn { flex: 1; min-height: 46px; }
+
+  /* Footer: a clean stacked column, not a wrapped desktop row. */
+  .footer .wrap { flex-direction: column; align-items: flex-start; gap: 14px; padding-block: 32px; }
+  .footer nav { margin-left: 0; gap: 12px 16px; }
+  .footer .foot-tag { margin: 0; }
+  .footer .contact { padding-top: 16px; }
+}
