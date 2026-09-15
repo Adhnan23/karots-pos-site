@@ -270,9 +270,11 @@ section { padding-block: 96px; }
 
 /* ---- Flagship mini-demos (feature-demos.js) ---- */
 .mini-demos-cap { font-family: "IBM Plex Mono", monospace; letter-spacing: .04em; color: var(--ink-muted); margin: 56px 0 16px; }
-.mini-demos { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.mini-demos { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 @media (max-width: 760px) { .mini-demos { grid-template-columns: 1fr; } }
-.mini { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
+.mini-mount { display: flex; }
+.mini-mount.wide { grid-column: 1 / -1; }
+.mini { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
 .mini-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .mini-title { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
 .mini-reset { width: 28px; height: 28px; border: 1px solid var(--border); background: var(--bg); border-radius: 7px; color: var(--ink-muted); cursor: pointer; font-size: 1rem; line-height: 1; display: grid; place-items: center; }
@@ -303,6 +305,76 @@ section { padding-block: 96px; }
 .cust-amt { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: .85rem; color: var(--ink-muted); margin: 4px 0 12px; }
 .cust-amt input { width: 130px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: "IBM Plex Mono", monospace; text-align: right; }
 .cust-amt input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* shared mini-demo rows */
+.pay-total { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: .9rem; color: var(--ink); }
+.pay-total strong { font-family: "Space Grotesk", sans-serif; font-variant-numeric: tabular-nums; }
+.r-rows { display: grid; gap: 8px; }
+
+/* split payment */
+.pay-lines { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.pay-lines li { display: flex; justify-content: space-between; font-size: .85rem; font-family: "IBM Plex Mono", monospace; color: var(--ink-muted); }
+.pay-remain { margin: 10px 0; font-family: "IBM Plex Mono", monospace; font-size: .9rem; font-weight: 600; }
+.pay-remain.is-done { color: var(--accent); }
+.pay-btns .btn { min-width: 0; }
+
+/* discount */
+.disc-toggle { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.chip { border: 1px solid var(--border); background: var(--bg); border-radius: 8px; padding: 8px 14px; font: inherit; font-family: "IBM Plex Mono", monospace; color: var(--ink-muted); cursor: pointer; }
+.chip.is-on { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.disc-in { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--ink); font-family: "IBM Plex Mono", monospace; text-align: right; }
+.disc-in:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.disc-line { color: var(--accent); }
+.disc-saved { margin: 12px 0 0; font-weight: 600; color: var(--accent); }
+
+/* drawer float */
+.float-rows { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
+.float-rows li { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 12px; }
+.float-denom { font-family: "IBM Plex Mono", monospace; font-size: .85rem; color: var(--ink); }
+.float-step { display: inline-flex; align-items: center; gap: 8px; }
+.float-c { min-width: 18px; text-align: center; font-variant-numeric: tabular-nums; }
+.float-sub { font-family: "IBM Plex Mono", monospace; font-size: .82rem; color: var(--ink-muted); text-align: right; min-width: 74px; }
+.float-total { border-top: 1px solid var(--border); padding-top: 10px; }
+
+/* return by receipt */
+.ret-no { font-family: "IBM Plex Mono", monospace; font-size: .78rem; color: var(--ink-muted); margin-bottom: 10px; }
+.ret-items { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 6px; }
+.ret-item { display: flex; justify-content: space-between; gap: 10px; padding: 9px 11px; border: 1px solid var(--border); border-radius: 9px; background: var(--bg); cursor: pointer; font-size: .88rem; }
+.ret-item.is-sel { border-color: var(--accent); background: var(--accent-soft); }
+.ret-item.is-done { opacity: .55; cursor: default; }
+.ret-item em { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: .72rem; color: var(--accent); text-transform: uppercase; }
+.ret-w { font-family: "IBM Plex Mono", monospace; font-size: .66rem; color: var(--ink-muted); border: 1px solid var(--border); border-radius: 999px; padding: 1px 6px; }
+
+/* profit by category */
+.prof-bars { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; }
+.prof-bar { display: grid; grid-template-columns: 84px 1fr auto; align-items: center; gap: 10px; cursor: pointer; }
+.prof-name { font-size: .82rem; color: var(--ink); }
+.prof-track { height: 10px; background: var(--accent-soft); border-radius: 999px; overflow: hidden; }
+.prof-track span { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .3s; }
+.prof-bar.is-sel .prof-name { font-weight: 700; color: var(--accent); }
+.prof-val { font-family: "IBM Plex Mono", monospace; font-size: .8rem; color: var(--ink-muted); }
+.prof-detail { display: grid; gap: 7px; border-top: 1px solid var(--border); padding-top: 12px; }
+.prof-periods { margin-bottom: 14px; }
+
+/* barcode labels */
+.label-pick { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: .82rem; color: var(--ink-muted); flex-wrap: wrap; }
+.label-pick > span:first-child { min-width: 58px; }
+.label-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.label-chips .chip { padding: 5px 10px; font-size: .74rem; }
+.label-print { min-height: 36px; padding: 0 14px; margin-left: auto; }
+/* the strip floats out of the printer (absolute) so the card never resizes */
+.print-area { position: relative; }
+.printer-tear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); z-index: 3; width: 24px; height: 16px; padding: 0; border: 0; border-radius: 4px; background: #e2e8f0; color: #0b1120; font-size: .72rem; line-height: 1; cursor: pointer; }
+.label-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 12px; }
+.label-strip:empty { margin-top: 0; }
+@keyframes label-feed { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: none; } }
+.label-strip.printed .plabel { animation: label-feed .42s ease both; animation-delay: calc(var(--i, 0) * .12s); }
+.label-strip.torn { transform: translateY(70px); opacity: 0; transition: transform .42s ease-in, opacity .34s ease-in; }
+.plabel { background: #fff; color: #111; border: 1px solid #dcdcdc; border-radius: 4px; padding: 8px 10px; text-align: center; box-shadow: 0 5px 12px rgba(0,0,0,.14); }
+.plabel-top { font-weight: 700; font-size: .82rem; }
+.plabel-bot { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1rem; margin-top: 4px; }
+.bc { display: block; margin: 6px auto 3px; height: 30px; max-width: 100%; }
+.label-code { font-family: "IBM Plex Mono", monospace; font-size: .66rem; letter-spacing: .14em; color: #333; }
 
 /* ---- Plugins (plugins.json) ---- */
 .plugins { background: var(--surface); border-block: 1px solid var(--border); }

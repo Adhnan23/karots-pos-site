@@ -3,7 +3,7 @@
 import { icon } from "./assets/icons.js";
 import { art } from "./assets/art.js";
 import { initPosDemo } from "./assets/pos-demo.js";
-import { initLotsDemo, initCreditDemo } from "./assets/feature-demos.js";
+import { initLotsDemo, initCreditDemo, initSplitDemo, initDiscountDemo, initFloatDemo, initReturnDemo, initProfitDemo, initLabelDemo } from "./assets/feature-demos.js";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -30,6 +30,12 @@ $$("[data-art]").forEach((el) => { el.innerHTML = art(el.dataset.art); });
 initPosDemo(document.getElementById("posDemo"));
 initLotsDemo(document.getElementById("lotsDemo"));
 initCreditDemo(document.getElementById("creditDemo"));
+initSplitDemo(document.getElementById("splitDemo"));
+initDiscountDemo(document.getElementById("discountDemo"));
+initFloatDemo(document.getElementById("floatDemo"));
+initReturnDemo(document.getElementById("returnDemo"));
+initProfitDemo(document.getElementById("profitDemo"));
+initLabelDemo(document.getElementById("labelDemo"));
 
 // ---- Theme: light/dark mode + a named colour palette from data/themes.json. ----
 // theme.css paints the default palette on first load; once themes.json arrives,
