@@ -1,0 +1,138 @@
+{
+  "groups": [
+    {
+      "id": "till-checkout",
+      "title": "Till & checkout",
+      "tagline": "The counter, fast.",
+      "icon": "barcode",
+      "items": [
+        "Fast cashier till with grouped product-menu cards",
+        "\"Frequently sold\" quick-picks",
+        "Barcode scan and forgiving name search",
+        "Cash / card / online / credit tenders, including split payments",
+        "Credit as a first-class payment, with limits and override",
+        "Instant change with change-kept rounding",
+        "Customer-facing receipts, kiosk lockdown and screen-lock",
+        "Multi-price / lot prompts and expiry warnings at the till"
+      ]
+    },
+    {
+      "id": "inventory-stock",
+      "title": "Inventory & stock",
+      "tagline": "Know what's on the shelf, and what it cost.",
+      "icon": "box",
+      "items": [
+        "Nested categories at any depth",
+        "Stock intake: add / restock with quantity and label print",
+        "Batches and lots with FEFO and expiry tracking",
+        "Per-lot dual pricing",
+        "Stock valuation at any category depth",
+        "Stock-take mode toggle",
+        "Found-at-till count correction",
+        "Damage write-off and configurable barcode-label lines"
+      ]
+    },
+    {
+      "id": "purchasing-suppliers",
+      "title": "Purchasing & suppliers",
+      "tagline": "Reordering without the guesswork.",
+      "icon": "truck",
+      "items": [
+        "Purchase-order lifecycle: draft → receive, with partial receipts",
+        "Per-supplier PO and GRN print",
+        "Demand-based reorder report with live filters",
+        "Supplier receiving discounts (per-item and whole-bill)",
+        "Supplier money flows: returns-credit, refunds, advances, auto-spent credit",
+        "Pay, receive and order from the counter behind a per-user flag"
+      ]
+    },
+    {
+      "id": "money-cash",
+      "title": "Money & cash control",
+      "tagline": "Every till drawer, accounted for.",
+      "icon": "coins",
+      "items": [
+        "Cash lockers and ledger",
+        "Till open / close reconciliation with denomination counting",
+        "A CR- receipt on every cash move",
+        "Cash-drawer kick on cash events",
+        "Bank locker and bill-pay",
+        "Admin bill-pay and get-money",
+        "Cashier expenses with categories",
+        "Shared-drawer \"continue last\""
+      ]
+    },
+    {
+      "id": "customers-credit",
+      "title": "Customers & credit",
+      "tagline": "Credit sales without the notebook.",
+      "icon": "card",
+      "items": [
+        "Customer register with duplicate guard",
+        "Credit limits and on-account sales",
+        "Old-debt-first payment waterfall (current → old → advance)",
+        "Editable opening balance",
+        "Printable customer and supplier statements",
+        "DP- / return / warranty customer receipts"
+      ]
+    },
+    {
+      "id": "reports-insights",
+      "title": "Reports & insights",
+      "tagline": "See the shop, not just the till roll.",
+      "icon": "chart",
+      "items": [
+        "Sales with profit, margin, KPI deltas, hour filter and drill-in",
+        "Peak-hours heatmap",
+        "Finance P&L",
+        "Losses & recovery (damage and warranty)",
+        "Tender report and top products",
+        "Valuation reporting",
+        "CSV / XLSX / ODS export",
+        "Dashboard with vs-yesterday deltas"
+      ]
+    },
+    {
+      "id": "warranty-service",
+      "title": "Warranty & service",
+      "tagline": "Replacements and repairs feed the same books.",
+      "icon": "shield",
+      "items": [
+        "Serial and by-receipt (non-serial) warranty",
+        "One-click replace-as-warranty-cost, feeding losses & recovery",
+        "Product recipes / BOM with yield and whole-units",
+        "Services & recipes page",
+        "Recipe variance",
+        "Own-use / staff P&L"
+      ]
+    },
+    {
+      "id": "admin-system",
+      "title": "Admin & system",
+      "tagline": "Yours to configure, yours to lock down.",
+      "icon": "settings",
+      "items": [
+        "Users, roles and permissions",
+        "White-label skins: custom colours, card shape, density",
+        "Four receipt styles (classic / modern / boxed / compact) across thermal and web",
+        "Unified activity view (audit + stock + cash + locker, extensible by plugins)",
+        "Dependency-free logical backup and restore",
+        "Rotating hourly support-PIN scheme",
+        "Hidden system-admin account"
+      ]
+    },
+    {
+      "id": "printing-hardware",
+      "title": "Printing & hardware",
+      "tagline": "Real receipt printers, real cash drawers.",
+      "icon": "printer",
+      "items": [
+        "Thermal ESC/POS receipts on Windows and Linux",
+        "Windows print spooler (RAW)",
+        "Network printers via tcp://IP:9100",
+        "Cash-drawer pulse",
+        "Barcode and label printing"
+      ]
+    }
+  ]
+}

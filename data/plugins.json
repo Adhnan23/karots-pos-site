@@ -1,0 +1,86 @@
+{
+  "plugins": [
+    {
+      "id": "ai-catalog",
+      "name": "AI Catalog",
+      "summary": "AI-assisted product entry and catalogue cleanup.",
+      "description": "Identify a part from its code, suggest a category, dup-check and generate a barcode, cost from markup, set quantity, and print labels — for new products or a batch Optimize pass over the existing catalogue. Works via API or manual paste.",
+      "icon": "sparkles",
+      "tags": ["catalog", "ai", "labels"],
+      "status": "new",
+      "order": 1
+    },
+    {
+      "id": "alternatives",
+      "name": "Alternatives",
+      "summary": "Group interchangeable products into quality tiers.",
+      "description": "Group-aware counter search, alternative suggestions with a till tier pin, and reorder-by-alternatives.",
+      "icon": "layers",
+      "tags": ["catalog", "till", "reorder"],
+      "order": 2
+    },
+    {
+      "id": "clearance",
+      "name": "Clearance",
+      "summary": "Retire and recover slow-moving stock.",
+      "description": "Flags stale items (has stock, no sale in N days) and lots expiring soon, suggests a margin-safe markdown the owner approves and applies at the till, and lists dead stock for one-click disable.",
+      "icon": "tag",
+      "tags": ["stock", "pricing"],
+      "order": 3
+    },
+    {
+      "id": "combos",
+      "name": "Combos",
+      "summary": "Named product deals and bundles.",
+      "description": "A group of products (or one product in bulk, e.g. buy-3-get-1-free) with a percent or fixed discount, added in one tap as real discounted lines that deplete stock and return like normal sales.",
+      "icon": "gift",
+      "tags": ["till", "pricing"],
+      "order": 4
+    },
+    {
+      "id": "documents",
+      "name": "Print & Copy Counter",
+      "summary": "Metered photocopy, print, laminate and bind jobs.",
+      "description": "Jobs priced by size, colour and side with quantity tiers (consuming paper/film from stock), custom labour jobs with per-worker payout, reversal and own-use, plus a receipts tab, activity feed and revenue/consumables/labour report.",
+      "icon": "printer",
+      "tags": ["services", "counter", "labour"],
+      "order": 5
+    },
+    {
+      "id": "productplus",
+      "name": "Product Plus",
+      "summary": "Admin-defined custom product fields.",
+      "description": "Text, number, yes/no and dropdown fields with per-field required / searchable / visibility settings — shown on the product form, stock intake and till info popup, usable as label lines and searchable across till and lists.",
+      "icon": "sliders",
+      "tags": ["catalog", "custom-fields"],
+      "order": 6
+    },
+    {
+      "id": "recharge",
+      "name": "Mobile Recharge",
+      "summary": "Carrier mobile-money agent.",
+      "description": "Airtime reload, cash-in/out, bill pay, supplier float top-ups, wallet tender for sales, and per-device float reconciliation.",
+      "icon": "phone",
+      "tags": ["money", "agent"],
+      "order": 7
+    },
+    {
+      "id": "repairs",
+      "name": "Repairs",
+      "summary": "Track device repair jobs drop-off to pickup.",
+      "description": "Parts and labour/charges, deposits, warranty, customer register and a repair slip. Settles as a normal sale at the till; the admin pays outside repairers from any cash location.",
+      "icon": "wrench",
+      "tags": ["service", "jobs"],
+      "order": 8
+    },
+    {
+      "id": "requests",
+      "name": "Customer Requests",
+      "summary": "Capture items customers ask for.",
+      "description": "Cashiers jot down items the shop doesn't carry yet; the admin reviews the list and can promote a request into a real product to stock.",
+      "icon": "clipboard",
+      "tags": ["catalog", "demand"],
+      "order": 9
+    }
+  ]
+}

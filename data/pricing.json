@@ -1,0 +1,63 @@
+{
+  "usdNote": "USD prices are approximate (≈ LKR 300 = $1) — ask for a current quote.",
+  "plans": [
+    {
+      "id": "software-offline",
+      "name": "Offline Software",
+      "tagline": "You have the hardware — we bring the POS.",
+      "price": { "lkr": 35000, "usd": 120, "unit": "one-time" },
+      "features": [
+        "Fully offline — no internet needed, ever",
+        "The complete POS software, installed on your PC",
+        "The plugins your shop needs, compiled into your build",
+        "White-labeled to your shop",
+        "Free training for you and your staff",
+        "First month of maintenance free"
+      ],
+      "cta": "Ask about this"
+    },
+    {
+      "id": "complete-offline",
+      "name": "Complete Setup",
+      "tagline": "Everything, ready to sell on day one.",
+      "featured": true,
+      "badge": "Most complete",
+      "price": { "lkr": 100000, "usd": 335, "unit": "one-time" },
+      "features": [
+        "Everything in Offline Software",
+        "PC — Intel i3 (2nd/3rd gen), 8 GB RAM",
+        "Monitor, keyboard and mouse",
+        "Barcode scanner",
+        "2-in-1 barcode & receipt printer",
+        "Installed, configured and tested by us",
+        "Free teaching & training",
+        "First month of maintenance free"
+      ],
+      "note": "Want us to enter your products for you? Added on by catalogue size.",
+      "cta": "Ask about this"
+    },
+    {
+      "id": "online",
+      "name": "Online",
+      "tagline": "Cloud database — reach your shop from anywhere.",
+      "price": { "lkr": 20000, "usd": 70, "unit": "setup" },
+      "recurring": { "lkr": 2000, "usd": 7, "unit": "per month" },
+      "features": [
+        "Fully online database",
+        "Access your shop and reports from anywhere",
+        "Monthly fee covers hosting and ongoing maintenance",
+        "Free training",
+        "First month of maintenance free"
+      ],
+      "cta": "Ask about this"
+    }
+  ],
+  "notes": [
+    "Free training and teaching comes with every setup.",
+    "The first month of maintenance is free on every setup.",
+    "After the first month, support is charged per call — priced by how involved the fix is.",
+    "Custom features and specialized improvements are available for an additional cost. Tell us what you need.",
+    "Extra till terminals for the same shop can be added over the LAN — ask for a quote.",
+    "USD prices are approximate; ask for a current quote in your currency."
+  ]
+}

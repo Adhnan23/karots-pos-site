@@ -1,0 +1,7 @@
+# OS / editor cruft — the site itself is fully static, no build artifacts.
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+.playwright-mcp/

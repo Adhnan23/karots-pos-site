@@ -1,0 +1,44 @@
+{
+  "apps": [
+    {
+      "id": "stock-capture",
+      "name": "Stock Capture",
+      "summary": "Offline Android stock counting, imports as CSV.",
+      "icon": "box",
+      "tags": ["android", "stock"],
+      "order": 1
+    },
+    {
+      "id": "onboard",
+      "name": "Onboard",
+      "summary": "Guided first-run setup for a new shop.",
+      "icon": "sliders",
+      "tags": ["setup"],
+      "order": 2
+    },
+    {
+      "id": "quick-sell",
+      "name": "Quick-Sell",
+      "summary": "A stripped-down rush till for peak-hour lines.",
+      "icon": "coins",
+      "tags": ["till"],
+      "order": 3
+    },
+    {
+      "id": "pin-vault",
+      "name": "PIN Vault",
+      "summary": "Offline authenticator for the rotating support PIN.",
+      "icon": "shield",
+      "tags": ["android", "security"],
+      "order": 4
+    },
+    {
+      "id": "catalog-sync",
+      "name": "Catalog Sync",
+      "summary": "Reconciles catalogues between two shops.",
+      "icon": "layers",
+      "tags": ["tool"],
+      "order": 5
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "siteUrl": "https://pos.karots.lk",
+  "demoUrl": null,
+  "contactName": "Sheik Adhnan",
+  "contactEmail": "adhnanmsa@gmail.com",
+  "contactPhone": "+94769626396",
+  "contactPhoneDisplay": "+94 76 962 6396",
+  "github": "https://github.com/Adhnan23",
+  "portfolioUrl": "https://karots.lk",
+  "freelance": {
+    "headline": "Need something custom built?",
+    "text": "I'm Sheik Adhnan — I take on freelance work: POS customizations and plugins, custom software, mobile apps, and integrations.",
+    "cta": "Hire me"
+  }
+}
