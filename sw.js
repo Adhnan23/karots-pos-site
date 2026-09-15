@@ -1,7 +1,8 @@
 // sw.js — a small offline cache for the static site so the demos keep working
-// with no connection. Cache-first for same-origin GETs; navigations fall back
-// to the cached index. Bump CACHE to ship new assets.
-const CACHE = "kpos-site-v1";
+// with no connection. Network-first for same-origin GETs (so prices and copy
+// stay fresh whenever the visitor is online); the cache is the offline fallback
+// and is refreshed on every successful fetch. Bump CACHE to force a re-precache.
+const CACHE = "kpos-site-v2";
 const ASSETS = [
   "./", "./index.html", "./styles.css", "./theme.css", "./app.js",
   "./assets/icons.js", "./assets/art.js", "./assets/pos-demo.js", "./assets/feature-demos.js",
@@ -26,12 +27,12 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return; // let cross-origin (fonts, JsBarcode) hit the network
   e.respondWith(
-    caches.match(req).then((hit) =>
-      hit || fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(req, copy));
-        return res;
-      }).catch(() => (req.mode === "navigate" ? caches.match("./index.html") : Response.error()))
+    fetch(req).then((res) => {
+      const copy = res.clone();
+      caches.open(CACHE).then((c) => c.put(req, copy)); // refresh the offline copy
+      return res;
+    }).catch(() =>
+      caches.match(req).then((hit) => hit || (req.mode === "navigate" ? caches.match("./index.html") : Response.error()))
     )
   );
 });

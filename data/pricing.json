@@ -5,7 +5,7 @@
       "id": "software-offline",
       "name": "Offline Software",
       "tagline": "You have the hardware — we bring the POS.",
-      "price": { "lkr": 35000, "usd": 120, "unit": "one-time" },
+      "price": { "lkr": 45000, "usd": 150, "unit": "one-time" },
       "features": [
         "Fully offline — no internet needed, ever",
         "The complete POS software, installed on your PC",
