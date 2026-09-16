@@ -12,6 +12,21 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
 const fmtLkr = (n) => "LKR " + Number(n).toLocaleString("en-US");
 const fmtUsd = (n) => "≈ $" + Number(n).toLocaleString("en-US");
 
+// ---- i18n: English (default) + Tamil + Tanglish, client-side. ----
+// Marketing copy only — the interactive demos stay English. Dictionaries map a
+// key to the translated string; a missing key falls back to the English in the
+// HTML (data-i18n) or the value from data/*.json, so nothing ever goes blank.
+const LANGS = [["en", "English"], ["ta", "தமிழ்"], ["tanglish", "Tanglish"]];
+const LANG_SHORT = { en: "EN", ta: "TA", tanglish: "TL" };
+const I18N = {};
+let LANG = "en";
+try { LANG = localStorage.getItem("kpos-lang") || "en"; } catch (e) {}
+const t = (key, fallback) => {
+  if (LANG === "en") return fallback;
+  const d = I18N[LANG];
+  return d && d[key] != null ? d[key] : fallback;
+};
+
 // Contact CTAs (pricing plans) become a pre-filled mailto once config loads.
 // Both applyConfig and renderPricing call this, so it works whichever finishes
 // first.
@@ -105,6 +120,57 @@ paletteToggle?.addEventListener("click", (e) => {
 document.addEventListener("click", (e) => { if (palettePanel && !palettePanel.hidden && !e.target.closest(".palette-wrap")) closePalette(); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePalette(); });
 
+// ---- Language picker (English / Tamil / Tanglish) ----
+// Same popover pattern as the palette. applyStaticI18n() swaps the text of every
+// [data-i18n] element, caching the original English once so switching back never
+// loses it; renderPricing re-runs so the data-driven plans translate too.
+const langToggle = $("#langToggle");
+const langPanel = $("#langPanel");
+function markLangActive() {
+  langPanel?.querySelectorAll(".swatch").forEach((x) => {
+    const on = x.dataset.lang === LANG;
+    x.classList.toggle("active", on); x.setAttribute("aria-checked", String(on));
+  });
+}
+function buildLang() {
+  if (!langPanel) return;
+  langPanel.innerHTML = LANGS.map(([id, name]) =>
+    `<button class="swatch" role="menuitemradio" aria-checked="false" data-lang="${esc(id)}">${esc(name)}</button>`).join("");
+  langPanel.querySelectorAll(".swatch").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  if (langToggle) langToggle.textContent = LANG_SHORT[LANG] || "EN";
+  markLangActive();
+}
+function applyStaticI18n() {
+  $$("[data-i18n]").forEach((el) => {
+    if (el.dataset.i18nEn == null) el.dataset.i18nEn = el.textContent; // cache English once
+    if (el.classList.contains("is-disabled")) return; // leave applyConfig's "Demo coming soon"
+    el.textContent = t(el.dataset.i18n, el.dataset.i18nEn);
+  });
+}
+function applyLang() {
+  applyStaticI18n();
+  if (pricingData) renderPricing(pricingData);
+  if (langToggle) langToggle.textContent = LANG_SHORT[LANG] || "EN";
+  root.setAttribute("lang", LANG === "ta" ? "ta" : "en"); // Tanglish is romanised → still en
+  markLangActive();
+}
+function setLang(l) {
+  LANG = l;
+  try { localStorage.setItem("kpos-lang", l); } catch (e) {}
+  applyLang();
+  closeLang();
+}
+function closeLang() { if (langPanel) { langPanel.hidden = true; langToggle.setAttribute("aria-expanded", "false"); } }
+langToggle?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  const open = langPanel.hidden;
+  langPanel.hidden = !open;
+  langToggle.setAttribute("aria-expanded", String(open));
+});
+document.addEventListener("click", (e) => { if (langPanel && !langPanel.hidden && !e.target.closest(".lang-wrap")) closeLang(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLang(); });
+buildLang();
+
 // ---- Mobile nav ----
 const navToggle = $("#navToggle");
 const navLinks = $("#navLinks");
@@ -172,30 +238,33 @@ function renderCompanion(apps) {
   observeReveals(grid);
 }
 
+let pricingData = null;
 function renderPricing(data) {
+  pricingData = data;
   const plans = data.plans || [];
   $("#pricingGrid").innerHTML = plans.map((p) => {
     const price = p.price || {};
     const rec = p.recurring;
+    const k = (s) => `plan_${p.id}_${s}`; // per-plan i18n keys; English JSON is the fallback
     return `
     <article class="plan reveal ${p.featured ? "featured" : ""}" id="plan-${esc(p.id)}">
-      ${p.badge ? `<span class="plan-badge">${esc(p.badge)}</span>` : ""}
-      <h3>${esc(p.name)}</h3>
-      <p class="plan-tagline">${esc(p.tagline || "")}</p>
+      ${p.badge ? `<span class="plan-badge">${esc(t(k("badge"), p.badge))}</span>` : ""}
+      <h3>${esc(t(k("name"), p.name))}</h3>
+      <p class="plan-tagline">${esc(t(k("tagline"), p.tagline || ""))}</p>
       <div class="plan-price">
         <span class="amount">${fmtLkr(price.lkr)}</span>
-        <span class="unit">${esc(price.unit || "")}</span>
+        <span class="unit">${esc(t(k("unit"), price.unit || ""))}</span>
         <span class="usd">${fmtUsd(price.usd)}</span>
       </div>
-      ${rec ? `<div class="plan-recurring">+ ${fmtLkr(rec.lkr)} <span class="unit">${esc(rec.unit || "")}</span> <span class="usd">${fmtUsd(rec.usd)}</span></div>` : ""}
+      ${rec ? `<div class="plan-recurring">+ ${fmtLkr(rec.lkr)} <span class="unit">${esc(t(k("recunit"), rec.unit || ""))}</span> <span class="usd">${fmtUsd(rec.usd)}</span></div>` : ""}
       <ul class="plan-features">
-        ${(p.features || []).map((f) => `<li>${icon("check")}<span>${esc(f)}</span></li>`).join("")}
+        ${(p.features || []).map((f, i) => `<li>${icon("check")}<span>${esc(t(k("feat_" + i), f))}</span></li>`).join("")}
       </ul>
-      ${p.note ? `<p class="plan-note">${esc(p.note)}</p>` : ""}
-      <a class="btn ${p.featured ? "btn-primary" : "btn-secondary"} js-contact-cta" data-subject="Karots POS — ${esc(p.name)}" href="mailto:">${esc(p.cta || "Ask about this")}</a>
+      ${p.note ? `<p class="plan-note">${esc(t(k("note"), p.note))}</p>` : ""}
+      <a class="btn ${p.featured ? "btn-primary" : "btn-secondary"} js-contact-cta" data-subject="Karots POS — ${esc(p.name)}" href="mailto:">${esc(t(k("cta"), p.cta || "Ask about this"))}</a>
     </article>`;
   }).join("");
-  $("#pricingNotes").innerHTML = (data.notes || []).map((n) => `<li>${esc(n)}</li>`).join("");
+  $("#pricingNotes").innerHTML = (data.notes || []).map((n, i) => `<li>${esc(t("pnote_" + i, n))}</li>`).join("");
   observeReveals($("#pricing"));
   wireContactCtas();
 }
@@ -260,6 +329,13 @@ getJSON("data/themes.json").then((d) => {
   buildPalette(d.themes || []);
   applyPalette();
 }).catch(() => {});
+
+// Load the translation dictionaries, then apply the saved language. English is
+// the built-in default, so a failed fetch just leaves the site in English.
+Promise.all([
+  getJSON("data/i18n/ta.json").catch(() => ({})),
+  getJSON("data/i18n/tanglish.json").catch(() => ({})),
+]).then(([ta, tl]) => { I18N.ta = ta; I18N.tanglish = tl; applyLang(); });
 
 // Install as an app + cache the shell so the demos work offline.
 if ("serviceWorker" in navigator) {

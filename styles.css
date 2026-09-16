@@ -86,6 +86,34 @@ section { padding-block: 96px; }
 .swatch.active { color: var(--accent); }
 .swatch.active::after { content: "✓"; margin-left: auto; color: var(--accent); }
 
+/* Language picker — same popover as the palette; button carries text not an icon */
+.lang-wrap { position: relative; }
+.btn-lang {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 40px; padding: 0 12px; border-radius: 8px;
+  background: transparent; border: 1px solid var(--border); color: var(--ink-muted);
+  font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: .85rem; cursor: pointer;
+}
+.btn-lang:hover { color: var(--ink); border-color: var(--ink-muted); }
+
+/* Tamil script renders taller/wider than Latin at the same size, so trim the
+   display text when Tamil is active. Tanglish is romanised (lang="en") and stays
+   as-is, and the demos are always English — so only [lang="ta"] is touched.
+   Specificity beats the mobile block below, so these hold at phone width too. */
+[lang="ta"] h1 { font-size: clamp(1.85rem, 3.6vw, 2.9rem); }
+[lang="ta"] h2 { font-size: clamp(1.3rem, 2vw, 1.8rem); }
+[lang="ta"] .hero .subhead { font-size: clamp(1rem, 1.35vw, 1.1rem); }
+[lang="ta"] .section-head p.lead,
+[lang="ta"] .hire-copy .lead { font-size: .95rem; }
+[lang="ta"] .pos-grid h3 { font-size: 1rem; }
+[lang="ta"] .plan h3 { font-size: 1.1rem; }
+[lang="ta"] .plan-tagline { font-size: .92rem; }
+[lang="ta"] .plan-features li,
+[lang="ta"] .plan-note { font-size: .82rem; }
+[lang="ta"] .hero-demo-cap { font-size: .72rem; }
+/* Tamil isn't uppercased and shouldn't be letter-spaced like the Latin tags */
+[lang="ta"] .tagline { letter-spacing: 0; text-transform: none; }
+
 @media (max-width: 860px) {
   .nav-links {
     position: absolute; top: 60px; left: 0; right: 0;

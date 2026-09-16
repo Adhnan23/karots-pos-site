@@ -8,6 +8,7 @@ const ASSETS = [
   "./assets/icons.js", "./assets/art.js", "./assets/pos-demo.js", "./assets/feature-demos.js",
   "./data/features.json", "./data/plugins.json", "./data/companion.json",
   "./data/pricing.json", "./data/config.json", "./data/themes.json",
+  "./data/i18n/ta.json", "./data/i18n/tanglish.json",
   "./favicon.svg", "./og.png", "./icons/icon-192.png", "./icons/icon-512.png",
 ];
 

@@ -101,15 +101,19 @@
         <span class="brand-mark" data-icon="logo"></span> Karots POS
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Primary">
-        <a href="#product">Product</a>
-        <a href="#plugins">Plugins</a>
-        <a href="#companion">Companion Apps</a>
-        <a href="#deploy">Deploy</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#demo">Demo</a>
-        <a class="btn btn-secondary js-demo-cta" href="#demo">Try the live demo</a>
+        <a href="#product" data-i18n="nav_product">Product</a>
+        <a href="#plugins" data-i18n="nav_plugins">Plugins</a>
+        <a href="#companion" data-i18n="nav_companion">Companion Apps</a>
+        <a href="#deploy" data-i18n="nav_deploy">Deploy</a>
+        <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+        <a href="#demo" data-i18n="nav_demo">Demo</a>
+        <a class="btn btn-secondary js-demo-cta" href="#demo" data-i18n="cta_try_demo">Try the live demo</a>
       </nav>
       <div class="nav-actions">
+        <div class="lang-wrap">
+          <button class="btn-lang" id="langToggle" type="button" aria-label="Language" aria-haspopup="true" aria-expanded="false">EN</button>
+          <div class="palette-panel" id="langPanel" role="menu" aria-label="Language" hidden></div>
+        </div>
         <div class="palette-wrap">
           <button class="btn-icon" id="paletteToggle" type="button" aria-label="Colour palette" aria-haspopup="true" aria-expanded="false"><span data-icon="palette"></span></button>
           <div class="palette-panel" id="palettePanel" role="menu" aria-label="Colour palette" hidden></div>
@@ -127,19 +131,19 @@
       <span class="bg-art bg-art-hero" data-art="rings" aria-hidden="true"></span>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <h1 id="hero-h">Your till, your inventory, your server.</h1>
-          <p class="subhead">Karots POS runs entirely on hardware you own — one static binary, no monthly fee, no internet dependency. Built for shops that sell on credit, track lots and expiry, and manage suppliers, not just ring up sales.</p>
+          <h1 id="hero-h" data-i18n="hero_h1">Your till, your inventory, your server.</h1>
+          <p class="subhead" data-i18n="hero_sub">Karots POS runs entirely on hardware you own — one static binary, no monthly fee, no internet dependency. Built for shops that sell on credit, track lots and expiry, and manage suppliers, not just ring up sales.</p>
           <div class="hero-ctas">
-            <a class="btn btn-primary js-demo-cta" href="#demo">Try the live demo →</a>
-            <a class="btn btn-secondary" href="#positioning">See what it replaces</a>
+            <a class="btn btn-primary js-demo-cta" href="#demo" data-i18n="cta_try_demo_arrow">Try the live demo →</a>
+            <a class="btn btn-secondary" href="#positioning" data-i18n="cta_replaces">See what it replaces</a>
           </div>
           <div class="proof">
-            <span>Single binary</span><span>PostgreSQL</span><span>Thermal receipts</span><span>Windows &amp; Linux</span><span>Runs on old PCs</span>
+            <span data-i18n="proof_binary">Single binary</span><span>PostgreSQL</span><span data-i18n="proof_receipts">Thermal receipts</span><span data-i18n="proof_oswin">Windows &amp; Linux</span><span data-i18n="proof_oldpc">Runs on old PCs</span>
           </div>
         </div>
         <div class="hero-demo">
           <div class="pos-demo" id="posDemo" aria-label="Mini point of sale — tap items to ring up a sale"></div>
-          <p class="hero-demo-cap">↑ A real mini till — tap items, take cash, print a receipt.</p>
+          <p class="hero-demo-cap" data-i18n="hero_demo_cap">↑ A real mini till — tap items, take cash, print a receipt.</p>
         </div>
       </div>
     </section>
@@ -151,16 +155,16 @@
         <h2 id="pos-h" class="sr-only" hidden>Why Karots</h2>
         <div class="pos-grid">
           <div>
-            <h3>No monthly lock-in.</h3>
-            <p>You own the binary, the database, and the receipts. Nothing stops working if a subscription lapses.</p>
+            <h3 data-i18n="pos1_h">No monthly lock-in.</h3>
+            <p data-i18n="pos1_p">You own the binary, the database, and the receipts. Nothing stops working if a subscription lapses.</p>
           </div>
           <div>
-            <h3>Built for how shops actually sell.</h3>
-            <p>Credit customers, split payments, supplier accounts and cash reconciliation are core features, not add-ons.</p>
+            <h3 data-i18n="pos2_h">Built for how shops actually sell.</h3>
+            <p data-i18n="pos2_p">Credit customers, split payments, supplier accounts and cash reconciliation are core features, not add-ons.</p>
           </div>
           <div>
-            <h3>One build per shop.</h3>
-            <p>Plugins are compiled in at build time — each shop ships exactly the features it needs, white-labeled to match.</p>
+            <h3 data-i18n="pos3_h">One build per shop.</h3>
+            <p data-i18n="pos3_p">Plugins are compiled in at build time — each shop ships exactly the features it needs, white-labeled to match.</p>
           </div>
         </div>
       </div>
@@ -171,12 +175,12 @@
       <span class="bg-art bg-art-product" data-art="blob" aria-hidden="true"></span>
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="tagline">The system</p>
-          <h2 id="product-h">Everything a shop counter needs</h2>
-          <p class="lead">Nine capability areas, all in the core — before you add a single plugin.</p>
+          <p class="tagline" data-i18n="product_tag">The system</p>
+          <h2 id="product-h" data-i18n="product_h">Everything a shop counter needs</h2>
+          <p class="lead" data-i18n="product_lead">Nine capability areas, all in the core — before you add a single plugin.</p>
         </div>
         <div id="featureGroups"><p class="lead" id="featureFallback" hidden>Feature list unavailable — serve this page over HTTP (see README).</p></div>
-        <p class="mini-demos-cap">A few of these you can try right here:</p>
+        <p class="mini-demos-cap" data-i18n="try_caption">A few of these you can try right here:</p>
         <div class="mini-demos">
           <div class="mini-mount" id="lotsDemo"></div>
           <div class="mini-mount" id="creditDemo"></div>
@@ -195,9 +199,9 @@
       <span class="bg-art bg-art-plugins" data-art="plus" aria-hidden="true"></span>
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="tagline">Plugins</p>
-          <h2 id="plugins-h">Compiled in per shop</h2>
-          <p class="lead">Each plugin is a feature module built directly into that shop's binary. Nothing installs at runtime, and nothing runs that a shop didn't ask for.</p>
+          <p class="tagline" data-i18n="plugins_tag">Plugins</p>
+          <h2 id="plugins-h" data-i18n="plugins_h">Compiled in per shop</h2>
+          <p class="lead" data-i18n="plugins_lead">Each plugin is a feature module built directly into that shop's binary. Nothing installs at runtime, and nothing runs that a shop didn't ask for.</p>
         </div>
         <div class="card-grid" id="pluginGrid"></div>
         <p class="lead" id="pluginFallback" hidden>Plugin list unavailable — serve this page over HTTP (see README).</p>
@@ -209,8 +213,8 @@
       <span class="bg-art bg-art-companion" data-art="squares" aria-hidden="true"></span>
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="tagline">Companion apps</p>
-          <h2 id="companion-h">The rest of the toolkit</h2>
+          <p class="tagline" data-i18n="companion_tag">Companion apps</p>
+          <h2 id="companion-h" data-i18n="companion_h">The rest of the toolkit</h2>
         </div>
         <div class="companion-grid" id="companionGrid"></div>
         <p class="lead" id="companionFallback" hidden>Companion app list unavailable — serve this page over HTTP (see README).</p>
@@ -222,8 +226,8 @@
       <span class="bg-art bg-art-deploy" data-art="lines" aria-hidden="true"></span>
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="tagline">How it runs</p>
-          <h2 id="deploy-h">Deploy once, on your own hardware</h2>
+          <p class="tagline" data-i18n="deploy_tag">How it runs</p>
+          <h2 id="deploy-h" data-i18n="deploy_h">Deploy once, on your own hardware</h2>
         </div>
         <ul class="deploy-list">
           <li><span data-icon="check"></span>One self-contained static binary — assets and DB migrations embedded, CGO-free.</li>
@@ -242,9 +246,9 @@
       <span class="bg-art bg-art-pricing" data-art="arcs" aria-hidden="true"></span>
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="tagline">Pricing</p>
-          <h2 id="pricing-h">Pick how you want to run it</h2>
-          <p class="lead">A one-time price for the offline options, or a small monthly for the online one. Prices in Sri&nbsp;Lankan Rupees, with an approximate US&nbsp;Dollar guide.</p>
+          <p class="tagline" data-i18n="pricing_tag">Pricing</p>
+          <h2 id="pricing-h" data-i18n="pricing_h">Pick how you want to run it</h2>
+          <p class="lead" data-i18n="pricing_lead">A one-time price for the offline options, or a small monthly for the online one. Prices in Sri&nbsp;Lankan Rupees, with an approximate US&nbsp;Dollar guide.</p>
         </div>
         <div class="pricing-grid" id="pricingGrid"></div>
         <ul class="pricing-notes" id="pricingNotes"></ul>
@@ -256,8 +260,8 @@
     <section class="demo" id="demo" aria-labelledby="demo-h">
       <span class="bg-art bg-art-demo" data-art="wave" aria-hidden="true"></span>
       <div class="wrap">
-        <h2 id="demo-h">See it running.</h2>
-        <p id="demoLead">Poke around a real till, the reports and the plugins — no install.</p>
+        <h2 id="demo-h" data-i18n="demo_h">See it running.</h2>
+        <p id="demoLead" data-i18n="demo_lead">Poke around a real till, the reports and the plugins — no install.</p>
         <a class="btn btn-primary js-demo-cta" href="#demo">Try the live demo →</a>
         <p class="demo-note" id="demoNote" hidden>A hosted demo is in the works — check back, or ask for a screen-share walkthrough in the meantime.</p>
       </div>
@@ -268,13 +272,13 @@
       <span class="bg-art bg-art-hire" data-art="gridDots" aria-hidden="true"></span>
       <div class="wrap hire-inner">
         <div class="hire-copy">
-          <p class="tagline">Freelance</p>
-          <h2 id="hire-h" data-cfg="freelance.headline">Need something custom built?</h2>
-          <p class="lead" data-cfg="freelance.text">I'm Sheik Adhnan — I take on freelance work: POS customizations and plugins, custom software, mobile apps, and integrations.</p>
+          <p class="tagline" data-i18n="hire_tag">Freelance</p>
+          <h2 id="hire-h" data-i18n="hire_h">Need something custom built?</h2>
+          <p class="lead" data-i18n="hire_lead">I'm Sheik Adhnan — I take on freelance work: POS customizations and plugins, custom software, mobile apps, and integrations.</p>
         </div>
         <div class="hire-ctas">
-          <a class="btn btn-primary js-contact-cta" data-subject="Freelance enquiry — via Karots POS" href="mailto:">Hire me</a>
-          <a class="btn btn-secondary" id="portfolioLink" href="https://karots.lk" target="_blank" rel="noopener">See my portfolio →</a>
+          <a class="btn btn-primary js-contact-cta" data-subject="Freelance enquiry — via Karots POS" href="mailto:" data-i18n="hire_cta">Hire me</a>
+          <a class="btn btn-secondary" id="portfolioLink" href="https://karots.lk" target="_blank" rel="noopener" data-i18n="hire_portfolio">See my portfolio →</a>
         </div>
       </div>
     </section>
@@ -284,15 +288,15 @@
   <footer class="footer">
     <div class="wrap">
       <a class="brand" href="#top"><span data-icon="logo"></span> Karots POS</a>
-      <p class="foot-tag">Self-hosted point of sale. Your till, your data.</p>
+      <p class="foot-tag" data-i18n="foot_tag">Self-hosted point of sale. Your till, your data.</p>
       <nav aria-label="Footer">
-        <a href="#product">Product</a>
-        <a href="#plugins">Plugins</a>
-        <a href="#companion">Companion Apps</a>
-        <a href="#deploy">Deploy</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#hire">Hire</a>
-        <a href="#demo">Demo</a>
+        <a href="#product" data-i18n="nav_product">Product</a>
+        <a href="#plugins" data-i18n="nav_plugins">Plugins</a>
+        <a href="#companion" data-i18n="nav_companion">Companion Apps</a>
+        <a href="#deploy" data-i18n="nav_deploy">Deploy</a>
+        <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+        <a href="#hire" data-i18n="nav_hire">Hire</a>
+        <a href="#demo" data-i18n="nav_demo">Demo</a>
       </nav>
       <p class="contact">
         Built by <strong id="builtBy">Sheik Adhnan</strong> —
