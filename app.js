@@ -16,7 +16,7 @@ const fmtUsd = (n) => "≈ $" + Number(n).toLocaleString("en-US");
 // Marketing copy only — the interactive demos stay English. Dictionaries map a
 // key to the translated string; a missing key falls back to the English in the
 // HTML (data-i18n) or the value from data/*.json, so nothing ever goes blank.
-const LANGS = [["en", "English"], ["ta", "தமிழ்"], ["tanglish", "Tanglish"]];
+const LANGS = [["en", "English"], ["ta", "Tamil"], ["tanglish", "Tanglish"]];
 const LANG_SHORT = { en: "EN", ta: "TA", tanglish: "TL" };
 const I18N = {};
 let LANG = "en";

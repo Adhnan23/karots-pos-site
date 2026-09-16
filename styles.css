@@ -104,15 +104,22 @@ section { padding-block: 96px; }
 [lang="ta"] h2 { font-size: clamp(1.3rem, 2vw, 1.8rem); }
 [lang="ta"] .hero .subhead { font-size: clamp(1rem, 1.35vw, 1.1rem); }
 [lang="ta"] .section-head p.lead,
-[lang="ta"] .hire-copy .lead { font-size: .95rem; }
+[lang="ta"] .hire-copy .lead { font-size: .9rem; }
 [lang="ta"] .pos-grid h3 { font-size: 1rem; }
+[lang="ta"] .pos-grid p,
+[lang="ta"] .footer .foot-tag { font-size: .9rem; }
 [lang="ta"] .plan h3 { font-size: 1.1rem; }
 [lang="ta"] .plan-tagline { font-size: .92rem; }
 [lang="ta"] .plan-features li,
 [lang="ta"] .plan-note { font-size: .82rem; }
 [lang="ta"] .hero-demo-cap { font-size: .72rem; }
-/* Tamil isn't uppercased and shouldn't be letter-spaced like the Latin tags */
-[lang="ta"] .tagline { letter-spacing: 0; text-transform: none; }
+/* Tamil isn't uppercased, shouldn't be letter-spaced, and reads larger than the
+   Latin eyebrow at the same size — so drop those and trim it. */
+[lang="ta"] .tagline { letter-spacing: 0; text-transform: none; font-size: .9rem; }
+/* Tamil nav labels are wider — keep them on one row (no internal wrap) and
+   smaller than the Latin nav so the desktop bar stays a single line. */
+[lang="ta"] .nav-links { gap: 16px; }
+[lang="ta"] .nav-links a { font-size: .82rem; white-space: nowrap; }
 
 @media (max-width: 860px) {
   .nav-links {
