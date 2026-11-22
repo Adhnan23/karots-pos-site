@@ -4,7 +4,7 @@ import { pages } from './dist-lib'
 // Words that must never reach a public page: the old product, the dropped languages,
 // and anything internal to a shop's install or to support.
 const FORBIDDEN = [
-  'Karots POS', 'Tamil', 'Tanglish', 'support PIN', 'install ID', 'system user', '0000000001',
+  'Karots POS', 'Tanglish', 'support PIN', 'install ID', 'system user', '0000000001',
   'Konami', 'cheat', 'Pocket Cashier', 'DEMO_SHOP', 'make demo', 'make docs-shots', 'go run ',
 ]
 

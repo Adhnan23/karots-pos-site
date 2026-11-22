@@ -1,0 +1,15 @@
+---
+title: "Combos"
+summary: "Product deals: a group of products, or one product in bulk such as buy 3 get 1 free."
+---
+
+Product deals: a group of products, or one product in bulk such as buy 3 get 1 free.
+
+![Combos](../../assets/shots/plugins/combos.jpg)
+
+- Priced as **% off, Rs off or a set price**, between optional dates.
+- The till rings a combo as **real lines kept together** and spots a combo as its items are scanned.
+- A **report** shows what each combo sold and what it gave away; returned sets are taken off (a combo comes back only whole, in whole sets).
+- With [AI Assistant](/plugins/aicatalog/), **Suggest combos** offers products that go together and opens the normal form. You set the price.
+
+The admin page is under **Apps → Combos** (`/admin/x/combos`). A shop has this plugin only if it was built with it (Install & Shop Builder).

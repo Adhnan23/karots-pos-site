@@ -1,0 +1,65 @@
+---
+title: "People & users"
+summary: "## Customers"
+---
+
+## Customers
+
+![Customers](../../assets/shots/people/customers.jpg)
+
+Walk-in customers need nothing. A **credit customer** has a phone number, a credit limit and a
+running balance:
+
+- Sell **on account** at the till. A cashier can't go past the limit; an admin can approve it.
+- Take payments and advances at the till's [Credit tab](/guides/till/#credit) or here. Change a
+  customer leaves can be kept as an advance for next time.
+- Enter an **old balance** from before the suite as an opening balance. If the customer already
+  holds an advance, it pays the old balance down straight away.
+- Print a **statement** for any period. A bounced or cancelled cheque shows on it as a debit
+  (**Cheque bounced**), and change they left as **Change kept**, so the balance is what they
+  really owe.
+- One phone, one customer: a phone another active customer already has is refused.
+- **Disable** a customer and their balance stays: they can still pay or get an advance back. A
+  sale put on a disabled customer's account still goes through and is marked **Needs review**.
+- Pressing Collect twice, or again after a lost connection, takes the payment once.
+- Import or export customers with **Sheets**.
+
+The top of the page shows what customers owe you in total and the advances you hold.
+
+## Users and rights
+
+![Users](../../assets/shots/people/users.jpg)
+
+Admins add staff logins here. Each login is a phone number and a PIN.
+
+| Role | Can |
+|---|---|
+| **Admin** | Everything, including users, settings and data |
+| **Manager** | The admin pages (stock, purchasing, money, reports, settings) except users, data and Activity |
+| **Cashier** | The till and the counter tabs their rights allow |
+| **Sales person** | The same Sell screen, cart and plugin menus, but no money: they **Send to cashier** ([how it works](/guides/till/#send-to-cashier)) |
+
+Each cashier has rights you switch on: **counter operations** (pay suppliers, take in deliveries, place orders and record expenses at
+the till; they will see cost prices),
+**manage credit at the till**, **see product cost at the till**, **see low stock at the till** and
+**can use Karots Shelf** (the phone app for putting products in during setup, see [Karots Shelf](/guides/shelf/)).
+A user can also have their own receipt printer.
+
+- With **force PIN change** on in Settings, a new user picks their own PIN the first time they
+  sign in.
+- A new PIN from an admin signs that user out everywhere.
+- The last admin can't be removed or demoted.
+
+## Locking
+
+The till and admin pages lock after the idle time set in **Settings**, or straight away with
+**Lock**. The same user or any admin can unlock. PIN fields never let the browser remember a PIN,
+because the counter PC is shared.
+
+## Who's on now and Activity
+
+The dashboard shows every signed-in screen: who, on which device, on which page, and when the
+lock screen is up. **Activity** is the audit trail: who did what, with the money and stock it
+moved, filterable by person and kind.
+
+![Activity](../../assets/shots/people/activity.jpg)

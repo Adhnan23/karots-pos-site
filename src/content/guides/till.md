@@ -1,0 +1,214 @@
+---
+title: "Selling at the till"
+summary: "The till is made for a desktop PC or a kiosk at the counter. Cashiers sign in with their phone number and PIN. After a few idle minutes the till locks itself, and the same cashier or any admin can unlock it."
+---
+
+The till is made for a desktop PC or a kiosk at the counter. Cashiers sign in with their phone
+number and PIN. After a few idle minutes the till locks itself, and the same cashier or any admin
+can unlock it.
+
+![The sell screen](../../assets/shots/till/sell-light.jpg)
+
+## The sell screen
+
+- **Left:** a search bar (it takes a scanner too), the group chips (Frequently sold, your cashier
+  menu groups, plugin menus) and product cards with price and stock.
+- **Middle:** the current sale. Change a quantity with − / +, set a pack or loose price, add a
+  line discount, or tap a line for its info.
+- **Right:** Retail or Wholesale, the customer (walk-in or a credit customer), the tenders
+  (cash, card, online and the rest), quick cash buttons, the bill discount and **Complete sale**.
+
+Search finds a product by its name or its **local name** (Sinhala / Tamil, set on the product), and
+every word you type may match either. Scanning a barcode adds the product (any of its barcodes, or a pack's own). If a
+search finds nothing, pressing Enter (or **+ Quick item** beside the search box) adds it as a **quick item** with a name
+and price, and the item goes to admin's review list. A scanned barcode no product has asks first: **Existing item**
+(the same item with a different barcode: find it, and the code becomes one of its barcodes) or **New item** (a quick
+item with the code filled in). A cashier's choice works straight away and goes to admin's review list. Receiving
+stock on the **Suppliers** tab asks the same question, and **+ New product** there adds something by name. A sale is never
+blocked: anything odd (selling below stock, a missing price) is sold first and flagged for review.
+
+### Keys
+
+The whole Sell page works without a mouse: a scanner and the keyboard are enough.
+
+| Key | Does |
+|---|---|
+| **F1** | Back to the menu. Clears the **search only**, never the cart. With the Search only layout it opens and closes **Browse** |
+| **F2 / F3** | Jump to search |
+| **↑ ↓** then **Enter** (in search) | Pick a product from the tiles on screen and add it |
+| **F4** | Hold the sale |
+| **F5** | Held sales: **↑ ↓** to choose, **Enter** resumes |
+| **F6** | Quantity of the line just added: type it, **Enter** goes back to search. **↑ ↓** move to other lines; **Delete** removes the line |
+| **F7** | Discount on the line just added: type an amount, or add **%** for a percentage; **↑ ↓** move to other lines; **Enter** goes back |
+| **F8** | Customer: type a name or phone, **↑ ↓**, **Enter** picks |
+| **F9** | Bill discount; **Enter** goes back to search |
+| **/** (in a discount) | Switch between an amount (Rs) and a percentage, for a line or the bill |
+| **F10** | Go to the amount; **F10 again** switches to the next payment method; **Enter** adds it, or completes the sale when the box is empty |
+| **F12** | New sale (asks first if the cart has items) |
+| **Ctrl K** | Every other button on the page and every tab: type a few letters, **↑ ↓**, **Enter** (Deposit, Withdraw, Quick item, Wholesale prices, a product group, Close the till…) |
+| **Enter** after a sale | Start the next sale |
+| **Esc** | Leave the field you're in |
+
+The keyboard button on the top bar lists them all. After 20 seconds with no key or tap the cursor
+goes back to the search box (never while a dialog is open), so the next scan always lands.
+
+The order of the three parts, their widths, the size of the product cards (down to a plain list)
+and the text size can be set for each screen size by your Karots technician: see
+[Appearance → Sell page layout](/guides/appearance/#sell-page-layout).
+
+Only **New sale** clears the cart. On a kiosk the browser's own keys are switched off: no F5
+reload and no right-click outside text boxes.
+
+### Paying
+
+- Split the bill across tenders, use **Fill** to put the rest on one tender, and keep the change
+  as the customer's advance (**Keep** / **Keep all**).
+- **On account** sells on credit to a customer with a limit. A cashier can't go over the limit,
+  but an admin can approve it.
+- **Cheque** takes a cheque from a named customer (bank, number, date). It goes into Cheques in
+  hand and prints on the receipt; an admin marks it cleared or bounced later (see
+  [Money → Cheques](/guides/money/#cheques)).
+- When change is short in the drawer, the till warns you. It doesn't stop the sale.
+
+### Holds
+
+**Hold** (F4) parks the sale and frees the till. Resume a held sale from the Held list (F5). The till
+won't resume one over a cart that already has items in it.
+
+![The till in dark mode](../../assets/shots/till/sell-dark.jpg)
+
+## Send to cashier
+
+For a shop where one person hands out the goods and another takes the money. Make the first a **Sales person** on the
+Users page, with their own login.
+
+- **The sales person** builds the cart as usual: products, quantities, line discounts, the customer (walk-ins too),
+  plugin items. They have no till to open, no payment, no bill discount and no money tabs. They can **Hold** a cart for
+  themselves. **Send to [cashier]** shows one button per cashier with a till open; with none open they hold it for now.
+- **A ticket is on screen only; nothing prints.** It gets a two-digit number, random but unique among those waiting, shown
+  big for the sales person to tell the customer. An optional name or note ("blue shirt") and the item list help the
+  cashier match it to the person and the goods in front of them. **Undo** on the "sent" message, or tapping it under
+  **Sent**, takes it back.
+- **The chosen cashier** hears a beep and gets a popup with **Open**, on any till tab, without stopping the sale in
+  progress. Every cashier with a till open can see every ticket under the cart, and open it if the customer comes to
+  them. Finish or hold the current sale first. Only one till can open a ticket.
+- **Not opened in 2 minutes:** it goes to the next open till, with a new popup. With only one till open, it stays.
+- **The cashier takes the money** the normal way. The receipt prints, the drawer opens and stock moves only then, so a
+  customer who walks away is just **Clear**, with nothing to return. **Sales** shows who prepared the sale.
+- **Closing a till with tickets on it:** each one must first be opened and sold, passed to another open till, or sent
+  back to the sales person's Held. A till an admin closes for someone passes its tickets on by itself; with no till left open, they go back to the sales person's Held.
+
+A customer buying something small from the cashier is an ordinary sale; tickets keep waiting meanwhile.
+
+
+![A sales person's cart, ready to send](../../assets/shots/till/send-to-cashier.jpg)
+
+![A ticket waiting on a cashier's till](../../assets/shots/till/tickets.jpg)
+
+![Closing a till with a ticket waiting](../../assets/shots/till/close-tickets.jpg)
+
+## Opening and closing the till
+
+Each cashier opens their till by counting the float note by note. Deposits and withdrawals move
+cash to a [locker](/guides/money/#lockers). At close the cashier counts again, the till shows what it
+should hold, and any over / short is recorded. A till left open overnight shows on the dashboard,
+where an admin or manager can close it for the cashier.
+
+## Counter tabs
+
+The tabs along the top do the counter's other jobs without leaving the till. **F1** on any tab
+goes back to Sell.
+
+### Returns
+
+Find the sale by receipt number, customer, phone or product. Pick what's coming back and why; the refund is what was paid for it.
+
+- **What was paid, to the cent.** A bill discount is shared over the lines, so returning every line one by one gives
+  back exactly what the customer paid, never a cent more.
+- **A combo comes back whole**: every item in it, in whole sets (2 of 3 sets is fine; one item of a combo on its own
+  isn't). Its lines move together on the screen.
+- **A credit sale** clears what the customer still owes on it first; anything they've already paid comes back as cash.
+- **A cheque that hasn't cleared**: the screen asks — **give the cheque back** (it's cancelled, no cash leaves the
+  drawer; what they keep goes on their account) or **refund cash and keep the cheque** (if it bounces, its amount goes
+  on their account).
+- **Card and online sales** are refunded in cash from the drawer.
+- **A phone or anything with a serial number** can be sold again after it comes back; its warranty ends with the
+  return.
+
+![Returns](../../assets/shots/till/returns.jpg)
+
+### Credit
+
+Customers who owe the shop. Take a payment or an advance (by cash, card, online or one or more
+cheques), or refund one.
+
+![Credit](../../assets/shots/till/credit.jpg)
+
+### Receipts
+
+Every slip of the shift (sales, cash, credit, warranty). Print one again at 80 or 58 mm, or as A4 / PDF.
+
+![Receipts](../../assets/shots/till/receipts.jpg)
+
+### Write-off
+
+Take damaged, expired or shop-use stock out, from the oldest batch first. For a
+[frozen](/guides/stock/#freezing-stock-while-a-shop-starts) product it asks
+**was it out for sale or in storage?** first: out for sale, stock stays as counted and the write-off is
+still recorded with its cost.
+
+![Write-off](../../assets/shots/till/write-off.jpg)
+
+### Frozen
+
+Shows only while some products are [frozen](/guides/stock/#freezing-stock-while-a-shop-starts). Pick one,
+then **Unfreeze** with how many are out for sale now, or **Put out for sale** when a box is opened.
+A frozen line in the cart has a **Frozen · Unfreeze** button too: it opens over the sale, so the cart
+stays as it is. Sales people can unfreeze as well.
+
+![Frozen](../../assets/shots/till/frozen.jpg)
+
+### Convert
+
+Break open a pack (a 25 kg sack into 1 kg bags) and record what actually came out. When only the loose
+product is [frozen](/guides/stock/#freezing-stock-while-a-shop-starts), it asks where they went: out for
+sale (not counted) or into storage (added to stock).
+
+![Convert](../../assets/shots/till/convert.jpg)
+
+### Labels
+
+Print barcode labels for a product.
+
+![Labels](../../assets/shots/till/labels.jpg)
+
+### Low stock
+
+What will run out before the next delivery, by supplier (if the cashier may see it).
+
+![Low stock](../../assets/shots/till/low-stock.jpg)
+
+### Warranty
+
+Find a unit by serial or receipt and swap it under warranty. Only a unit still under warranty can be
+swapped, up to and including its last day. A unit that came back on a return has none, and by receipt
+you can swap only what the customer kept. The new unit's warranty goes on from the old one's; it
+doesn't start again. To do a favour after the warranty ends, write the unit off and sell the new one
+at Rs 0.
+
+![Warranty](../../assets/shots/till/warranty.jpg)
+
+### Suppliers
+
+Pay a supplier (cash, or a cheque on a bank account the cashier may use), receive stock or place
+an order at the counter (if the cashier may handle suppliers).
+
+![Suppliers](../../assets/shots/till/suppliers.jpg)
+
+### Expenses
+
+Pay a shop expense from the drawer, or by cheque.
+
+![Expenses](../../assets/shots/till/expenses.jpg)
+
+What each cashier sees here is set per user: see [People & users](/guides/people/#users-and-rights).
