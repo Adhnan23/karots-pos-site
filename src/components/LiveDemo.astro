@@ -1,0 +1,40 @@
+---
+// The live Demo Room, offered only once it answers (src/scripts/live-demo.ts); a code is needed to open it.
+import { CONTACT, DEMO_URL } from '../data/site'
+const ask = `${CONTACT.whatsapp}?text=${encodeURIComponent('Hello Karots, I would like a code to try the live Demo Room.')}`
+---
+<section class="live" data-live-demo data-state="checking" aria-live="polite">
+  <h2>Try the real thing on a PC</h2>
+  <p>A shop with a year of trade behind it: sell, print receipts, look at stock and reports. It runs in your browser.</p>
+  <p class="checking">Checking the live demo…</p>
+  <div class="up">
+    <p>You'll need this hour's code to open it. Ask us on WhatsApp and we'll send it.</p>
+    <div class="actions">
+      <a class="btn primary" href={DEMO_URL} target="_blank" rel="noopener">Open the live demo</a>
+      <a class="btn ghost" href={ask}>Ask for a code</a>
+    </div>
+  </div>
+  <div class="down">
+    <p>The live demo is resting right now. We can show it at your shop instead.</p>
+    <div class="actions"><a class="btn primary" href={`${CONTACT.whatsapp}?text=${encodeURIComponent('Hello Karots, I would like to see Karots Suite at my shop.')}`}>Book a demo on WhatsApp</a></div>
+  </div>
+</section>
+
+<script>
+  import { wireLiveDemo } from '../scripts/live-demo'
+  wireLiveDemo()
+</script>
+
+<style>
+  .live { margin-top: 3rem; padding: clamp(1.5rem, 4vw, 2.25rem); border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--saffron) }
+  h2 { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2rem) }
+  p { color: var(--muted) }
+  .up, .down { display: none }
+  [data-state='up'] .up, [data-state='down'] .down { display: block }
+  [data-state='up'] .checking, [data-state='down'] .checking { display: none }
+  .checking { font-weight: 700; color: var(--ink) }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem }
+  .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.25em; border-radius: var(--r-btn); font-weight: 700; text-decoration: none }
+  .primary { background-color: var(--saffron); color: var(--saffron-ink) }
+  .ghost { border: 2px solid var(--line); color: var(--ink) }
+</style>

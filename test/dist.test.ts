@@ -139,3 +139,24 @@ describe('SEO', () => {
     expect(full).not.toMatch(/!\[|\.\.\/assets/)
   })
 })
+
+describe('live Demo Room', () => {
+  it('the tour and contact pages link to demo.karots.lk and say a code is needed', () => {
+    for (const path of ['/tour/', '/contact/']) {
+      const html = pages().find((p) => p.path === path)!.html
+      expect(html, path).toContain('href="https://demo.karots.lk/"')
+      expect(html, path).toMatch(/code/i)
+    }
+  })
+})
+
+describe('live Demo Room', () => {
+  it('the tour and contact pages offer it, say a code is needed, and keep it hidden until it answers', () => {
+    for (const path of ['/tour/', '/contact/']) {
+      const html = pages().find((p) => p.path === path)!.html
+      expect(html, path).toContain('href="https://demo.karots.lk/"')
+      expect(html, path).toMatch(/data-live-demo[^>]*data-state="checking"/)
+      expect(html, path).toMatch(/code/i)
+    }
+  })
+})

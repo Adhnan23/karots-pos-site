@@ -13,3 +13,6 @@ export const NAV = [
   { href: '/pricing/', label: 'Pricing' },
   { href: '/contact/', label: 'Contact' },
 ]
+
+/** The live Demo Room (the Suite's deploy/demo-room on the VPS); visitors need this hour's code. */
+export const DEMO_URL = 'https://demo.karots.lk/'

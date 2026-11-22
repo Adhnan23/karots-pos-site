@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Button from '../components/Button.astro'
 import { CONTACT } from '../data/site'
+import LiveDemo from '../components/LiveDemo.astro'
 ---
 <Base title="Contact — Karots Suite" description="Call or message Karots to see Karots Suite at your shop, ask a question or get a price." path="/contact/">
   <div class="wrap page">
@@ -17,6 +18,7 @@ import { CONTACT } from '../data/site'
       <p>We bring Karots Suite to your counter and show it with your kind of products: a sale from scan to receipt, your stock, batches and expiry, suppliers and the day's money. Tell us your shop's name and town and a good time.</p>
       <Button href={`${CONTACT.whatsapp}?text=${encodeURIComponent('Hello Karots, I would like to see Karots Suite at my shop.')}`}>Book a demo on WhatsApp</Button>
     </section>
+    <LiveDemo />
   </div>
 </Base>
 
