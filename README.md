@@ -1,8 +1,8 @@
 # Karots Suite site
 
 The public site for Karots Suite, written for **shop owners** (not developers): what it does, a phone tour sellers
-show at the counter, the owner guides and plugin pages, pricing, questions and contact. Static Astro, deployed to
-Cloudflare Pages. Installable and works offline: the home page and the whole tour are saved on a phone's first visit.
+show at the counter, the owner guides and plugin pages, pricing, questions and contact. Static Astro, served by a
+Cloudflare Worker (assets only). Installable and works offline: the home page and the whole tour are saved on a phone's first visit.
 
 The old Karots POS site is kept on the `archive/karots-pos` branch.
 
@@ -43,7 +43,7 @@ Each page has its title, description, canonical address and a share image drawn 
 
 ```sh
 bun run test && bun run build
-bunx wrangler pages deploy
+bunx wrangler deploy
 ```
 
 Prices: `/pricing/` says "call us" until the price list is ready; add figures there and an `offers` block to
