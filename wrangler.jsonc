@@ -1,0 +1,7 @@
+{
+  // Cloudflare Pages: a static site, no Functions. Deploy: bun run build && bunx wrangler pages deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "karots-suite-site",
+  "compatibility_date": "2026-11-01",
+  "pages_build_output_dir": "./dist"
+}

@@ -9,6 +9,8 @@ export default defineConfig({
   site: SITE,
   output: 'static',
   trailingSlash: 'always',
+  // One small stylesheet per page: inline it so nothing blocks the first paint.
+  build: { inlineStylesheets: 'always' },
   // Every image, Markdown ones too, gets a srcset and resizes to its container.
   image: { layout: 'constrained', responsiveStyles: true },
   integrations: [sitemap({ filter: (page) => !page.includes('404') && !page.includes('/offline/') }), serviceWorker()],

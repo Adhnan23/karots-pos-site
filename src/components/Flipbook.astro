@@ -8,7 +8,7 @@ const { frames, ms = 1600, label } = Astro.props
 <figure class="book" data-flipbook data-ms={ms} aria-label={label}>
   <div class="stage" data-stage>
     {frames.map((f, i) => (
-      <Image data-frame class:list={['frame', { on: i === 0 }]} style={`--focus:${f.focus}`} src={f.src} alt={f.caption} widths={[480, 720, 1024]} sizes="(max-width: 699px) 230vw, (max-width: 1000px) 100vw, 980px" loading={i === 0 ? 'eager' : 'lazy'} />
+      <Image data-frame class:list={['frame', { on: i === 0 }]} style={`--focus:${f.focus}`} src={f.src} alt={`${label}, step ${i + 1} of ${frames.length}`} widths={[480, 720, 1024]} quality={70} sizes="(max-width: 699px) 230vw, (max-width: 1000px) 100vw, 980px" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'low'} />
     ))}
   </div>
   <figcaption>
