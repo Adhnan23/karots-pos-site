@@ -28,7 +28,7 @@ describe('built site', () => {
 })
 
 // Pages later tasks build (Task 6 tour, Task 7 the rest). Empty once they exist.
-const PENDING = ['/tour/']
+const PENDING: string[] = []
 
 describe('links and content pages', () => {
   it('every internal link resolves', () => {
@@ -72,5 +72,18 @@ describe('sales pages', () => {
 
   it('the demo button opens the tour without JavaScript', () => {
     expect(page('/')!.html).toMatch(/id="demo-button"[^>]*href="\/tour\/"|href="\/tour\/"[^>]*id="demo-button"/)
+  })
+})
+
+describe('tour', () => {
+  it('four tour pages, each with the sale flipbook first', () => {
+    for (const k of ['pharmacy', 'grocery', 'phone', 'hardware']) {
+      const p = pages().find((x) => x.path === `/tour/${k}/`)
+      expect(p, k).toBeDefined()
+      const flip = p!.html.indexOf('data-flipbook')
+      const card = p!.html.indexOf('data-card="screen"')
+      expect(flip, `${k} flipbook`).toBeGreaterThan(-1)
+      expect(card, `${k} screens`).toBeGreaterThan(flip)
+    }
   })
 })

@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro'
+import Flipbook from '../../components/Flipbook.astro'
+import TourCard from '../../components/TourCard.astro'
+import Button from '../../components/Button.astro'
+import { SALE, TOUR, type Kind } from '../../data/tour'
+import { shot } from '../../lib/shots'
+import { CONTACT } from '../../data/site'
+
+export function getStaticPaths() {
+  return (Object.keys(TOUR) as Kind[]).map((kind) => ({ params: { kind } }))
+}
+const kind = Astro.params.kind as Kind
+const t = TOUR[kind]
+const frames = SALE.map((f) => ({ src: shot(`tour/${kind}/${f.shot}.jpg`), caption: f.caption }))
+const total = t.cards.length + 2
+---
+<Base title={`${t.name} tour — Karots Suite`} description={`A sale at ${t.shop} from scan to receipt, then the screens a ${t.name.toLowerCase()} owner uses every day.`} path={`/tour/${kind}/`}>
+  <div class="tour">
+    <div class="wrap head">
+      <p class="back"><a href="/tour/">All shops</a></p>
+      <h1>{t.name}</h1>
+      <div class="row">
+        <p class="shop">At {t.shop}, a Karots demo shop</p>
+      <div class="controls">
+        <button type="button" data-prev aria-label="Back">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+        <span data-count aria-live="polite">1 / {total}</span>
+        <button type="button" data-next aria-label="Next">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+      </div>
+      </div>
+    </div>
+    <ul class="deck" data-deck>
+      <li class="slide" data-card="sale">
+        <div class="wrap"><Flipbook frames={frames} label={`A sale at ${t.shop}`} /></div>
+      </li>
+      {t.cards.map((c, i) => (
+        <li class="slide"><div class="wrap"><ul class="one"><TourCard src={shot(`tour/${kind}/${c.shot}.jpg`)} title={c.title} caption={c.caption} n={i + 2} of={total} /></ul></div></li>
+      ))}
+      <li class="slide" data-card="end">
+        <div class="wrap end">
+          <h2>See it at your shop</h2>
+          <p>We'll bring it to your counter and set it up with your kind of products.</p>
+          <div class="actions">
+            <Button href={`tel:${CONTACT.phone}`}>Call {CONTACT.phoneDisplay}</Button>
+            <Button href={CONTACT.whatsapp} kind="ghost">WhatsApp</Button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</Base>
+
+<script>
+  import { initDeck } from '../../scripts/deck'
+  initDeck()
+</script>
+
+<style>
+  .tour { padding-block: 1.5rem 2.5rem }
+  .back { margin: 0 0 0.5rem }
+  .back a { color: var(--muted) }
+  h1 { font-size: clamp(2rem, 1.4rem + 3vw, 3.2rem); margin-bottom: 0.15em }
+  .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; margin-bottom: 1rem }
+  .shop { color: var(--muted); margin: 0 }
+  .deck {
+    list-style: none; margin: 0; padding: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain; scrollbar-width: none;
+  }
+  .deck::-webkit-scrollbar { display: none }
+  .slide { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; padding-block: 0.5rem }
+  .one { list-style: none; margin: 0; padding: 0 }
+  .end { display: grid; align-content: center; min-height: 60vh; text-align: center; justify-items: center }
+  .end p { color: var(--muted) }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1rem }
+  .controls { display: flex; align-items: center; gap: 0.75rem; margin-left: auto }
+  .controls button { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--line); background-color: var(--surface); color: var(--ink); cursor: pointer }
+  .controls button:hover { border-color: var(--saffron) }
+  [data-count] { font-weight: 700; min-width: 4ch; text-align: center }
+</style>

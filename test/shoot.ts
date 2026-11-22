@@ -1,11 +1,18 @@
 // Design-gate screenshots: bun test/shoot.ts /path/ [/other/] → test/shots/<name>-<w>-<mode>.png
 // Serves dist/ itself (astro preview), so build first.
 import { chromium } from '@playwright/test'
-import { spawn } from 'node:child_process'
+import { execSync, spawn } from 'node:child_process'
+
+const stopPreview = () => { try { execSync('bunx astro preview stop', { stdio: 'ignore' }) } catch {} }
+stopPreview() // Astro keeps a preview server running in the background
 
 const paths = process.argv.slice(2).length ? process.argv.slice(2) : ['/']
+const PORT = 4399
 const server = spawn('bunx', ['astro', 'preview', '--port', '4399'], { stdio: 'ignore' })
-await new Promise((r) => setTimeout(r, 2500))
+for (let i = 0; i < 60; i++) {
+  if (await fetch(`http://localhost:${PORT}/`).then(() => true, () => false)) break
+  await new Promise((r) => setTimeout(r, 250))
+}
 const browser = await chromium.launch()
 try {
   for (const path of paths)
@@ -23,4 +30,5 @@ try {
 } finally {
   await browser.close()
   server.kill()
+  stopPreview()
 }

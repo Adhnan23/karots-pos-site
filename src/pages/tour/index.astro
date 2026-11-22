@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro'
+import KindTiles from '../../components/KindTiles.astro'
+---
+<Base title="Tour — Karots Suite" description="See Karots Suite at work in a pharmacy, a grocery, a mobile shop or a hardware shop: a sale from scan to receipt, then stock, expiry, suppliers and the day's numbers." path="/tour/">
+  <div class="wrap page">
+    <h1>See it at work</h1>
+    <p class="lede">Pick your kind of shop. You'll watch a sale from the first scan to the receipt, then swipe through the screens you'd use every day.</p>
+    <KindTiles />
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+  .lede { margin-bottom: 2.5rem }
+</style>
