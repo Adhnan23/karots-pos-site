@@ -1,68 +1,66 @@
 ---
-// The hero's receipt: a real-looking 80 mm slip that prints line by line once.
-// Prices are the Demo Room grocery's, so the numbers add up.
-const lines = [
-  { name: 'Anchor Milk Powder 400g', qty: 1, each: 1250 },
-  { name: 'Paracetamol 500mg (card)', qty: 2, each: 30 },
-  { name: 'Eggs', qty: 10, each: 55 },
-  { name: 'Sunlight Soap 110g', qty: 3, each: 95 },
-  { name: 'Keeri Samba Rice 1kg', qty: 2, each: 290 },
-]
-const total = lines.reduce((s, l) => s + l.qty * l.each, 0)
-const cash = 3000
-const rs = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2 })
+// The hero: real receipts the Suite printed in the Demo Room (make tour-shots → tour/<kind>/receipt.png),
+// each in its shop's own receipt style. One slides out of the printer on load; "Print another" prints the next.
+import { Image } from 'astro:assets'
+import { shot } from '../lib/shots'
+
+const slips = [
+  { kind: 'hardware', shop: 'Lanka Build Hardware' },
+  { kind: 'pharmacy', shop: 'CityCare Pharmacy' },
+  { kind: 'phone', shop: 'Galaxy Mobile & Repairs' },
+  { kind: 'grocery', shop: 'Sunrise Mini Mart' },
+].map((s) => ({ ...s, src: shot(`tour/${s.kind}/receipt.png`) }))
 ---
-<figure class="receipt" aria-label={`A receipt for ${lines.length} items, total Rs. ${rs(total)}`}>
-  <div class="slot" aria-hidden="true"></div>
-  <div class="paper">
-    <p class="shop">Sunrise Mini Mart</p>
-    <p class="addr">No. 12, Main Street, Kalpitiya<br />077 123 4567</p>
-    <p class="meta"><span>Receipt 4821</span><span>22 Nov 2026 10:42</span></p>
-    <ol class="items">
-      {lines.map((l, i) => (
-        <li style={`--i:${i}`}>
-          <span class="n">{l.name}</span>
-          <span class="q">{l.qty} × {rs(l.each)}</span>
-          <span class="a">{rs(l.qty * l.each)}</span>
-        </li>
-      ))}
-    </ol>
-    <p class="row total"><span>Total</span><span>Rs. {rs(total)}</span></p>
-    <p class="row"><span>Cash</span><span>{rs(cash)}</span></p>
-    <p class="row change"><span>Change</span><span>{rs(cash - total)}</span></p>
-    <p class="thanks">Thank you, come again!</p>
-    <svg class="bars" viewBox="0 0 120 24" aria-hidden="true">
-      {Array.from({ length: 40 }, (_, i) => <rect x={i * 3} width={(i * 7) % 3 === 0 ? 2 : 1} height="24" />)}
-    </svg>
+<figure class="receipt" data-receipt>
+  <div class="printer" aria-hidden="true"><span></span></div>
+  <div class="out">
+    {slips.map((s, i) => (
+      <Image data-slip data-shop={s.shop} class:list={['paper', { on: i === 0 }]} src={s.src}
+        alt={`A receipt printed by Karots Suite for ${s.shop}, in its own style`} widths={[340, 680]} sizes="340px"
+        quality={90} loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'low'} />
+    ))}
   </div>
+  <figcaption>
+    <span data-caption>{slips[0].shop}’s receipt</span>
+    <button type="button" data-print>Print another</button>
+  </figcaption>
 </figure>
 
+<script>
+  for (const fig of document.querySelectorAll<HTMLElement>('[data-receipt]')) {
+    const slips = [...fig.querySelectorAll<HTMLImageElement>('[data-slip]')]
+    const caption = fig.querySelector('[data-caption]')!
+    let i = 0
+    fig.querySelector('[data-print]')!.addEventListener('click', () => {
+      slips[i].classList.remove('on')
+      i = (i + 1) % slips.length
+      slips[i].loading = 'eager'
+      void slips[i].offsetWidth // restart the feed animation
+      slips[i].classList.add('on')
+      caption.textContent = `${slips[i].dataset.shop}’s receipt`
+    })
+  }
+</script>
+
 <style>
-  .receipt { margin: 0; position: relative; width: min(100%, 330px); justify-self: center }
-  .slot {
-    height: 14px; margin-inline: -14px; border-radius: 8px; position: relative; z-index: 1;
-    background-color: #2b2d33; box-shadow: var(--shadow), inset 0 -3px 0 #0d0e11;
+  .receipt { margin: 0; width: min(100%, 340px); justify-self: center; display: grid }
+  .printer {
+    height: 18px; margin-inline: -16px; position: relative; z-index: 1; border-radius: 9px;
+    background-color: #2b2d33; box-shadow: var(--shadow);
   }
-  .paper {
-    margin-top: -6px; padding: 1.6rem 1.25rem 1.25rem; background-color: var(--paper); color: var(--paper-ink);
-    font: 13px/1.5 var(--mono); box-shadow: var(--shadow);
+  .printer span { position: absolute; left: 12px; right: 12px; top: 8px; height: 3px; border-radius: 2px; background-color: #0d0e11 }
+  .out { overflow: hidden; margin-top: -9px; padding: 0 8px 24px } /* room for the paper's shadow */
+  .out :global(.paper) {
+    display: none; width: 100%; height: auto; background-color: #fff; padding: 18px 14px 26px;
+    box-shadow: 0 10px 28px -12px rgb(22 23 27 / 0.45);
     mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px 100%;
-    padding-bottom: 1.8rem;
-    animation: feed 2.6s steps(26) both;
-    transform-origin: top;
   }
-  @keyframes feed { from { clip-path: inset(0 0 100% 0) } to { clip-path: inset(0 0 0 0) } }
-  p { margin: 0; max-width: none }
-  .shop { text-align: center; font-weight: 600; font-size: 16px }
-  .addr { text-align: center; font-size: 12px }
-  .meta, .row { display: flex; justify-content: space-between; gap: 1rem }
-  .meta { font-size: 12px; border-block: 1px dashed currentColor; padding-block: 0.4rem; margin-block: 0.7rem }
-  .items { list-style: none; margin: 0 0 0.6rem; padding: 0 0 0.6rem; border-bottom: 1px dashed currentColor }
-  .items li { display: grid; grid-template-columns: 1fr auto; margin-bottom: 0.35rem }
-  .n { grid-column: 1 / -1 }
-  .q { color: #666 }
-  .total { font-weight: 600; font-size: 15px }
-  .change { margin-top: 0.2rem; padding-top: 0.3rem; border-top: 1px dashed currentColor; font-weight: 600 }
-  .thanks { text-align: center; margin-top: 1rem }
-  .bars { display: block; width: 70%; margin: 0.8rem auto 0; fill: currentColor }
+  .out :global(.paper.on) { display: block; animation: feed 1.9s cubic-bezier(0.22, 0.7, 0.25, 1) both }
+  @keyframes feed { from { transform: translateY(-100%) } to { transform: translateY(0) } }
+  figcaption { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.25rem; color: var(--muted); font-size: 0.95rem }
+  button {
+    flex: none; min-height: 44px; padding: 0 1rem; border-radius: var(--r-btn); border: 2px solid var(--line);
+    background: none; color: var(--ink); font: inherit; font-weight: 700; cursor: pointer;
+  }
+  button:hover { border-color: var(--saffron) }
 </style>
