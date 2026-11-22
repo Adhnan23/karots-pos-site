@@ -5,16 +5,18 @@ import Screen from '../../components/Screen.astro'
 import Button from '../../components/Button.astro'
 import Demo from '../../components/Demo.astro'
 import { FEATURES, type Feature } from '../../data/features'
+import { breadcrumbs } from '../../lib/jsonld'
 
 export function getStaticPaths() {
   return FEATURES.map((f) => ({ params: { area: f.area }, props: { f } }))
 }
 const { f } = Astro.props as { f: Feature }
 const path = `/features/${f.area}/`
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Features', path: '/features/' }, { name: f.title, path }]
 ---
-<Base title={`${f.title} — Karots Suite`} description={f.summary} path={path}>
+<Base title={`${f.title} — Karots Suite`} description={f.summary} path={path} ogShot={f.shot} jsonLd={[breadcrumbs(Astro.site!, crumbs)]}>
   <div class="wrap page">
-    <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Features', path: '/features/' }, { name: f.title, path }]} />
+    <Breadcrumbs items={crumbs} />
     <h1>{f.title}</h1>
     <p class="lede">{f.summary}</p>
     <Screen src={f.shot} alt={f.alt} eager />

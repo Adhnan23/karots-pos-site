@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { files, pages } from './dist-lib'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { DIST, files, pages } from './dist-lib'
 
 // Words that must never reach a public page: the old product, the dropped languages,
 // and anything internal to a shop's install or to support.
@@ -85,5 +87,52 @@ describe('tour', () => {
       expect(flip, `${k} flipbook`).toBeGreaterThan(-1)
       expect(card, `${k} screens`).toBeGreaterThan(flip)
     }
+  })
+})
+
+describe('SEO', () => {
+  const site = 'https://pos.karots.lk'
+  const real = () => pages().filter((p) => p.path !== '/404.html')
+  const meta = (html: string, prop: string) => html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`))?.[1]
+  const ld = (html: string) => [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap((m) => [JSON.parse(m[1])].flat())
+
+  it('every page has its canonical address', () => {
+    for (const p of real()) expect(p.html, p.path).toContain(`<link rel="canonical" href="${site}${p.path}">`)
+  })
+
+  it('every page has a share card whose image exists', () => {
+    const have = new Set(files())
+    for (const p of real()) {
+      expect(meta(p.html, 'og:title'), p.path).toBeTruthy()
+      expect(meta(p.html, 'og:description'), p.path).toBeTruthy()
+      const img = meta(p.html, 'og:image') ?? ''
+      expect(img.startsWith(site + '/'), `${p.path} og:image ${img}`).toBe(true)
+      expect(have.has(img.slice(site.length)), `${p.path} og:image file ${img}`).toBe(true)
+      expect(meta(p.html, 'twitter:card'), p.path).toBe('summary_large_image')
+    }
+  })
+
+  it('structured data: the home page names the business and the software, the FAQ its questions, guides their trail', () => {
+    const types = (path: string) => ld(pages().find((p) => p.path === path)!.html).map((x) => x['@type'])
+    expect(types('/')).toEqual(expect.arrayContaining(['Organization', 'SoftwareApplication']))
+    expect(types('/faq/')).toContain('FAQPage')
+    expect(types('/guides/stock/')).toContain('BreadcrumbList')
+    expect(types('/plugins/pharmacy/')).toContain('BreadcrumbList')
+  })
+
+  it('the sitemap lists every page but the 404', () => {
+    const sm = readFileSync(join(DIST, 'sitemap-0.xml'), 'utf8')
+    for (const p of real()) expect(sm, p.path).toContain(`<loc>${site}${p.path}</loc>`)
+    expect(sm).not.toContain('404')
+    expect(readFileSync(join(DIST, 'robots.txt'), 'utf8')).toContain(`Sitemap: ${site}/sitemap-index.xml`)
+  })
+
+  it('llms.txt lists every guide and plugin; llms-full.txt carries their text', () => {
+    const llms = readFileSync(join(DIST, 'llms.txt'), 'utf8')
+    const full = readFileSync(join(DIST, 'llms-full.txt'), 'utf8')
+    for (const p of real().filter((x) => /^\/(guides|plugins)\/[^/]+\/$/.test(x.path))) expect(llms, p.path).toContain(`${site}${p.path}`)
+    expect(llms.startsWith('# Karots Suite')).toBe(true)
+    expect(full).toContain('## Products')
+    expect(full).not.toMatch(/!\[|\.\.\/assets/)
   })
 })

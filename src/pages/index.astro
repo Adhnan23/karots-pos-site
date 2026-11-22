@@ -9,11 +9,12 @@ import Button from '../components/Button.astro'
 import { FEATURES } from '../data/features'
 import { plugins } from '../lib/content'
 import { CONTACT } from '../data/site'
+import { organization, softwareApplication } from '../lib/jsonld'
 
 const main = FEATURES.slice(0, 4)
 const list = await plugins()
 ---
-<Base title="Karots Suite — the shop system for Sri Lankan retail" description="Till, stock, purchasing, money and reports for a small Sri Lankan shop, in one program that works without the internet." path="/">
+<Base title="Karots Suite — the shop system for Sri Lankan retail" description="Till, stock, purchasing, money and reports for a small Sri Lankan shop, in one program that works without the internet." path="/" jsonLd={[organization(Astro.site!), softwareApplication(Astro.site!)]}>
   <Hero />
 
   <Section id="kinds" title="Made for your kind of shop" intro="Pick yours and see the screens you would use every day, with a sale from start to finish." tone="surface">

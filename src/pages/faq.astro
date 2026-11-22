@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro'
 import { FAQ } from '../data/faq'
+import { faq } from '../lib/jsonld'
 ---
-<Base title="Questions — Karots Suite" description="Answers for shop owners: internet, power cuts, printers, phones, Sinhala and Tamil names, expiry, backups, updates and price." path="/faq/">
+<Base title="Questions — Karots Suite" description="Answers for shop owners: internet, power cuts, printers, phones, Sinhala and Tamil names, expiry, backups, updates and price." path="/faq/" jsonLd={[faq(FAQ)]}>
   <div class="wrap page">
     <h1>Questions shop owners ask</h1>
     <div class="list">
