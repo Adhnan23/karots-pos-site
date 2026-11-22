@@ -1,0 +1,17 @@
+---
+interface Props { id?: string; title: string; intro?: string; tone?: 'plain' | 'surface' }
+const { id, title, intro, tone = 'plain' } = Astro.props
+---
+<section id={id} class:list={['section', tone]}>
+  <div class="wrap">
+    <h2>{title}</h2>
+    {intro && <p class="lede">{intro}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section { padding-block: clamp(3.5rem, 8vw, 6.5rem) }
+  .surface { background-color: var(--surface) }
+  .lede { margin-bottom: 2.5rem }
+</style>

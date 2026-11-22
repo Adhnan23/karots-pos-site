@@ -10,10 +10,14 @@
     "test": "astro build && vitest run"
   },
   "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
     "astro": "^5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@playwright/test": "1.63.0",
     "@types/node": "^26.6.6",
     "typescript": "^6",
     "vitest": "^5.1.1"

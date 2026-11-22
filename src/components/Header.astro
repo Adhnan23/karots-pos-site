@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets'
+import logo from '../assets/logo.jpg'
+import { CONTACT, NAV } from '../data/site'
+import ThemeToggle from './ThemeToggle.astro'
+const here = Astro.url.pathname
+---
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Karots Suite, home">
+      <Image src={logo} alt="" width={36} height={36} />
+      <span>Karots Suite</span>
+    </a>
+    <nav aria-label="Main" class="links">
+      {NAV.map((n) => <a href={n.href} aria-current={here.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+    </nav>
+    <div class="end">
+      <ThemeToggle />
+      <a class="call" href={`tel:${CONTACT.phone}`}>Call</a>
+      <details class="menu">
+        <summary aria-label="Menu"><span></span></summary>
+        <nav aria-label="Menu">
+          {NAV.map((n) => <a href={n.href} aria-current={here.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .top {
+    position: sticky; top: 0; z-index: 10;
+    background-color: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; gap: 1.5rem; min-height: 64px }
+  .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: var(--display); font-weight: 800; font-stretch: 115%; font-size: 1.15rem }
+  .brand img { border-radius: 10px }
+  .links { display: none; gap: 0.25rem; margin-inline: auto }
+  .links a, .menu nav a { text-decoration: none; padding: 0.5rem 0.75rem; border-radius: var(--r-btn); color: var(--muted); font-weight: 600 }
+  .links a:hover, .menu nav a:hover { color: var(--ink) }
+  .links a[aria-current], .menu nav a[aria-current] { color: var(--ink); background-color: var(--saffron-soft) }
+  .end { display: flex; align-items: center; gap: 0.25rem; margin-left: auto }
+  .call { display: none; padding: 0.55rem 1rem; border-radius: var(--r-btn); background-color: var(--ink); color: var(--bg); font-weight: 700; text-decoration: none }
+
+  .menu summary { list-style: none; display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer; border-radius: var(--r-btn) }
+  .menu summary::-webkit-details-marker { display: none }
+  .menu summary span, .menu summary span::before, .menu summary span::after { display: block; width: 20px; height: 2px; background-color: var(--ink); border-radius: 2px; position: relative }
+  .menu summary span::before, .menu summary span::after { content: ''; position: absolute }
+  .menu summary span::before { top: -6px } .menu summary span::after { top: 6px }
+  .menu[open] summary span { background-color: transparent }
+  .menu[open] summary span::before { top: 0; transform: rotate(45deg) }
+  .menu[open] summary span::after { top: 0; transform: rotate(-45deg) }
+  .menu nav {
+    position: absolute; left: 0; right: 0; top: 64px; display: grid; padding: 0.75rem var(--gutter) 1.25rem;
+    background-color: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+  }
+  .menu nav a { padding: 0.85rem 0.75rem; font-size: 1.1rem }
+
+  @media (min-width: 960px) {
+    .links, .call { display: flex }
+    .end { margin-left: 0 }
+    .menu { display: none }
+  }
+</style>

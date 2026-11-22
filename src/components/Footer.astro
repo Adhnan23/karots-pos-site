@@ -1,0 +1,34 @@
+---
+import { CONTACT, NAV } from '../data/site'
+const year = new Date().getFullYear()
+---
+<footer class="foot">
+  <div class="wrap grid">
+    <div>
+      <p class="name">Karots Suite</p>
+      <p class="muted">The shop system for small Sri Lankan shops. Runs on your own PC, works without the internet.</p>
+    </div>
+    <nav aria-label="Footer">
+      {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+      <a href="/faq/">Questions</a>
+    </nav>
+    <div class="reach">
+      <a href={`tel:${CONTACT.phone}`}>{CONTACT.phoneDisplay}</a>
+      <a href={CONTACT.whatsapp}>WhatsApp</a>
+      <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+    </div>
+  </div>
+  <div class="wrap legal muted">© {year} Karots Korp</div>
+</footer>
+
+<style>
+  .foot { border-top: 1px solid var(--line); padding-block: 3rem 2rem; margin-top: 2rem }
+  .grid { display: grid; gap: 2rem }
+  .name { font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: 1.3rem; margin-bottom: 0.4rem }
+  .muted { color: var(--muted) }
+  nav, .reach { display: grid; gap: 0.4rem; align-content: start }
+  nav a, .reach a { text-decoration: none; color: var(--muted); overflow-wrap: anywhere }
+  nav a:hover, .reach a:hover { color: var(--ink) }
+  .legal { margin-top: 2.5rem; font-size: 0.9rem }
+  @media (min-width: 720px) { .grid { grid-template-columns: 2fr 1fr 1.4fr } }
+</style>

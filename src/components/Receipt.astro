@@ -1,0 +1,68 @@
+---
+// The hero's receipt: a real-looking 80 mm slip that prints line by line once.
+// Prices are the Demo Room grocery's, so the numbers add up.
+const lines = [
+  { name: 'Anchor Milk Powder 400g', qty: 1, each: 1250 },
+  { name: 'Paracetamol 500mg (card)', qty: 2, each: 30 },
+  { name: 'Eggs', qty: 10, each: 55 },
+  { name: 'Sunlight Soap 110g', qty: 3, each: 95 },
+  { name: 'Keeri Samba Rice 1kg', qty: 2, each: 290 },
+]
+const total = lines.reduce((s, l) => s + l.qty * l.each, 0)
+const cash = 3000
+const rs = (n: number) => n.toLocaleString('en-US', { minimumFractionDigits: 2 })
+---
+<figure class="receipt" aria-label={`A receipt for ${lines.length} items, total Rs. ${rs(total)}`}>
+  <div class="slot" aria-hidden="true"></div>
+  <div class="paper">
+    <p class="shop">Sunrise Mini Mart</p>
+    <p class="addr">No. 12, Main Street, Kalpitiya<br />077 123 4567</p>
+    <p class="meta"><span>Receipt 4821</span><span>22 Nov 2026 10:42</span></p>
+    <ol class="items">
+      {lines.map((l, i) => (
+        <li style={`--i:${i}`}>
+          <span class="n">{l.name}</span>
+          <span class="q">{l.qty} × {rs(l.each)}</span>
+          <span class="a">{rs(l.qty * l.each)}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="row total"><span>Total</span><span>Rs. {rs(total)}</span></p>
+    <p class="row"><span>Cash</span><span>{rs(cash)}</span></p>
+    <p class="row change"><span>Change</span><span>{rs(cash - total)}</span></p>
+    <p class="thanks">Thank you, come again!</p>
+    <svg class="bars" viewBox="0 0 120 24" aria-hidden="true">
+      {Array.from({ length: 40 }, (_, i) => <rect x={i * 3} width={(i * 7) % 3 === 0 ? 2 : 1} height="24" />)}
+    </svg>
+  </div>
+</figure>
+
+<style>
+  .receipt { margin: 0; position: relative; width: min(100%, 330px); justify-self: center }
+  .slot {
+    height: 14px; margin-inline: -14px; border-radius: 8px; position: relative; z-index: 1;
+    background-color: #2b2d33; box-shadow: var(--shadow), inset 0 -3px 0 #0d0e11;
+  }
+  .paper {
+    margin-top: -6px; padding: 1.6rem 1.25rem 1.25rem; background-color: var(--paper); color: var(--paper-ink);
+    font: 13px/1.5 var(--mono); box-shadow: var(--shadow);
+    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px 100%;
+    padding-bottom: 1.8rem;
+    animation: feed 2.6s steps(26) both;
+    transform-origin: top;
+  }
+  @keyframes feed { from { clip-path: inset(0 0 100% 0) } to { clip-path: inset(0 0 0 0) } }
+  p { margin: 0; max-width: none }
+  .shop { text-align: center; font-weight: 600; font-size: 16px }
+  .addr { text-align: center; font-size: 12px }
+  .meta, .row { display: flex; justify-content: space-between; gap: 1rem }
+  .meta { font-size: 12px; border-block: 1px dashed currentColor; padding-block: 0.4rem; margin-block: 0.7rem }
+  .items { list-style: none; margin: 0 0 0.6rem; padding: 0 0 0.6rem; border-bottom: 1px dashed currentColor }
+  .items li { display: grid; grid-template-columns: 1fr auto; margin-bottom: 0.35rem }
+  .n { grid-column: 1 / -1 }
+  .q { color: #666 }
+  .total { font-weight: 600; font-size: 15px }
+  .change { margin-top: 0.2rem; padding-top: 0.3rem; border-top: 1px dashed currentColor; font-weight: 600 }
+  .thanks { text-align: center; margin-top: 1rem }
+  .bars { display: block; width: 70%; margin: 0.8rem auto 0; fill: currentColor }
+</style>

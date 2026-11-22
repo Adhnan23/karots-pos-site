@@ -1,0 +1,22 @@
+<button class="theme" type="button" aria-label="Switch light or dark">
+  <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18V3Z"/><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+</button>
+
+<script>
+  const root = document.documentElement
+  document.querySelector('.theme')?.addEventListener('click', () => {
+    const dark = root.dataset.theme
+      ? root.dataset.theme === 'dark'
+      : matchMedia('(prefers-color-scheme: dark)').matches
+    root.dataset.theme = dark ? 'light' : 'dark'
+    try { localStorage.setItem('ks-site-theme', root.dataset.theme) } catch {}
+  })
+</script>
+
+<style>
+  .theme {
+    display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: var(--r-btn);
+    background: none; color: var(--ink); cursor: pointer;
+  }
+  .theme:hover { background-color: var(--bg) }
+</style>

@@ -1,0 +1,18 @@
+---
+interface Props { href: string; kind?: 'primary' | 'ghost'; id?: string }
+const { href, kind = 'primary', id } = Astro.props
+---
+<a class:list={['btn', kind]} href={href} id={id}><slot /></a>
+
+<style>
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5em; min-height: 48px; padding: 0 1.25em;
+    border-radius: var(--r-btn); font-weight: 700; text-decoration: none; white-space: nowrap;
+    transition: transform 0.12s ease, background-color 0.12s ease;
+  }
+  .btn:active { transform: translateY(1px) }
+  .primary { background-color: var(--saffron); color: var(--saffron-ink) }
+  .primary:hover { background-color: #ffbb1a }
+  .ghost { border: 2px solid var(--line); color: var(--ink) }
+  .ghost:hover { border-color: var(--ink) }
+</style>
