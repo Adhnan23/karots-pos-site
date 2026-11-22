@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap'
 import serviceWorker from './src/integrations/sw'
 
 // The site's address — changes once, at deploy.
-export const SITE = 'https://pos.karots.lk'
+export const SITE = 'https://suite.karots.lk'
 
 export default defineConfig({
   site: SITE,

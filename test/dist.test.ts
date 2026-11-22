@@ -93,7 +93,7 @@ describe('tour', () => {
 })
 
 describe('SEO', () => {
-  const site = 'https://pos.karots.lk'
+  const site = 'https://suite.karots.lk'
   // The 404 and the offline page are noindex: no canonical, not in the sitemap.
   const real = () => pages().filter((p) => p.path !== '/404.html' && p.path !== '/offline/')
   const meta = (html: string, prop: string) => html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`))?.[1]
