@@ -1,6 +1,6 @@
 // bun run sync [suitePath] — copies the Suite's owner guides, plugin pages and the screenshots they use into
 // src/content/ and src/assets/shots/. The outputs are committed, so a build never needs the Suite repo.
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { convert, EXCLUDED_PLUGINS, GUIDES, type Kind } from './sync-lib'
 
@@ -34,4 +34,6 @@ for (const img of images) {
   mkdirSync(dirname(dest), { recursive: true })
   copyFileSync(join(suite, 'docs', 'images', img), dest)
 }
+// The phone tour's frames (Suite: make tour-shots), whole folder per shop kind.
+cpSync(join(suite, 'docs', 'images', 'tour'), join(site, 'src', 'assets', 'shots', 'tour'), { recursive: true })
 console.log(`synced ${GUIDES.length} guides, ${plugins.length} plugins, ${images.size} images`)

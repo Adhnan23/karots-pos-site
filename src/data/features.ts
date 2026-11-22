@@ -87,5 +87,5 @@ export const KINDS = [
   { kind: 'pharmacy', name: 'Pharmacy', line: 'Batches, expiry and prescriptions' },
   { kind: 'grocery', name: 'Grocery & mini mart', line: 'Fast scanning, packs and credit' },
   { kind: 'phone', name: 'Mobile & repairs', line: 'Repair jobs, reloads and bills' },
-  { kind: 'hardware', name: 'Hardware', line: 'Quotes, invoices and clearance' },
+  { kind: 'hardware', name: 'Hardware', line: 'Clearance, customer requests, sold by the metre' },
 ]
