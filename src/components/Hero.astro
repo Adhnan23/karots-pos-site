@@ -12,7 +12,7 @@ import { CONTACT } from '../data/site'
         keeps selling when the internet or the power goes.
       </p>
       <div class="actions">
-        <Button href="/tour/" id="demo-button">See it on this phone</Button>
+        <Button href="/tour/" id="demo-button" data-demo data-pc="Book a demo at your shop">See it on this phone</Button>
         <Button href={`tel:${CONTACT.phone}`} kind="ghost">Call {CONTACT.phoneDisplay}</Button>
       </div>
     </div>
@@ -26,3 +26,8 @@ import { CONTACT } from '../data/site'
   .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem }
   @media (min-width: 900px) { .grid { grid-template-columns: 1.35fr 1fr } }
 </style>
+
+<script>
+  import { wireDemoButtons } from '../scripts/demo-button'
+  wireDemoButtons()
+</script>

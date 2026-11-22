@@ -28,14 +28,14 @@ describe('built site', () => {
 })
 
 // Pages later tasks build (Task 6 tour, Task 7 the rest). Empty once they exist.
-const PENDING = ['/features/', '/tour/', '/pricing/', '/contact/', '/faq/']
+const PENDING = ['/tour/']
 
 describe('links and content pages', () => {
   it('every internal link resolves', () => {
     const have = new Set(files())
     for (const p of pages())
       for (const [, href] of p.html.matchAll(/(?:href|src)="(\/[^"#?]*)/g)) {
-        if (PENDING.includes(href)) continue
+        if (PENDING.some((p) => href.startsWith(p))) continue
         const ok = href.endsWith('/') ? have.has(href + 'index.html') : have.has(href)
         expect(ok, `${href} on ${p.path}`).toBe(true)
       }
@@ -53,5 +53,24 @@ describe('links and content pages', () => {
     expect(plugins.length).toBe(10)
     expect(paths.has('/guides/')).toBe(true)
     expect(paths.has('/plugins/')).toBe(true)
+  })
+})
+
+describe('sales pages', () => {
+  const page = (path: string) => pages().find((p) => p.path === path)
+  it('has home, features per area, pricing, contact, FAQ and a 404', () => {
+    for (const p of ['/', '/features/', '/features/till/', '/features/stock/', '/features/purchasing/', '/features/money/',
+      '/features/reports/', '/pricing/', '/contact/', '/faq/'])
+      expect(page(p), p).toBeDefined()
+    expect(pages().some((p) => p.path === '/404.html'), '404').toBe(true)
+  })
+
+  it('shows no price until the user sends the list', () => {
+    expect(page('/pricing/')!.html).not.toMatch(/Rs\.? ?\d|LKR/)
+    for (const p of pages()) expect(p.html, p.path).not.toContain('LKR')
+  })
+
+  it('the demo button opens the tour without JavaScript', () => {
+    expect(page('/')!.html).toMatch(/id="demo-button"[^>]*href="\/tour\/"|href="\/tour\/"[^>]*id="demo-button"/)
   })
 })

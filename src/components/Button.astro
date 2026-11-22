@@ -1,8 +1,8 @@
 ---
-interface Props { href: string; kind?: 'primary' | 'ghost'; id?: string }
-const { href, kind = 'primary', id } = Astro.props
+interface Props { href: string; kind?: 'primary' | 'ghost'; id?: string; [attr: `data-${string}`]: string | boolean }
+const { href, kind = 'primary', id, ...rest } = Astro.props
 ---
-<a class:list={['btn', kind]} href={href} id={id}><slot /></a>
+<a class:list={['btn', kind]} href={href} id={id} {...rest}><slot /></a>
 
 <style>
   .btn {

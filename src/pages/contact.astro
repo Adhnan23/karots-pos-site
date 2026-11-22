@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro'
+import Button from '../components/Button.astro'
+import { CONTACT } from '../data/site'
+---
+<Base title="Contact — Karots Suite" description="Call or message Karots to see Karots Suite at your shop, ask a question or get a price." path="/contact/">
+  <div class="wrap page">
+    <h1>Talk to Karots</h1>
+    <p class="lede">Questions, a price, or a look at your counter: call or message, whichever is easier.</p>
+    <ul class="ways">
+      <li><a href={`tel:${CONTACT.phone}`}><span class="how">Call</span><span class="what">{CONTACT.phoneDisplay}</span></a></li>
+      <li><a href={CONTACT.whatsapp}><span class="how">WhatsApp</span><span class="what">{CONTACT.phoneDisplay}</span></a></li>
+      <li><a href={`mailto:${CONTACT.email}`}><span class="how">Email</span><span class="what mail">{CONTACT.email}</span></a></li>
+    </ul>
+    <section id="demo" class="demo">
+      <h2>See it at your shop</h2>
+      <p>We bring Karots Suite to your counter and show it with your kind of products: a sale from scan to receipt, your stock, batches and expiry, suppliers and the day's money. Tell us your shop's name and town and a good time.</p>
+      <Button href={`${CONTACT.whatsapp}?text=${encodeURIComponent('Hello Karots, I would like to see Karots Suite at my shop.')}`}>Book a demo on WhatsApp</Button>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+  .lede { margin-bottom: 2.5rem }
+  .ways { list-style: none; margin: 0 0 3.5rem; padding: 0; display: grid; gap: 0.75rem }
+  .ways a { display: grid; gap: 0.2rem; padding: 1.25rem 1.4rem; border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line); text-decoration: none }
+  .ways a:hover { border-color: var(--saffron) }
+  .how { color: var(--muted); font-weight: 600 }
+  .what { font-family: var(--display); font-stretch: 112%; font-weight: 800; font-size: 1.35rem; overflow-wrap: anywhere }
+  .mail { font-size: clamp(1rem, 0.85rem + 0.9vw, 1.35rem); overflow-wrap: normal; word-break: break-all }
+  .demo { padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: var(--r-tile); background-color: var(--saffron-soft) }
+  @media (min-width: 860px) { .ways { grid-template-columns: repeat(3, 1fr) } }
+</style>

@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro'
+import FeatureRow from '../../components/FeatureRow.astro'
+import { FEATURES } from '../../data/features'
+---
+<Base title="Features — Karots Suite" description="The till, stock and expiry, suppliers, money, reports, staff and printing: what Karots Suite does for a small Sri Lankan shop." path="/features/">
+  <div class="wrap page">
+    <h1>Features</h1>
+    <p class="lede">Everything a shop does in a day, in one program on your own PC.</p>
+    {FEATURES.map((f, i) => <FeatureRow f={f} flip={i % 2 === 1} heading="h2" />)}
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+</style>

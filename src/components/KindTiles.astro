@@ -1,0 +1,28 @@
+---
+import { KINDS } from '../data/features'
+---
+<ul class="kinds">
+  {KINDS.map((k) => (
+    <li>
+      <a href={`/tour/${k.kind}/`}>
+        <span class="name">{k.name}</span>
+        <span class="line">{k.line}</span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .kinds { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem }
+  a {
+    display: grid; gap: 0.35rem; min-height: 8.5rem; align-content: end; padding: 1.25rem 1.35rem;
+    border-radius: var(--r-tile); text-decoration: none; background-color: var(--saffron); color: var(--saffron-ink);
+    transition: transform 0.15s ease;
+  }
+  li:nth-child(even) a { background-color: var(--ink); color: var(--bg) }
+  a:hover { transform: translateY(-3px) }
+  .name { font-family: var(--display); font-stretch: 125%; font-weight: 800; font-size: 1.55rem; line-height: 1.05 }
+  .line { font-weight: 600; opacity: 0.85 }
+  @media (min-width: 640px) { .kinds { grid-template-columns: 1fr 1fr } }
+  @media (min-width: 1100px) { .kinds { grid-template-columns: repeat(4, 1fr) } a { min-height: 12rem } }
+</style>

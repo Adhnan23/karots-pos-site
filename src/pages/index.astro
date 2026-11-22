@@ -1,7 +1,63 @@
 ---
 import Base from '../layouts/Base.astro'
 import Hero from '../components/Hero.astro'
+import Section from '../components/Section.astro'
+import KindTiles from '../components/KindTiles.astro'
+import FeatureRow from '../components/FeatureRow.astro'
+import Trust from '../components/Trust.astro'
+import Button from '../components/Button.astro'
+import { FEATURES } from '../data/features'
+import { plugins } from '../lib/content'
+import { CONTACT } from '../data/site'
+
+const main = FEATURES.slice(0, 4)
+const list = await plugins()
 ---
 <Base title="Karots Suite — the shop system for Sri Lankan retail" description="Till, stock, purchasing, money and reports for a small Sri Lankan shop, in one program that works without the internet." path="/">
   <Hero />
+
+  <Section id="kinds" title="Made for your kind of shop" intro="Pick yours and see the screens you would use every day, with a sale from start to finish." tone="surface">
+    <KindTiles />
+  </Section>
+
+  <Section title="Everything the counter needs" intro="One program for the till, the shelf, the suppliers and the money. Here is what each part does.">
+    {main.map((f, i) => <FeatureRow f={f} flip={i % 2 === 1} />)}
+    <p class="all"><a href="/features/">All the features</a></p>
+  </Section>
+
+  <Section title="Built to be trusted" intro="A shop can't stop because the computer did. These are the things Karots Suite is built never to get wrong." tone="surface">
+    <Trust />
+  </Section>
+
+  <Section title="Add what your shop needs" intro="Every shop gets the till, stock, suppliers, money and reports. Plugins add the rest, built into your own copy.">
+    <ul class="plugins">
+      {list.map((p) => <li><a href={`/plugins/${p.id}/`}>{p.data.title}</a></li>)}
+    </ul>
+  </Section>
+
+  <section class="close">
+    <div class="wrap">
+      <h2>See it at your counter</h2>
+      <p class="lede">We bring it to your shop and show it with your kind of products.</p>
+      <div class="actions">
+        <Button href={`tel:${CONTACT.phone}`}>Call {CONTACT.phoneDisplay}</Button>
+        <Button href={CONTACT.whatsapp} kind="ghost">Message on WhatsApp</Button>
+      </div>
+    </div>
+  </section>
 </Base>
+
+<style>
+  .all { margin-top: 1.5rem; font-weight: 700 }
+  .all a { text-decoration-color: var(--saffron); text-decoration-thickness: 2px }
+  .plugins { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem }
+  .plugins a {
+    display: inline-block; padding: 0.7rem 1.1rem; border-radius: 999px; border: 2px solid var(--line);
+    text-decoration: none; font-weight: 700;
+  }
+  .plugins a:hover { border-color: var(--saffron) }
+  .close { padding-block: clamp(3.5rem, 8vw, 6rem); background-color: var(--ink); color: var(--bg) }
+  .close .lede { color: color-mix(in srgb, var(--bg) 75%, transparent) }
+  .close :global(.ghost) { color: var(--bg); border-color: color-mix(in srgb, var(--bg) 35%, transparent) }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem }
+</style>

@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro'
+import Button from '../components/Button.astro'
+---
+<Base title="Page not found — Karots Suite" description="This page isn't here. Start from the home page or the tour." path="/404/">
+  <div class="wrap page">
+    <h1>This page isn't here</h1>
+    <p class="lede">It may have moved. The home page and the tour have everything.</p>
+    <div class="actions">
+      <Button href="/">Go to the home page</Button>
+      <Button href="/tour/" kind="ghost">See the tour</Button>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 5rem 6rem }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem }
+</style>

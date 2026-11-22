@@ -1,0 +1,27 @@
+---
+// "Built to be trusted": plain promises the Suite's tests and battle runs back up.
+const items = [
+  { t: 'Keeps selling with no internet', d: 'Everything runs on the PC in your shop. The internet is only for backups and updates.' },
+  { t: 'Survives a power cut', d: 'A finished sale is never lost. When the power comes back, the till is up in seconds with every sale in place.' },
+  { t: 'Money and stock always add up', d: 'Every rule about money and stock is checked by automated tests that run whole shop days, power cuts included, before any update reaches you.' },
+  { t: 'Backed up on its own', d: 'Automatic backups every few hours, a copy on a USB stick or another PC, and an optional copy in the cloud.' },
+  { t: 'Your data stays yours', d: 'Your sales and customers live on your own PC, not on someone else’s server.' },
+  { t: 'Updates when you say', d: 'The shop never updates by itself. You press Update; it backs up first, and goes back to the old version if the new one won’t start.' },
+]
+---
+<ul class="trust">
+  {items.map((i) => (
+    <li>
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--paid)" /><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      <div><h3>{i.t}</h3><p>{i.d}</p></div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .trust { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.75rem 3rem }
+  li { display: grid; grid-template-columns: 26px 1fr; gap: 1rem; align-items: start }
+  h3 { margin: 0.1rem 0 0.35rem; font-size: 1.2rem }
+  p { margin: 0; color: var(--muted) }
+  @media (min-width: 800px) { .trust { grid-template-columns: 1fr 1fr } }
+</style>

@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Screen from '../../components/Screen.astro'
+import Button from '../../components/Button.astro'
+import { FEATURES, type Feature } from '../../data/features'
+
+export function getStaticPaths() {
+  return FEATURES.map((f) => ({ params: { area: f.area }, props: { f } }))
+}
+const { f } = Astro.props as { f: Feature }
+const path = `/features/${f.area}/`
+---
+<Base title={`${f.title} — Karots Suite`} description={f.summary} path={path}>
+  <div class="wrap page">
+    <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Features', path: '/features/' }, { name: f.title, path }]} />
+    <h1>{f.title}</h1>
+    <p class="lede">{f.summary}</p>
+    <Screen src={f.shot} alt={f.alt} eager />
+    <ul class="points">
+      {f.points.map((p) => <li>{p}</li>)}
+    </ul>
+    <slot name="demo" />
+    <div class="actions">
+      <Button href={`/guides/${f.guide}/`}>Read the full guide</Button>
+      <Button href="/tour/" kind="ghost">See the tour</Button>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+  .lede { margin-bottom: 2rem }
+  .points { margin: 2.5rem 0; padding: 0; list-style: none; display: grid; gap: 1rem 3rem; max-width: 60rem }
+  .points li { padding-left: 1.4rem; position: relative }
+  .points li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.6rem; height: 0.6rem; border-radius: 3px; background-color: var(--saffron) }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem }
+  @media (min-width: 800px) { .points { grid-template-columns: 1fr 1fr } }
+</style>

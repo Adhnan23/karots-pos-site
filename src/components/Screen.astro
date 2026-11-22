@@ -1,0 +1,15 @@
+---
+// A screenshot of the Suite in a thin PC frame.
+import { Image } from 'astro:assets'
+import { shot } from '../lib/shots'
+interface Props { src: string; alt: string; eager?: boolean }
+const { src, alt, eager = false } = Astro.props
+---
+<div class="screen">
+  <Image src={shot(src)} alt={alt} widths={[480, 800, 1200]} sizes="(min-width: 1000px) 640px, 100vw" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />
+</div>
+
+<style>
+  .screen { padding: 6px; border-radius: var(--r-frame); background-color: #2b2d33; box-shadow: var(--shadow) }
+  .screen :global(img) { border-radius: calc(var(--r-frame) - 6px); width: 100%; height: auto }
+</style>

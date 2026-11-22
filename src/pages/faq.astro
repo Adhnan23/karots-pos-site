@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro'
+import { FAQ } from '../data/faq'
+---
+<Base title="Questions — Karots Suite" description="Answers for shop owners: internet, power cuts, printers, phones, Sinhala and Tamil names, expiry, backups, updates and price." path="/faq/">
+  <div class="wrap page">
+    <h1>Questions shop owners ask</h1>
+    <div class="list">
+      {FAQ.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem; max-width: 52rem }
+  .list { margin-top: 2rem; border-top: 1px solid var(--line) }
+  details { border-bottom: 1px solid var(--line) }
+  summary {
+    cursor: pointer; list-style: none; padding: 1.15rem 2.5rem 1.15rem 0; position: relative;
+    font-family: var(--display); font-stretch: 110%; font-weight: 700; font-size: 1.15rem;
+  }
+  summary::-webkit-details-marker { display: none }
+  summary::after { content: '+'; position: absolute; right: 0.5rem; top: 0.9rem; font-size: 1.5rem; color: var(--saffron); transition: transform 0.15s ease }
+  details[open] summary::after { transform: rotate(45deg) }
+  details p { margin: 0 0 1.25rem; color: var(--muted) }
+</style>

@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro'
+import Button from '../components/Button.astro'
+import { CONTACT } from '../data/site'
+---
+<Base title="Pricing — Karots Suite" description="Karots Suite is priced for your shop: the core program, the plugins your kind of shop needs, and installation. Call or message for a price." path="/pricing/">
+  <div class="wrap page">
+    <h1>A price for your shop</h1>
+    <p class="lede">Every shop is different, so we price yours by what it needs. Tell us about your shop and we'll give you a price.</p>
+    <ul class="parts">
+      <li><h2>The core</h2><p>The till, stock and expiry, suppliers, money, reports, staff and printing. Every shop gets all of it.</p></li>
+      <li><h2>Your plugins</h2><p>Only the ones your kind of shop uses: pharmacy, repairs, reloads, invoices, combos and the rest.</p></li>
+      <li><h2>Installation</h2><p>We set it up on your PC with your printers, and show your staff how to use it.</p></li>
+    </ul>
+    <div class="actions">
+      <Button href={`tel:${CONTACT.phone}`}>Call {CONTACT.phoneDisplay}</Button>
+      <Button href={CONTACT.whatsapp} kind="ghost">Ask on WhatsApp</Button>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+  .lede { margin-bottom: 2.5rem }
+  .parts { list-style: none; margin: 0 0 2.5rem; padding: 0; display: grid; gap: 1rem }
+  .parts li { padding: 1.5rem; border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--saffron) }
+  .parts h2 { font-size: 1.5rem }
+  .parts p { margin: 0; color: var(--muted) }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem }
+  @media (min-width: 860px) { .parts { grid-template-columns: repeat(3, 1fr) } }
+</style>

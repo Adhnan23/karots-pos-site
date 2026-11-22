@@ -1,0 +1,26 @@
+---
+import Screen from './Screen.astro'
+import type { Feature } from '../data/features'
+interface Props { f: Feature; flip?: boolean; heading?: 'h2' | 'h3' }
+const { f, flip = false, heading = 'h3' } = Astro.props
+const H = heading
+---
+<article class:list={['row', { flip }]}>
+  <div class="text">
+    <H class="title"><a href={`/features/${f.area}/`}>{f.title}</a></H>
+    <p>{f.summary}</p>
+    <a class="more" href={`/features/${f.area}/`}>More about {f.short}</a>
+  </div>
+  <Screen src={f.shot} alt={f.alt} />
+</article>
+
+<style>
+  .row { display: grid; gap: 1.5rem; align-items: center; padding-block: 2rem }
+  .title { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem) }
+  .title a { text-decoration: none }
+  .more { font-weight: 700; text-decoration-color: var(--saffron); text-decoration-thickness: 2px }
+  @media (min-width: 900px) {
+    .row { grid-template-columns: 1fr 1.5fr; gap: 3.5rem }
+    .flip .text { order: 2 }
+  }
+</style>
