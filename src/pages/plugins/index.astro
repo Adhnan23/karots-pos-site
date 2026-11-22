@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro'
+import IndexList from '../../components/IndexList.astro'
+import { plugins } from '../../lib/content'
+
+const items = (await plugins()).map((p) => ({ title: p.data.title, summary: p.data.summary, path: `/plugins/${p.id}/` }))
+---
+<Base title="Plugins — Karots Suite" description="Add what your kind of shop needs: pharmacy, repairs, reloads, combos, invoices, clearance and more, built into your copy." path="/plugins/">
+  <div class="wrap page">
+    <h1>Plugins</h1>
+    <p class="lede">
+      Every shop gets the till, stock, suppliers, money and reports. Plugins add what your kind of shop needs, built
+      into your own copy, so nothing you don't use gets in the way.
+    </p>
+    <IndexList items={items} />
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+  .lede { margin-bottom: 2.5rem }
+</style>

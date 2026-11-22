@@ -1,0 +1,16 @@
+---
+import { render } from 'astro:content'
+import Doc from '../../layouts/Doc.astro'
+import { plugins } from '../../lib/content'
+
+export async function getStaticPaths() {
+  const all = await plugins()
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry, all } }))
+}
+const { entry, all } = Astro.props
+const { Content } = await render(entry)
+const siblings = all.map((g) => ({ title: g.data.title, path: `/plugins/${g.id}/` }))
+---
+<Doc title={entry.data.title} summary={entry.data.summary} path={`/plugins/${entry.id}/`} section={{ name: 'Plugins', path: '/plugins/' }} siblings={siblings}>
+  <Content />
+</Doc>

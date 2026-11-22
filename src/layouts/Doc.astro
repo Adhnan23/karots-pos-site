@@ -1,0 +1,48 @@
+---
+// A guide or plugin page: breadcrumbs, title, summary, the synced Markdown, and the rest of its kind alongside.
+import Base from './Base.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+import Prose from '../components/Prose.astro'
+
+interface Props {
+  title: string
+  summary: string
+  path: string
+  section: { name: string; path: string }
+  siblings: { title: string; path: string }[]
+}
+const { title, summary, path, section, siblings } = Astro.props
+const crumbs = [{ name: 'Home', path: '/' }, section, { name: title, path }]
+---
+<Base title={`${title} — Karots Suite`} description={summary} path={path}>
+  <article class="wrap doc">
+    <div class="main">
+      <Breadcrumbs items={crumbs} />
+      <h1>{title}</h1>
+      <Prose><slot /></Prose>
+    </div>
+    <aside aria-label={`More ${section.name.toLowerCase()}`}>
+      <p class="aside-title">{section.name}</p>
+      <ul>
+        {siblings.map((s) => (
+          <li><a href={s.path} aria-current={s.path === path ? 'page' : undefined}>{s.title}</a></li>
+        ))}
+      </ul>
+    </aside>
+  </article>
+</Base>
+
+<style>
+  .doc { display: grid; gap: 3rem; padding-block: 2.5rem 4rem }
+  h1 { font-size: clamp(2.1rem, 1.4rem + 3.4vw, 3.4rem) }
+  aside { border-top: 1px solid var(--line); padding-top: 1.5rem }
+  .aside-title { font-weight: 700; margin-bottom: 0.5rem }
+  aside ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem }
+  aside a { display: block; padding: 0.4rem 0.75rem; border-radius: var(--r-btn); text-decoration: none; color: var(--muted) }
+  aside a:hover { color: var(--ink) }
+  aside a[aria-current] { color: var(--ink); background-color: var(--saffron-soft); font-weight: 700 }
+  @media (min-width: 1000px) {
+    .doc { grid-template-columns: minmax(0, 1fr) 15rem }
+    aside { border-top: 0; padding-top: 4.5rem; position: sticky; top: 4rem; align-self: start }
+  }
+</style>

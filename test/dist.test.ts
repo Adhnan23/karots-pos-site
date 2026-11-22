@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { pages } from './dist-lib'
+import { files, pages } from './dist-lib'
 
 // Words that must never reach a public page: the old product, the dropped languages,
 // and anything internal to a shop's install or to support.
@@ -24,5 +24,30 @@ describe('built site', () => {
       expect(p.html, `title on ${p.path}`).toMatch(/<title>[^<]+<\/title>/)
       expect(p.html, `description on ${p.path}`).toMatch(/<meta name="description" content="[^"]+"/)
     }
+  })
+})
+
+// Pages later tasks build (Task 6 tour, Task 7 the rest). Empty once they exist.
+const PENDING = ['/features/', '/tour/', '/pricing/', '/contact/', '/faq/']
+
+describe('links and content pages', () => {
+  it('every internal link resolves', () => {
+    const have = new Set(files())
+    for (const p of pages())
+      for (const [, href] of p.html.matchAll(/href="(\/[^"#?]*)/g)) {
+        if (PENDING.includes(href)) continue
+        const ok = href.endsWith('/') ? have.has(href + 'index.html') : have.has(href)
+        expect(ok, `${href} on ${p.path}`).toBe(true)
+      }
+  })
+
+  it('every guide and plugin is a page', () => {
+    const paths = new Set(pages().map((p) => p.path))
+    for (const g of ['till', 'stock', 'purchasing', 'money', 'reports', 'people', 'printing', 'appearance', 'shelf'])
+      expect(paths.has(`/guides/${g}/`), g).toBe(true)
+    const plugins = [...paths].filter((p) => /^\/plugins\/[^/]+\/$/.test(p))
+    expect(plugins.length).toBe(10)
+    expect(paths.has('/guides/')).toBe(true)
+    expect(paths.has('/plugins/')).toBe(true)
   })
 })

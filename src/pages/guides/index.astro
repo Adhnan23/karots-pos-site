@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro'
+import IndexList from '../../components/IndexList.astro'
+import { guides } from '../../lib/content'
+
+const items = (await guides()).map((g) => ({ title: g.data.title, summary: g.data.summary, path: `/guides/${g.id}/` }))
+---
+<Base title="Guides — Karots Suite" description="Plain-English guides for shop owners and staff: selling at the till, stock, suppliers, money, reports, people and printing." path="/guides/">
+  <div class="wrap page">
+    <h1>Guides</h1>
+    <p class="lede">How each part of Karots Suite works, with screenshots from a real shop's year of trade.</p>
+    <IndexList items={items} />
+  </div>
+</Base>
+
+<style>
+  .page { padding-block: 2.5rem 4rem }
+  .lede { margin-bottom: 2.5rem }
+</style>

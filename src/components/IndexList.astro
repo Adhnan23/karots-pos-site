@@ -1,0 +1,24 @@
+---
+interface Props { items: { title: string; summary: string; path: string }[] }
+const { items } = Astro.props
+---
+<ul class="list">
+  {items.map((it) => (
+    <li>
+      <a href={it.path}>
+        <h2>{it.title}</h2>
+        <p>{it.summary}</p>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line) }
+  li { border-bottom: 1px solid var(--line) }
+  a { display: grid; gap: 0.35rem 3rem; padding: 1.4rem 0.25rem; text-decoration: none; transition: background-color 0.12s ease }
+  a:hover h2 { text-decoration: underline; text-decoration-color: var(--saffron); text-decoration-thickness: 3px; text-underline-offset: 0.18em }
+  h2 { font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.6rem); margin: 0; font-stretch: 115% }
+  p { margin: 0; color: var(--muted) }
+  @media (min-width: 800px) { a { grid-template-columns: 18rem 1fr; align-items: baseline } }
+</style>
