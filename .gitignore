@@ -8,3 +8,4 @@ test/shots/
 .vscode/
 .idea/
 .playwright-mcp/
+test/lh/
