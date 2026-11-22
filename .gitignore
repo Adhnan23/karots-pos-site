@@ -1,6 +1,9 @@
-# OS / editor cruft — the site itself is fully static, no build artifacts.
+node_modules/
+dist/
+.astro/
+.superpowers/
+test/shots/
 .DS_Store
-Thumbs.db
 *.log
 .vscode/
 .idea/
