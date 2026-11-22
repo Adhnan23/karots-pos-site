@@ -32,7 +32,7 @@ fonts, Cloudflare Pages (wrangler). Suite side: Playwright (`web/docs-shots`).
 ## Review Focus
 
 1. A guide links to an excluded guide or a missing image → the link becomes plain text, the build never ships a 404
-   link (test in Task 3, check in Task 10).
+   link (test in Task 3, check in Task 4).
 2. A seller's phone opens `/tour/` offline having visited only `/` → the tour still opens (all four kinds precached on
    first visit; test in Task 10).
 3. An update deploys while a phone holds the old Service Worker → the new version takes over on next open, no mixed
