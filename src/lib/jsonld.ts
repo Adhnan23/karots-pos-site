@@ -1,5 +1,6 @@
-// Structured data (schema.org) for search engines. No prices until the user's list exists.
+// Structured data (schema.org) for search engines.
 import { CONTACT } from '../data/site'
+import { PLANS } from '../data/pricing'
 
 export function organization(site: URL) {
   return {
@@ -15,6 +16,7 @@ export function softwareApplication(site: URL) {
     applicationCategory: 'BusinessApplication', operatingSystem: 'Windows, Linux',
     description: 'Till, stock and expiry, suppliers, money and reports for a small Sri Lankan shop, in one program that works without the internet.',
     publisher: { '@type': 'Organization', name: 'Karots' },
+    offers: PLANS.map((p) => ({ '@type': 'Offer', name: p.name, price: String(p.price), priceCurrency: 'LKR', url: new URL('/pricing/', site).href })),
   }
 }
 

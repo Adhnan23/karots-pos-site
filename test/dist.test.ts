@@ -67,9 +67,11 @@ describe('sales pages', () => {
     expect(pages().some((p) => p.path === '/404.html'), '404').toBe(true)
   })
 
-  it('shows no price until the user sends the list', () => {
-    expect(page('/pricing/')!.html).not.toMatch(/Rs\.? ?\d|LKR/)
-    for (const p of pages()) expect(p.html, p.path).not.toContain('LKR')
+  it('shows the prices (user, 2026-11-22): Suite 100,000, Core 80,000, service 5,000 a month or 60,000 a year, entry 10 a product', () => {
+    const html = page('/pricing/')!.html
+    for (const n of ['Rs. 100,000', 'Rs. 80,000', 'Rs. 5,000', 'Rs. 60,000', 'Rs. 10 a product', '3 months’ warranty']) expect(html, n).toContain(n)
+    const offers = [...html.matchAll(/"price":"(\d+)"/g)].map((m) => m[1])
+    expect(offers.sort()).toEqual(['100000', '80000'])
   })
 
   it('the demo button opens the tour without JavaScript', () => {

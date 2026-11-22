@@ -11,5 +11,5 @@ export const FAQ: { q: string; a: string }[] = [
   { q: 'Where is my data kept?', a: 'On your own PC, with automatic backups every few hours, a copy on a USB stick or another PC, and an optional copy in the cloud.' },
   { q: 'How do updates work?', a: 'Your shop never updates by itself. When you press Update it backs up first, installs the new version, and goes back to the old one if the new one won’t start.' },
   { q: 'Can I try it before buying?', a: 'Yes. We can show it at your shop with your kind of products. Call or message us to set a time.' },
-  { q: 'How much does it cost?', a: 'It depends on what your shop needs: the core program, the plugins for your kind of shop, and installation. Call or message us for a price for your shop.' },
+  { q: 'How much does it cost?', a: 'Karots Suite is Rs. 100,000 once, with the plugins your shop wants and the Karots Shelf app. Core, without plugins or Karots Shelf, is Rs. 80,000. Both come with 3 months’ warranty and free training. The service plan, Rs. 5,000 a month or Rs. 60,000 a year, brings every new feature, help any time and cloud backup.' },
 ]

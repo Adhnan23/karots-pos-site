@@ -9,7 +9,9 @@ const ABOUT = `# Karots Suite
 > program on the shop's own PC. It sells without the internet, survives power cuts, and every admin page and
 > report works on a phone. Plugins add pharmacy, repairs, reloads and bills, print and copy, combos, clearance and more.
 
-Made by Karots, Sri Lanka. Prices are given per shop: call or message +94 76 962 6396.
+Made by Karots, Sri Lanka. Karots Suite Rs. 100,000 once (with the shop's plugins and the Karots Shelf app); Core
+Rs. 80,000 (no plugins or Shelf); both with 3 months' warranty and free training. Service plan Rs. 5,000 a month or
+Rs. 60,000 a year: new features, help any time, cloud backup. Products put in for Rs. 10 each. Call +94 76 962 6396.
 `
 
 const line = (site: URL, path: string, title: string, summary: string) => `- [${title}](${new URL(path, site).href}): ${summary}`
@@ -29,7 +31,7 @@ export async function llmsTxt(site: URL) {
     ...Object.entries(TOUR).map(([k, t]) => line(site, `/tour/${k}/`, `${t.name} tour`, `a sale at ${t.shop} from scan to receipt, then the owner's screens`)),
     '', '## Optional',
     line(site, '/faq/', 'Questions', 'answers for shop owners'),
-    line(site, '/pricing/', 'Pricing', 'priced per shop: the core, its plugins and installation'),
+    line(site, '/pricing/', 'Pricing', 'Karots Suite Rs. 100,000, Core Rs. 80,000, service plan Rs. 5,000 a month'),
     line(site, '/contact/', 'Contact', 'phone, WhatsApp and email'),
     line(site, '/llms-full.txt', 'Full text', 'every guide and plugin page as plain Markdown'),
     '',
