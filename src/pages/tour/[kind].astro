@@ -12,7 +12,7 @@ export function getStaticPaths() {
 }
 const kind = Astro.params.kind as Kind
 const t = TOUR[kind]
-const frames = SALE.map((f) => ({ src: shot(`tour/${kind}/${f.shot}.jpg`), caption: f.caption, focus: f.focus }))
+const frames = SALE.map((f) => ({ src: shot(`tour/${kind}/${f.shot}.jpg`), caption: f.caption }))
 const total = t.cards.length + 2
 ---
 <Base title={`${t.name} tour — Karots Suite`} description={`A sale at ${t.shop} from scan to receipt, then the screens a ${t.name.toLowerCase()} owner uses every day.`} path={`/tour/${kind}/`} ogShot={`tour/${kind}/03-sale-cart.jpg`}>
@@ -80,4 +80,13 @@ const total = t.cards.length + 2
   .controls button { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--line); background-color: var(--surface); color: var(--ink); cursor: pointer }
   .controls button:hover { border-color: var(--saffron) }
   [data-count] { font-weight: 700; min-width: 4ch; text-align: center }
+  /* A phone on its side: a one-line heading so the screen is the till. */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .tour { padding-top: 0.5rem }
+    .back { display: none }
+    h1 { font-size: 1.35rem; margin: 0 }
+    .head { display: flex; align-items: center; gap: 1rem }
+    .row { flex: 1; margin: 0 }
+    .controls button { width: 40px; height: 40px }
+  }
 </style>

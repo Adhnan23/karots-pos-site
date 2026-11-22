@@ -5,14 +5,13 @@ export type Kind = 'pharmacy' | 'grocery' | 'phone' | 'hardware'
 export type Card = { shot: string; title: string; caption: string }
 
 /** The sale, frame by frame: the same story in every shop. */
-/** `focus`: on a phone the frame is cropped to this part of the screen (x, as a CSS position). */
-export const SALE: { shot: string; caption: string; focus: string }[] = [
-  { shot: '01-sale-empty', focus: '40%', caption: 'The cashier’s screen, ready for the next customer.' },
-  { shot: '02-sale-scan', focus: '62%', caption: 'Scan the first item. It goes straight into the sale.' },
-  { shot: '03-sale-cart', focus: '68%', caption: 'Scan the rest. The total adds up as you go.' },
-  { shot: '04-sale-pay', focus: '92%', caption: 'The customer pays cash. Tap the note they gave and the change shows at once.' },
-  { shot: '05-sale-done', focus: '80%', caption: 'Complete the sale. The change to give stays on the screen.' },
-  { shot: '06-sale-receipt', focus: '50%', caption: 'The receipt prints in the shop’s own style.' },
+export const SALE: { shot: string; caption: string }[] = [
+  { shot: '01-sale-empty', caption: 'The cashier’s screen, ready for the next customer.' },
+  { shot: '02-sale-scan', caption: 'Scan the first item. It goes straight into the sale.' },
+  { shot: '03-sale-cart', caption: 'Scan the rest. The total adds up as you go.' },
+  { shot: '04-sale-pay', caption: 'The customer pays cash. Tap the note they gave and the change shows at once.' },
+  { shot: '05-sale-done', caption: 'Complete the sale. The change to give stays on the screen.' },
+  { shot: '06-sale-receipt', caption: 'The receipt prints in the shop’s own style.' },
 ]
 
 const common = (headline: Card): Card[] => [
