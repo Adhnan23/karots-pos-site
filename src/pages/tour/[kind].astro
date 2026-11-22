@@ -12,7 +12,7 @@ export function getStaticPaths() {
 }
 const kind = Astro.params.kind as Kind
 const t = TOUR[kind]
-const frames = SALE.map((f) => ({ src: shot(`tour/${kind}/${f.shot}.jpg`), caption: f.caption }))
+const frames = SALE.map((f) => ({ src: shot(`tour/${kind}/${f.shot}.jpg`), caption: f.caption, focus: f.focus }))
 const total = t.cards.length + 2
 ---
 <Base title={`${t.name} tour — Karots Suite`} description={`A sale at ${t.shop} from scan to receipt, then the screens a ${t.name.toLowerCase()} owner uses every day.`} path={`/tour/${kind}/`}>

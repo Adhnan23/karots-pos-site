@@ -1,9 +1,9 @@
 // The areas the Features pages cover: copy from the Suite's README and guides, in an owner's words.
-export type Feature = { area: string; short: string; title: string; summary: string; shot: string; alt: string; guide: string; points: string[] }
+export type Feature = { area: string; short: string; demos?: ('lots' | 'packs' | 'pay' | 'credit')[]; title: string; summary: string; shot: string; alt: string; guide: string; points: string[] }
 
 export const FEATURES: Feature[] = [
   {
-    area: 'till', short: 'the till', title: 'Sell fast at the counter', guide: 'till',
+    area: 'till', short: 'the till', demos: ['pay'], title: 'Sell fast at the counter', guide: 'till',
     summary: 'Scan, search or tap a product. Discounts, split payments, credit, holds and returns, and the till never stops a sale.',
     shot: 'till/sell-light.jpg', alt: 'The till: products on the left, the sale in the middle, payment on the right',
     points: [
@@ -16,7 +16,7 @@ export const FEATURES: Feature[] = [
     ],
   },
   {
-    area: 'stock', short: 'stock and expiry', title: 'Know your stock', guide: 'stock',
+    area: 'stock', short: 'stock and expiry', demos: ['lots', 'packs'], title: 'Know your stock', guide: 'stock',
     summary: 'Batches and expiry, packs sold whole or loose, stock-take, intake by scan, and reorder levels it learns on its own.',
     shot: 'stock/batches.jpg', alt: 'Batches with their expiry dates, the ones close to expiry marked',
     points: [
@@ -39,7 +39,7 @@ export const FEATURES: Feature[] = [
     ],
   },
   {
-    area: 'money', short: 'money', title: 'Follow every rupee', guide: 'money',
+    area: 'money', short: 'money', demos: ['credit'], title: 'Follow every rupee', guide: 'money',
     summary: 'Till sessions with counted cash, lockers, cheques, expenses and a cash flow page that adds it all up.',
     shot: 'money/cashflow.jpg', alt: 'Cash flow: money in and out of every locker',
     points: [

@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro'
 import Breadcrumbs from '../../components/Breadcrumbs.astro'
 import Screen from '../../components/Screen.astro'
 import Button from '../../components/Button.astro'
+import Demo from '../../components/Demo.astro'
 import { FEATURES, type Feature } from '../../data/features'
 
 export function getStaticPaths() {
@@ -20,7 +21,7 @@ const path = `/features/${f.area}/`
     <ul class="points">
       {f.points.map((p) => <li>{p}</li>)}
     </ul>
-    <slot name="demo" />
+    {f.demos?.map((d) => <Demo kind={d} />)}
     <div class="actions">
       <Button href={`/guides/${f.guide}/`}>Read the full guide</Button>
       <Button href="/tour/" kind="ghost">See the tour</Button>

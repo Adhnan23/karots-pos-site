@@ -1,0 +1,52 @@
+---
+// A small playable piece of the Suite, following its rule book (src/scripts/demos/*).
+export type DemoKind = 'lots' | 'packs' | 'pay' | 'credit'
+interface Props { kind: DemoKind }
+const { kind } = Astro.props
+const TITLES: Record<DemoKind, { title: string; intro: string }> = {
+  lots: { title: 'Try it: which batch sells?', intro: 'Three batches of the same syrup. Sell them one by one.' },
+  packs: { title: 'Try it: cards and loose tablets', intro: 'Change the quantity and watch the price.' },
+  pay: { title: 'Try it: take the money', intro: 'Pay a Rs. 2,725 bill with notes, a card, or both.' },
+  credit: { title: 'Try it: sell on credit', intro: 'A regular customer buys on account.' },
+}
+const t = TITLES[kind]
+---
+<section class="demo" aria-label={t.title}>
+  <h2>{t.title}</h2>
+  <p class="intro">{t.intro}</p>
+  <div class="demo-box" data-demo-kind={kind}><noscript>Turn on JavaScript to try this.</noscript></div>
+</section>
+
+<script>
+  const load = {
+    lots: () => import('../scripts/demos/lots'),
+    packs: () => import('../scripts/demos/packs'),
+    pay: () => import('../scripts/demos/pay'),
+    credit: () => import('../scripts/demos/credit'),
+  }
+  for (const el of document.querySelectorAll<HTMLElement>('[data-demo-kind]')) {
+    load[el.dataset.demoKind as keyof typeof load]().then((m) => m.mount(el))
+  }
+</script>
+
+<style>
+  .demo { margin: 2.5rem 0; padding: clamp(1.25rem, 4vw, 2rem); border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line) }
+  h2 { font-size: clamp(1.4rem, 1.2rem + 1vw, 1.8rem) }
+  .intro { color: var(--muted) }
+  .demo-box :global(button) {
+    min-height: 44px; padding: 0 1rem; border-radius: var(--r-btn); border: 0; cursor: pointer;
+    background-color: var(--saffron); color: var(--saffron-ink); font: inherit; font-weight: 700;
+  }
+  .demo-box :global(button.ghost) { background: none; border: 2px solid var(--line); color: var(--ink) }
+  .demo-box :global(.demo-actions) { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem }
+  .demo-box :global(.demo-msg) { margin: 1rem 0 0; padding: 0.85rem 1rem; border-radius: var(--r-btn); background-color: var(--saffron-soft) }
+  .demo-box :global(.demo-what) { margin: 0 0 0.5rem }
+  .demo-box :global(.demo-lots) { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem }
+  .demo-box :global(.demo-lots li) { display: grid; grid-template-columns: auto 1fr auto; gap: 0.75rem; align-items: baseline; padding: 0.7rem 0.9rem; border-radius: var(--r-btn); border: 1px solid var(--line) }
+  .demo-box :global(.demo-lots li.soon) { border-color: var(--saffron) }
+  .demo-box :global(.demo-lots li.bad) { border-color: #d23f3f; color: color-mix(in srgb, var(--ink) 75%, #d23f3f) }
+  .demo-box :global(.demo-lots .n) { font-weight: 700 }
+  .demo-box :global(.demo-qty) { display: flex; align-items: center; gap: 1rem }
+  .demo-box :global(.demo-qty output) { font-family: var(--display); font-stretch: 112%; font-weight: 800; font-size: 1.4rem; min-width: 7ch; text-align: center }
+  .demo-box :global(.demo-qty button) { width: 48px; font-size: 1.4rem; padding: 0 }
+</style>
