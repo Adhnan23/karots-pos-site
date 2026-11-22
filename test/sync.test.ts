@@ -36,6 +36,15 @@ describe('rewrite', () => {
   })
 })
 
+describe('raw HTML images', () => {
+  it('become Markdown images in one paragraph, so the site can optimise them', () => {
+    const md = 'Top.\n\n<p>\n  <img src="../images/admin/dashboard.jpg" width="49%" alt="Light">\n  <img src="../images/admin/dashboard-dark.jpg" width="49%" alt="Dark">\n</p>\n\nEnd.'
+    const r = rewrite(md, 'guide', known)
+    expect(r.md).toBe('Top.\n\n![Light](../../assets/shots/admin/dashboard.jpg)\n![Dark](../../assets/shots/admin/dashboard-dark.jpg)\n\nEnd.')
+    expect(r.images).toEqual(['admin/dashboard.jpg', 'admin/dashboard-dark.jpg'])
+  })
+})
+
 describe('dropMentions', () => {
   it('drops only the sentences that name it, across wrapped lines', () => {
     const md = 'Tickets keep waiting. Tickets need the main PC, and a sales person can\'t sign in to Pocket Cashier: in a\npower cut, one cashier sells. A cashier on [Pocket Cashier](x.md) can open tickets.\n\nNext paragraph.'
@@ -57,5 +66,20 @@ describe('convert', () => {
     expect(out.md).toBe(
       '---\ntitle: "Stock"\nsummary: "Everything about what\'s on the shelf. More here."\n---\n\nEverything about **what\'s on** the shelf.\nMore here.\n\n## Products\n',
     )
+  })
+})
+
+describe('convert keeps internal detail off the site', () => {
+  it('drops admin addresses and the Shop Builder sentence', () => {
+    const src = '# Repairs\n\nJobs.\n\nThe admin page is under **Apps → Repairs** (`/admin/x/repairs`). A shop has this plugin only if it was built with it (Install & Shop Builder).\n'
+    expect(convert(src, 'plugin', known).md).toContain('The admin page is under **Apps → Repairs**.')
+    expect(convert(src, 'plugin', known).md).not.toMatch(/admin\/x|Shop Builder/)
+  })
+
+  it('drops remote-access and technician update steps', () => {
+    const src = '# Reports\n\nCharts.\n\nTo watch the shop from home, owners connect their phone to the shop PC over Tailscale. The suite\nitself stays on the shop\'s network.\n\nPlug one in later and run\n**Setup → Update** on that PC. On Windows, install the printer first.\n'
+    const md = convert(src, 'guide', known).md
+    expect(md).not.toMatch(/Tailscale|Setup → Update/)
+    expect(md).toContain('On Windows, install the printer first.')
   })
 })

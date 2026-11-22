@@ -11,10 +11,8 @@ The sun / screen / moon buttons in the top bar switch between light, the device'
 dark. The choice is kept on that device only, so the counter PC can stay light while the owner's
 phone is dark.
 
-<p>
-  <img src="../images/admin/dashboard.jpg" width="49%" alt="Light">
-  <img src="../images/admin/dashboard-dark.jpg" width="49%" alt="Dark">
-</p>
+![Light](../../assets/shots/admin/dashboard.jpg)
+![Dark](../../assets/shots/admin/dashboard-dark.jpg)
 
 ## Palettes
 

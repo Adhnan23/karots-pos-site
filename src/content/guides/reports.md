@@ -63,11 +63,8 @@ goods back.
 
 ## On a phone
 
-<p>
-  <img src="../images/phone/dashboard.jpg" width="220" alt="Dashboard on a phone">
-  <img src="../images/phone/sales.jpg" width="220" alt="Sales report on a phone">
-  <img src="../images/phone/top-products.jpg" width="220" alt="Top products on a phone">
-</p>
+![Dashboard on a phone](../../assets/shots/phone/dashboard.jpg)
+![Sales report on a phone](../../assets/shots/phone/sales.jpg)
+![Top products on a phone](../../assets/shots/phone/top-products.jpg)
 
-To watch the shop from home, owners connect their phone to the shop PC over Tailscale. The suite
-itself stays on the shop's network.
+The suite itself stays on the shop's network.

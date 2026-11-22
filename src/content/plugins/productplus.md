@@ -14,4 +14,4 @@ Extra product fields for the things your shop cares about: brand, generic name, 
 - **Moving a product to another category:** values of fields that no longer apply are kept but hidden, and come back if it moves back. The new category's fields start empty; if one is required, the product form asks for it on the next save, and Fill in shows what's missing.
 - With [AI Assistant](/plugins/aicatalog/), **Fill in details** fills the fields you tick, per category, reusing values you already use. A product that moved category comes back on that list for its new fields.
 
-The admin page is under **Apps → Product Plus** (`/admin/x/productplus`). A shop has this plugin only if it was built with it (Install & Shop Builder).
+The admin page is under **Apps → Product Plus**.

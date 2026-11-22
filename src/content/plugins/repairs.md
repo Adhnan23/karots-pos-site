@@ -17,4 +17,4 @@ Repair jobs from drop-off to pickup.
 - The **report** shows each collected job's own bill lines, so two jobs picked up on one bill (or a part sold loose
   beside them) never count each other's.
 
-The admin page is under **Apps → Repairs** (`/admin/x/repairs`). A shop has this plugin only if it was built with it (Install & Shop Builder).
+The admin page is under **Apps → Repairs**.

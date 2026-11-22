@@ -6,8 +6,10 @@ export type Kind = 'guide' | 'plugin'
 export const GUIDES = ['till', 'stock', 'purchasing', 'money', 'reports', 'people', 'printing', 'appearance', 'shelf']
 /** Plugin pages that stay off the site until the user says (docs/guide/plugins/<slug>.md). */
 export const EXCLUDED_PLUGINS = ['pocketcashier', 'README']
-/** Named on no public page: sentences that mention them are dropped. */
-export const UNMENTIONED = ['Pocket Cashier']
+/** Named on no public page (unreleased, internal or technician-only): sentences that mention them are dropped. */
+export const UNMENTIONED = ['Pocket Cashier', 'Shop Builder', 'Tailscale', 'Setup → Update']
+/** In-app addresses like (`/admin/x/repairs`): the page's name is enough for an owner. */
+const APP_PATH = / \(`\/[^`]*`\)/g
 
 const LINK = /(!?)\[([^\]]*)\]\(([^)\s]+)\)/g
 
@@ -18,10 +20,17 @@ function keyOf(path: string, from: Kind): string {
   return file.startsWith('../') ? `guide:${file.slice(3)}` : `plugin:${file}`
 }
 
+/** `<p><img src alt>…</p>` → Markdown images in one paragraph (Astro only optimises Markdown images). */
+const htmlImages = (md: string) =>
+  md
+    .replace(/<img\s[^>]*?src="([^"]+)"[^>]*?alt="([^"]*)"[^>]*>/g, '![$2]($1)')
+    .replace(/<p>\n((?:\s*!\[[^\]]*\]\([^)]+\)\n)+)<\/p>/g, (_, imgs: string) =>
+      imgs.split('\n').map((l) => l.trim()).filter(Boolean).join('\n'))
+
 /** Rewrites image and page links for the site; `known` holds the keys of pages the site has. */
 export function rewrite(md: string, from: Kind, known: Set<string>): { md: string; images: string[] } {
   const images: string[] = []
-  const out = md.replace(LINK, (all, bang: string, text: string, target: string) => {
+  const out = htmlImages(md).replace(LINK, (all, bang: string, text: string, target: string) => {
     if (/^[a-z]+:/i.test(target)) return all
     const img = target.match(/^(?:\.\.\/)+images\/(.+)$/)
     if (img) {
@@ -74,7 +83,7 @@ const plain = (s: string) =>
 
 /** A Suite guide page → the site's content file (frontmatter title + summary, no H1) and the images it uses. */
 export function convert(source: string, from: Kind, known: Set<string>): { md: string; images: string[] } {
-  let md = source
+  let md = source.replace(APP_PATH, '')
   for (const w of UNMENTIONED) md = dropMentions(md, w)
   const r = rewrite(md, from, known)
   const m = r.md.match(/^# (.+)\n+/)

@@ -35,4 +35,4 @@ Fill in details, the marks and doses rely on the right category, so run **Identi
 
 Tell the chatbot about your shop in **Settings → Custom instructions**: it goes into every prompt.
 
-The admin page is under **Apps → AI Assistant** (`/admin/x/aicatalog`). A shop has this plugin only if it was built with it (Install & Shop Builder).
+The admin page is under **Apps → AI Assistant**.

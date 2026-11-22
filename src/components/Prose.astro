@@ -21,3 +21,8 @@
   .prose :global(blockquote) { margin: 0 0 1.2em; padding: 0.75rem 1rem; border-left: 4px solid var(--saffron); background-color: var(--surface); border-radius: 0 var(--r-btn) var(--r-btn) 0 }
   .prose :global(blockquote p) { margin: 0 }
 </style>
+<style>
+  /* Several screenshots in one paragraph sit side by side (light / dark, phone screens). */
+  .prose :global(p:has(> img + img)) { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-start }
+  .prose :global(p:has(> img + img) > img) { flex: 1 1 140px; min-width: 0 }
+</style>

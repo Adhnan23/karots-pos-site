@@ -14,4 +14,4 @@ Photocopy, print, laminate and bind, for a shop with a copier.
 - A **job panel at the till** (it also opens from search and from a scan) builds the job. The job and its extras print on the receipt as one block, each line priced under the total.
 - Custom-priced jobs, shop use, and mistaken jobs returned through core Returns. A **copies report** shows what was done: each job is written with its sale, so none goes missing, and returned copies come off it.
 
-The admin page is under **Apps → Print & Copy** (`/admin/x/documents`). A shop has this plugin only if it was built with it (Install & Shop Builder).
+The admin page is under **Apps → Print & Copy**.

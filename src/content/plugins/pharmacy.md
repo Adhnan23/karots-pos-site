@@ -15,4 +15,4 @@ Patients, prescriptions and the controlled-drug register for a pharmacy. It come
 - With [AI Assistant](/plugins/aicatalog/), the prescription and controlled marks and usual doses can be suggested in bulk, for the pharmacist to check. A chatbot's answer is only a suggestion: it can miss a mark or be wrong about a dose.
 - Medicines use core [packs](/guides/stock/#products) (a card of 10 sold whole or loose) and [batches](/guides/stock/#batches-and-expiry).
 
-The admin page is under **Apps → Pharmacy** (`/admin/x/pharmacy`). A shop has this plugin only if it was built with it (Install & Shop Builder).
+The admin page is under **Apps → Pharmacy**.

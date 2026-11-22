@@ -35,10 +35,7 @@ In **Setup → Settings**:
 
 ## Printers on a cashier PC
 
-Setup puts a small print helper on every cashier PC. It tells the main PC which printers that PC
-has and prints what it is sent, so a USB receipt printer can sit at the counter. On Linux, Setup
-also makes a queue for each USB printer plugged in at the time; plug one in later and run
-**Setup → Update** on that PC. On Windows, install the printer so it shows in Windows first.
+Setup puts a small print helper on every cashier PC. It tells the main PC which printers that PC has and prints what it is sent, so a USB receipt printer can sit at the counter. On Windows, install the printer so it shows in Windows first.
 
 1. In **Settings → Cashier PCs' printers**, the PC shows as **Waiting for your OK**.
 2. Pick its receipt and label printers, then press **Approve**. **Test slip** checks it.

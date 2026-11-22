@@ -5,7 +5,7 @@ import { files, pages } from './dist-lib'
 // and anything internal to a shop's install or to support.
 const FORBIDDEN = [
   'Karots POS', 'Tanglish', 'support PIN', 'install ID', 'system user', '0000000001',
-  'Konami', 'cheat', 'Pocket Cashier', 'DEMO_SHOP', 'make demo', 'make docs-shots', 'go run ',
+  'Konami', 'cheat', 'Pocket Cashier', 'Tailscale', 'Shop Builder', '/admin/', 'Setup → Update', 'DEMO_SHOP', 'make demo', 'make docs-shots', 'go run ',
 ]
 
 describe('built site', () => {
@@ -34,11 +34,15 @@ describe('links and content pages', () => {
   it('every internal link resolves', () => {
     const have = new Set(files())
     for (const p of pages())
-      for (const [, href] of p.html.matchAll(/href="(\/[^"#?]*)/g)) {
+      for (const [, href] of p.html.matchAll(/(?:href|src)="(\/[^"#?]*)/g)) {
         if (PENDING.includes(href)) continue
         const ok = href.endsWith('/') ? have.has(href + 'index.html') : have.has(href)
         expect(ok, `${href} on ${p.path}`).toBe(true)
       }
+  })
+
+  it('no image points outside the site', () => {
+    for (const p of pages()) expect(p.html, p.path).not.toMatch(/src="\.\.?\//)
   })
 
   it('every guide and plugin is a page', () => {

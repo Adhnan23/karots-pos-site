@@ -12,4 +12,4 @@ Product deals: a group of products, or one product in bulk such as buy 3 get 1 f
 - A **report** shows what each combo sold and what it gave away; returned sets are taken off (a combo comes back only whole, in whole sets).
 - With [AI Assistant](/plugins/aicatalog/), **Suggest combos** offers products that go together and opens the normal form. You set the price.
 
-The admin page is under **Apps → Combos** (`/admin/x/combos`). A shop has this plugin only if it was built with it (Install & Shop Builder).
+The admin page is under **Apps → Combos**.
