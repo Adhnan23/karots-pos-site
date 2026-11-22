@@ -7,7 +7,9 @@
     "build": "astro build",
     "check": "astro check",
     "sync": "bun scripts/sync.ts",
-    "test": "astro check && astro build && vitest run"
+    "test": "astro check && astro build && vitest run",
+    "test:offline": "astro build && bun test/offline.ts",
+    "icons": "bun scripts/icons.ts"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

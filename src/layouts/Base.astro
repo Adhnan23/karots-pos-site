@@ -16,7 +16,7 @@ interface Props {
 const { title, description, path, ogShot = DEFAULT_OG, jsonLd = [] } = Astro.props
 const canonical = new URL(path, Astro.site).href
 const og = new URL(ogPath(ogShot), Astro.site).href
-const is404 = path === '/404/'
+const is404 = path === '/404/' || path === '/offline/'
 ---
 <!doctype html>
 <html lang="en">
@@ -40,8 +40,12 @@ const is404 = path === '/404/'
     <meta name="twitter:image" content={og} />
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
     <meta name="theme-color" content="#16171b" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <script is:inline>
       try { const t = localStorage.getItem('ks-site-theme'); if (t) document.documentElement.dataset.theme = t } catch {}
+      if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('/sw.js'))
     </script>
   </head>
   <body>
