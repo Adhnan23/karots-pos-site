@@ -69,8 +69,17 @@ sale ring up, stock, batches and expiry, suppliers — enough to book a proper d
   label) are kept **only where they match the Suite**; each is checked against the Suite's rule book and rewritten
   where the Suite behaves differently (e.g. the Suite never stops a sale on an expired lot the way the POS demo
   does — check `docs/rules/` first). One that can't be made true is dropped.
-- **Look:** the Suite's own tokens and a built-in palette (Studio light / Night dark, `docs/design/theme.md`),
-  light and dark. Screens and site look like one product.
+- **Look (user, 2026-11-22):** a **new, proper design** — nothing carried over from the old POS site's look.
+  Designed fresh (frontend-design skill), distinctive, light and dark, mobile first. It may borrow the Suite's
+  palette colours so screenshots sit naturally, but the layout and type are new.
+- **PWA (user):** web manifest, icons (incl. maskable), Service Worker that precaches the shell + tour and caches
+  other pages / images as visited; an offline page; "Add to home screen" works on Android.
+- **SEO and machine-readable (user: "best SEO and more"):** per-page title / description / canonical, Open Graph +
+  Twitter cards with a generated OG image per page, JSON-LD (`Organization`, `SoftwareApplication`, `Product` /
+  `Offer` once prices exist, `BreadcrumbList`, `FAQPage` for an FAQ), `sitemap.xml`, `robots.txt`, `llms.txt` +
+  `llms-full.txt` (built from the synced guides), semantic HTML, fast pages (no JS framework at runtime, responsive
+  `<picture>` images, self-hosted fonts), Lighthouse ≥ 95 on every category, accessibility basics (contrast, focus,
+  alt text from the guides).
 - **"Rules" (*my call*, user to confirm):** a "Built to be trusted" section on Home and Features — battle-tested
   money and stock, survives power cuts, works offline, automatic backups + cloud — in plain words, no internal
   names. The Shop Rules (free vs paid, refunds) go on the site **after** the lawyer review and the price list,
