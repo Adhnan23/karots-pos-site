@@ -81,6 +81,23 @@ export function dropMentions(md: string, word: string): string {
 const plain = (s: string) =>
   s.replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(LINK, '$2').replace(/[*_`]/g, '').replace(/\s*\n\s*/g, ' ').trim()
 
+/** The search engines' description: the page's prose from the top, about 120–160 characters, cut at a sentence. */
+export function description(body: string): string {
+  let text = ''
+  for (const block of body.split(/\n{2,}/)) {
+    if (text.length >= 120) break
+    if (/^\s*([#|<!-]|\d+\.)/.test(block)) continue // headings, tables, HTML, images, lists
+    const t = plain(block).replace(/\s*The admin page is under [^.]*\./, '') // says nothing to a search
+    if (t) text = text ? `${text} ${t}` : t
+  }
+  if (text.length <= 160) return text
+  const cut = text.slice(0, 160)
+  const end = cut.lastIndexOf('. ')
+  if (end >= 60) return cut.slice(0, end + 1)
+  if (cut.endsWith('.') && text[160] === ' ') return cut
+  return cut.slice(0, cut.lastIndexOf(' ', 158)) + '…'
+}
+
 /** A Suite guide page → the site's content file (frontmatter title + summary, no H1) and the images it uses. */
 export function convert(source: string, from: Kind, known: Set<string>): { md: string; images: string[] } {
   let md = source.replace(APP_PATH, '')
@@ -89,7 +106,9 @@ export function convert(source: string, from: Kind, known: Set<string>): { md: s
   const m = r.md.match(/^# (.+)\n+/)
   if (!m) throw new Error('a guide page must start with "# Title"')
   const body = r.md.slice(m[0].length)
-  const summary = plain(body.split('\n\n')[0])
-  const front = `---\ntitle: ${JSON.stringify(m[1].trim())}\nsummary: ${JSON.stringify(summary)}\n---\n\n`
+  const first = body.split('\n\n')[0]
+  if (/^#/.test(first) || !plain(first)) throw new Error(`"${m[1].trim()}" needs an opening paragraph under its title (the page's summary)`)
+  const summary = plain(first)
+  const front = `---\ntitle: ${JSON.stringify(m[1].trim())}\nsummary: ${JSON.stringify(summary)}\ndescription: ${JSON.stringify(description(body))}\n---\n\n`
   return { md: front + body, images: r.images }
 }

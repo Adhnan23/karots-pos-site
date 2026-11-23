@@ -1,6 +1,7 @@
 ---
 title: "Reload & Bills"
 summary: "For a shop that is a mobile-money agent: reloads, carrier packages, bill payments, wallet deposits and cash outs."
+description: "For a shop that is a mobile-money agent: reloads, carrier packages, bill payments, wallet deposits and cash outs."
 ---
 
 For a shop that is a mobile-money agent: reloads, carrier packages, bill payments, wallet deposits and cash outs.

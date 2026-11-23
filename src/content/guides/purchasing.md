@@ -1,6 +1,7 @@
 ---
 title: "Purchasing"
 summary: "Suppliers, what you order from them, what arrives and what goes back. You'll find it under Purchasing."
+description: "Suppliers, what you order from them, what arrives and what goes back. You'll find it under Purchasing."
 ---
 
 Suppliers, what you order from them, what arrives and what goes back. You'll find it under

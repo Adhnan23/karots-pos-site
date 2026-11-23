@@ -1,6 +1,7 @@
 ---
 title: "Print & Copy"
 summary: "Photocopy, print, laminate and bind, for a shop with a copier."
+description: "Photocopy, print, laminate and bind, for a shop with a copier."
 ---
 
 Photocopy, print, laminate and bind, for a shop with a copier.

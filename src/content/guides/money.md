@@ -1,6 +1,7 @@
 ---
 title: "Money"
 summary: "Every rupee that moves is recorded once, in one place, so the till, the lockers, the reports and the cash flow always agree. Sales are the source of truth for revenue. You'll find it under Money."
+description: "Every rupee that moves is recorded once, in one place, so the till, the lockers, the reports and the cash flow always agree."
 ---
 
 Every rupee that moves is recorded once, in one place, so the till, the lockers, the reports and

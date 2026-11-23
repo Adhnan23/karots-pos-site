@@ -1,6 +1,7 @@
 ---
 title: "Customer requests"
 summary: "Remember what customers ask for that the shop doesn't carry."
+description: "Remember what customers ask for that the shop doesn't carry."
 ---
 
 Remember what customers ask for that the shop doesn't carry.

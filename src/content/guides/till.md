@@ -1,6 +1,7 @@
 ---
 title: "Selling at the till"
 summary: "The till is made for a desktop PC or a kiosk at the counter. Cashiers sign in with their phone number and PIN. After a few idle minutes the till locks itself, and the same cashier or any admin can unlock it."
+description: "The till is made for a desktop PC or a kiosk at the counter. Cashiers sign in with their phone number and PIN."
 ---
 
 The till is made for a desktop PC or a kiosk at the counter. Cashiers sign in with their phone

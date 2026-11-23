@@ -1,6 +1,7 @@
 ---
 title: "Product Plus"
 summary: "Extra product fields for the things your shop cares about: brand, generic name, manufacturer, guarantee, fits…"
+description: "Extra product fields for the things your shop cares about: brand, generic name, manufacturer, guarantee, fits…"
 ---
 
 Extra product fields for the things your shop cares about: brand, generic name, manufacturer, guarantee, fits…

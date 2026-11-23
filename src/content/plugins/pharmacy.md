@@ -1,6 +1,7 @@
 ---
 title: "Pharmacy"
 summary: "Patients, prescriptions and the controlled-drug register for a pharmacy. It comes with Product Plus and Alternatives."
+description: "Patients, prescriptions and the controlled-drug register for a pharmacy. It comes with Product Plus and Alternatives."
 ---
 
 Patients, prescriptions and the controlled-drug register for a pharmacy. It comes with [Product Plus](/plugins/productplus/) and [Alternatives](/plugins/alternatives/).

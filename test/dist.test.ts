@@ -24,7 +24,9 @@ describe('built site', () => {
     for (const p of pages()) {
       expect(p.html.match(/<h1[\s>]/g)?.length, `h1 count on ${p.path}`).toBe(1)
       expect(p.html, `title on ${p.path}`).toMatch(/<title>[^<]+<\/title>/)
-      expect(p.html, `description on ${p.path}`).toMatch(/<meta name="description" content="[^"]+"/)
+      const d = (p.html.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? '').replace(/&[a-z]+;|&#\d+;/g, '_')
+      expect(d.length, `description length on ${p.path}: ${d}`).toBeGreaterThanOrEqual(50)
+      expect(d.length, `description length on ${p.path}: ${d}`).toBeLessThanOrEqual(160)
     }
   })
 })

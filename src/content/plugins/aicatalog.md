@@ -1,6 +1,7 @@
 ---
 title: "AI Assistant"
 summary: "Help for whoever sets the shop up, and for the new cashier who doesn't know the stock yet. It works with any free chatbot by copy and paste, with no API key."
+description: "Help for whoever sets the shop up, and for the new cashier who doesn't know the stock yet. It works with any free chatbot by copy and paste, with no API key."
 ---
 
 Help for whoever sets the shop up, and for the new cashier who doesn't know the stock yet. It works with any free chatbot by copy and paste, with no API key.

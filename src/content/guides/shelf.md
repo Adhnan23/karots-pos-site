@@ -1,6 +1,7 @@
 ---
 title: "Karots Shelf"
 summary: "Karots Shelf (full name Karots Suite Shelf) is an Android app for your own staff, for the weeks when the shop is being set up. Each person walks the shelves with their phone and puts products into Karots Suite one at a time:"
+description: "Karots Shelf (full name Karots Suite Shelf) is an Android app for your own staff, for the weeks when the shop is being set up."
 ---
 
 **Karots Shelf** (full name Karots Suite Shelf) is an Android app for your own staff, for the weeks

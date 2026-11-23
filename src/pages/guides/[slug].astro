@@ -12,6 +12,6 @@ const { entry, all } = Astro.props
 const { Content } = await render(entry)
 const siblings = all.map((g) => ({ title: g.data.title, path: `/guides/${g.id}/` }))
 ---
-<Doc title={entry.data.title} summary={entry.data.summary} path={`/guides/${entry.id}/`} section={{ name: 'Guides', path: '/guides/' }} siblings={siblings} ogShot={guideShot(entry.id)}>
+<Doc title={entry.data.title} summary={entry.data.summary} description={entry.data.description} path={`/guides/${entry.id}/`} section={{ name: 'Guides', path: '/guides/' }} siblings={siblings} ogShot={guideShot(entry.id)}>
   <Content />
 </Doc>

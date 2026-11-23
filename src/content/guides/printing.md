@@ -1,6 +1,7 @@
 ---
 title: "Printing"
 summary: "Receipts and labels print straight from the shop's server to thermal printers (80 mm or 58 mm receipts and barcode label printers), so no print dialog pops up at the till. Invoices, POs, GRNs, statements, Z reports and count sheets are A4 pages you print or save as PDF from the browser."
+description: "Receipts and labels print straight from the shop's server to thermal printers (80 mm or 58 mm receipts and barcode label printers), so no print dialog pops up…"
 ---
 
 Receipts and labels print straight from the shop's server to thermal printers (80 mm or 58 mm

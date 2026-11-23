@@ -1,6 +1,7 @@
 ---
 title: "Combos"
 summary: "Product deals: a group of products, or one product in bulk such as buy 3 get 1 free."
+description: "Product deals: a group of products, or one product in bulk such as buy 3 get 1 free."
 ---
 
 Product deals: a group of products, or one product in bulk such as buy 3 get 1 free.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { convert, dropMentions, rewrite } from '../scripts/sync-lib'
+import { convert, description, dropMentions, rewrite } from '../scripts/sync-lib'
 
 const known = new Set(['guide:till', 'guide:stock', 'plugin:repairs', 'plugin:pharmacy'])
 
@@ -64,8 +64,32 @@ describe('convert', () => {
   it('moves the first heading and paragraph into frontmatter and drops the heading', () => {
     const out = convert('# Stock\n\nEverything about **what\'s on** the [shelf](x.md).\nMore here.\n\n## Products\n', 'guide', known)
     expect(out.md).toBe(
-      '---\ntitle: "Stock"\nsummary: "Everything about what\'s on the shelf. More here."\n---\n\nEverything about **what\'s on** the shelf.\nMore here.\n\n## Products\n',
+      '---\ntitle: "Stock"\nsummary: "Everything about what\'s on the shelf. More here."\ndescription: "Everything about what\'s on the shelf. More here."\n---\n\nEverything about **what\'s on** the shelf.\nMore here.\n\n## Products\n',
     )
+  })
+})
+
+describe('convert: the search description', () => {
+  it('refuses a page with no opening paragraph', () => {
+    expect(() => convert('# People\n\n## Customers\n\nText.\n', 'guide', known)).toThrow(/opening paragraph/)
+  })
+
+  it('adds the next paragraphs to a short summary, cut at a sentence, at most 160 characters', () => {
+    const long = 'Every sale is kept on the PC in your shop, and the till starts again in seconds. '.repeat(3)
+    const d = description(`Repair jobs.\n\n![x](y.jpg)\n\n## Jobs\n\n${long}\n`)
+    expect(d.startsWith('Repair jobs. Every sale is kept')).toBe(true)
+    expect(d.length).toBeLessThanOrEqual(160)
+    expect(d.endsWith('seconds.')).toBe(true)
+  })
+
+  it('leaves out where the admin page is', () => {
+    expect(description('Repair jobs. The admin page is under Apps → Repairs.\n\nJobs move from drop-off to pickup.')).toBe('Repair jobs. Jobs move from drop-off to pickup.')
+  })
+
+  it('cuts at a word with an ellipsis when no sentence ends in time', () => {
+    const d = description('word '.repeat(60))
+    expect(d.length).toBeLessThanOrEqual(160)
+    expect(d.endsWith('word…')).toBe(true)
   })
 })
 

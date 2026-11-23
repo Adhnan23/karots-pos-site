@@ -1,6 +1,7 @@
 ---
 title: "Clearance"
 summary: "Mark down slow and expiring stock before it becomes a loss."
+description: "Mark down slow and expiring stock before it becomes a loss."
 ---
 
 Mark down slow and expiring stock before it becomes a loss.

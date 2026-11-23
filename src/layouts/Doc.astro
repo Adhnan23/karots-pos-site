@@ -8,15 +8,17 @@ import { breadcrumbs } from '../lib/jsonld'
 interface Props {
   title: string
   summary: string
+  /** The search engines' description (synced; about 120–160 characters). */
+  description: string
   path: string
   section: { name: string; path: string }
   siblings: { title: string; path: string }[]
   ogShot?: string
 }
-const { title, summary, path, section, siblings, ogShot } = Astro.props
+const { title, summary, description, path, section, siblings, ogShot } = Astro.props
 const crumbs = [{ name: 'Home', path: '/' }, section, { name: title, path }]
 ---
-<Base title={`${title} — Karots Suite`} description={summary} path={path} ogShot={ogShot} jsonLd={[breadcrumbs(Astro.site!, crumbs)]}>
+<Base title={`${title} — Karots Suite`} description={description} path={path} ogShot={ogShot} jsonLd={[breadcrumbs(Astro.site!, crumbs)]}>
   <article class="wrap doc">
     <div class="main">
       <Breadcrumbs items={crumbs} />

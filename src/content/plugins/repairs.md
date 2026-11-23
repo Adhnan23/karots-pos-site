@@ -1,9 +1,11 @@
 ---
 title: "Repairs"
-summary: "Repair jobs from drop-off to pickup."
+summary: "Repair jobs from drop-off to pickup: the device and fault, parts and labour, deposits, a ticket label, warranty comebacks and the profit on each job."
+description: "Repair jobs from drop-off to pickup: the device and fault, parts and labour, deposits, a ticket label, warranty comebacks and the profit on each job."
 ---
 
-Repair jobs from drop-off to pickup.
+Repair jobs from drop-off to pickup: the device and fault, parts and labour, deposits, a ticket
+label, warranty comebacks and the profit on each job.
 
 ![Repairs](../../assets/shots/plugins/repairs.jpg)
 

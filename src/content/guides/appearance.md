@@ -1,6 +1,7 @@
 ---
 title: "Appearance"
 summary: "The whole shop shares one palette. Each screen picks light or dark for itself."
+description: "The whole shop shares one palette. Each screen picks light or dark for itself."
 ---
 
 The whole shop shares one **palette**. Each screen picks light or dark for itself.
