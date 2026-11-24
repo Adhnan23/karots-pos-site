@@ -6,12 +6,15 @@ import { guides, plugins } from './content'
 const ABOUT = `# Karots Suite
 
 > The shop system for small Sri Lankan retail: till, stock and expiry, suppliers, money and reports in one
-> program on the shop's own PC. It sells without the internet, survives power cuts, and every admin page and
+> program on the shop's own PC. It sells without the internet, a power cut loses no finished sale, and every admin page and
 > report works on a phone. Plugins add pharmacy, repairs, reloads and bills, print and copy, combos, clearance and more.
 
 Made by Karots, Sri Lanka. Karots Suite Rs. 100,000 once (with the shop's plugins and the Karots Shelf app); Core
-Rs. 80,000 (no plugins or Shelf); both with 3 months' warranty and free training. Service plan Rs. 5,000 a month or
-Rs. 60,000 a year: new features, help any time, cloud backup. Products put in for Rs. 10 each. Call +94 76 962 6396.
+Rs. 80,000 (no plugins or Shelf); both with installation, training and the first 3 months of the service plan free.
+Genuine bugs are fixed free, always. Service plan Rs. 5,000 a month or Rs. 60,000 a year: support, major upgrades, small
+changes, maintenance, cloud backup. One licence = the one PC that runs it. Main PC: 64-bit Windows 10 / 11 or Linux;
+recommended Core i3 2nd gen, 4 GB, 20 GB free SSD, 1366 × 768; minimum Core 2 Duo, 2 GB, 5 GB free hard disk, 1024 × 768.
+Products put in for Rs. 10 each. Call +94 76 962 6396.
 `
 
 const line = (site: URL, path: string, title: string, summary: string) => `- [${title}](${new URL(path, site).href}): ${summary}`

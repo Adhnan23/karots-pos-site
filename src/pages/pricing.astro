@@ -2,13 +2,13 @@
 import Base from '../layouts/Base.astro'
 import Button from '../components/Button.astro'
 import { CONTACT } from '../data/site'
-import { INCLUDED, PLANS, PRODUCT_ENTRY, SERVICE, rs } from '../data/pricing'
+import { CASHIER_PC, CORE_TO_SUITE, DISK_YEAR, INCLUDED, PLANS, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, WHO_PAYS, rs } from '../data/pricing'
 import { softwareApplication } from '../lib/jsonld'
 ---
-<Base title="Pricing — Karots Suite" description={`Karots Suite ${rs(100000)} with your plugins and Karots Shelf, or Core ${rs(80000)}. 3 months' warranty and free training. Service plan ${rs(SERVICE.monthly)} a month.`} path="/pricing/" jsonLd={[softwareApplication(Astro.site!)]}>
+<Base title="Pricing — Karots Suite" description={`Karots Suite ${rs(100000)} or Core ${rs(80000)}, once. Bugs fixed free, always; 3 months of the service plan free, then ${rs(SERVICE.monthly)} a month if you want it.`} path="/pricing/" jsonLd={[softwareApplication(Astro.site!)]}>
   <div class="wrap page">
     <h1>Pricing</h1>
-    <p class="lede">Pay once for the software. Add the service plan if you want new features, help any time and cloud backup.</p>
+    <p class="lede">Pay once for the software, and it is yours to use for as long as you like. Genuine bugs are fixed free, always. After your first 3 months, the service plan brings support, upgrades and cloud backup if you want them.</p>
 
     <div class="plans">
       {PLANS.map((p) => (
@@ -24,7 +24,7 @@ import { softwareApplication } from '../lib/jsonld'
       ))}
     </div>
 
-    <p class="entry">Want us to put your products in? <b>{rs(PRODUCT_ENTRY)} a product.</b></p>
+    <p class="entry">Want us to put your products in? <b>{rs(PRODUCT_ENTRY)} a product.</b> Started with Core? Move up to Karots Suite for <b>{rs(CORE_TO_SUITE)}</b>; a Karots Suite shop adds plugins later for free.</p>
 
     <section class="service" aria-labelledby="service">
       <div>
@@ -35,6 +35,53 @@ import { softwareApplication } from '../lib/jsonld'
       <ul>
         {SERVICE.gets.map((g) => <li>{g}</li>)}
       </ul>
+    </section>
+
+    <section class="block" aria-labelledby="who-pays">
+      <h2 id="who-pays">Who pays for what</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>First 3 months</th><th>With the plan</th><th>Without a plan</th></tr></thead>
+          <tbody>
+            {WHO_PAYS.map((r) => <tr><th scope="row">{r.what}</th><td>{r.first}</td><td>{r.plan}</td><td>{r.none}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p>A <b>genuine bug</b> is Karots Suite doing something wrong that its guide says it does right. Problems the shop
+        caused (deleted data, a virus, settings changed by someone) and faults in the PC, printer or network are charged.
+        Without a plan your shop keeps working exactly as it is, and bug fixes still reach you.</p>
+      <p><b>When the plan ends</b>, new cloud backups stop; the last one is kept for 30 days and we bring it back if you
+        ask in that time. The backups on your own PC and USB stick carry on. Join again any time, with nothing to pay for
+        the months you were away.</p>
+    </section>
+
+    <section class="block" aria-labelledby="licence">
+      <h2 id="licence">Your licence</h2>
+      <ul>
+        <li><b>One licence, one PC:</b> the main PC that runs Karots Suite. Cashier PCs and phones that connect to it need no licence of their own.</li>
+        <li><b>A new PC, or a reinstall after a format:</b> tell us, and we move it free from your latest backup.</li>
+        <li><b>Two PCs running it at once, or a second shop:</b> each needs its own licence.</li>
+        <li><b>Your copy keeps working:</b> it needs nothing from us to keep selling. Not the internet, not a plan, not a payment check.</li>
+        <li><b>Changed your mind?</b> In the first week the licence is refunded in full; after that we keep a little more each week, and after day 30 nothing is refunded.</li>
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="pc">
+      <h2 id="pc">System requirements</h2>
+      <p class="sub">The main PC, the one that runs Karots Suite:</p>
+      <div class="scroll">
+        <table class="req">
+          <thead><tr><th></th><th>Minimum</th><th>Recommended</th></tr></thead>
+          <tbody>
+            {REQUIREMENTS.map((r) => <tr><th scope="row">{r.what}</th><td data-label="Minimum">{r.min}</td><td data-label="Recommended">{r.rec}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p><b>Cashier PCs:</b> {CASHIER_PC}. They need no licence of their own.</p>
+      <p class="small">Measured with a year of a busy shop (about 40,000 sales and 2,000 products) on PCs slowed down to
+        each of these. On the minimum PC the till still finds a product in under 0.3 seconds and a year's report takes
+        under 5; the recommended PC does both about twice as fast. That year took {DISK_YEAR} of disk, with a week of
+        backups.</p>
     </section>
 
     <div class="actions">
@@ -67,6 +114,26 @@ import { softwareApplication } from '../lib/jsonld'
   .service .once, .service .alt { color: color-mix(in srgb, var(--bg) 70%, transparent) }
   .service .alt { margin: 0 }
   .actions { display: flex; flex-wrap: wrap; gap: 0.75rem }
+  .block { margin-bottom: 2.5rem }
+  .block h2 { font-size: 1.6rem; margin-bottom: 1rem }
+  .block p { margin: 1rem 0 0 }
+  .block ul { gap: 0.7rem }
+  .scroll { overflow-x: auto }
+  table { border-collapse: collapse; width: 100% }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere }
+  @media (max-width: 600px) { table { font-size: 0.85rem } th, td { padding: 0.5rem 0.3rem } }
+  thead th { font-size: 0.95rem; color: var(--muted) }
+  tbody th { font-weight: 600 }
+  .small { color: var(--muted); font-size: 0.95rem }
+  .sub { margin: 0 0 0.75rem }
+  .req tbody th { width: 9rem }
+  @media (max-width: 600px) {
+    .req thead { display: none }
+    .req tr { display: grid; grid-template-columns: 1fr 1fr; gap: 0 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--line) }
+    .req tbody th { grid-column: 1 / -1; width: auto; border: 0; padding: 0 0 0.3rem; font-size: 1rem }
+    .req td { border: 0; padding: 0 }
+    .req td::before { content: attr(data-label); display: block; font-size: 0.8rem; color: var(--muted) }
+  }
   @media (min-width: 860px) {
     .plans { grid-template-columns: 1fr 1fr }
     .service { grid-template-columns: 1fr 1.4fr; align-items: center }
