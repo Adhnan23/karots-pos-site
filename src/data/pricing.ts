@@ -1,55 +1,33 @@
 // Prices (user, 2026-11-22). The one place the site's figures live: the pricing page, the FAQ, JSON-LD and llms.txt read them.
 export const PLANS = [
-  {
-    id: 'suite', name: 'Karots Suite', price: 100000, featured: true,
-    line: 'Everything, with the plugins your shop wants.',
-    without: 'Software only: you bring the PC and printers.',
-    gets: ['Everything in Core', 'The plugins your kind of shop wants', 'Karots Shelf, the app your staff use to put products in'],
-  },
-  {
-    id: 'core', name: 'Core', price: 80000, featured: false,
-    line: 'The whole shop system, without plugins.',
-    gets: ['The till, stock and expiry, suppliers, money, reports, staff and printing'],
-    without: 'Software only, with no plugins and no Karots Shelf app.',
-  },
+  { id: 'suite', name: 'Karots Suite', price: 100000 },
+  { id: 'core', name: 'Core', price: 80000 },
 ]
 
-/** A combo, not credit (user, 2026-11-24): Karots Suite at a lower price with 2 years of the service plan; no interest. */
-export const EASY_PAY = {
-  name: 'Easy Pay',
-  options: [
-    { months: 24, start: 50000, total: 170000, rest: 50000 },
-    { months: 12, start: 65000, total: 125000, rest: 35000 },
-  ],
-  line: 'A combo: Karots Suite for less, with the service plan for 1 or 2 years. No interest and no loan: each month pays for the service you get that month.',
-  gets: [
-    'Everything in Karots Suite',
-    'The service plan for the whole time: support, upgrades, small changes and cloud backup',
-    'Rs. 5,000 a month or Rs. 60,000 a year',
-    'After that the licence is fully yours; keep the plan if you like',
-    'Genuine bugs fixed free, always',
-  ],
-  note: 'Stopping early? Pay the rest of the Karots Suite price (Rs. 50,000 on 2 years, Rs. 35,000 on 1 year) and it’s yours, or the licence ends after written notice. Your data always stays yours.',
-}
+/** The four ways to buy (user, 2026-11-22 and 2026-11-24). Karots Suite and Core are software only. */
+export const TIERS = [
+  { id: 'core', name: 'Core', price: 'Rs. 80,000', unit: 'one time', for: 'The till, stock, suppliers, money and reports. Software only, no plugins.' },
+  { id: 'suite', name: 'Karots Suite', price: 'Rs. 100,000', unit: 'one time', for: 'Everything, with the plugins your kind of shop wants. Software only.', featured: true },
+  { id: 'easy', name: 'Easy Pay', price: 'Rs. 50,000', unit: '+ the plan for 2 years (or Rs. 65,000 + 1 year)', for: 'Karots Suite for less up front. A combo, not a loan: no interest.' },
+  { id: 'complete', name: 'Complete Shop', price: 'Rs. 190,000', unit: 'to 220,000 or more, quoted for your shop', from: true, for: 'Karots Suite with the PC and printers, done end to end.' },
+] as const
 
-/** Karots Suite with the hardware (user, 2026-11-24): quoted per shop, the price moves with the hardware chosen. */
-export const COMPLETE = {
-  name: 'Complete Shop', from: 190000, to: 220000,
-  line: 'Karots Suite with the hardware, done end to end: we buy it, set it all up at your shop and hand it over ready to sell.',
-  gets: [
-    'Everything in Karots Suite',
-    'A PC set up for your shop',
-    'Receipt and label printing: one 2-in-1 printer, or two separate printers',
-    'A barcode scanner and a cash drawer, if you want them',
-    'Installation and training for you and your staff',
-    '6 months of everything the service plan gives, free',
-    '6 months’ warranty on the hardware we supply: if it breaks, we sort it out',
-  ],
-  note: 'The price depends on what you choose: the PC, one printer or two, a scanner, a cash drawer. Extra cashier PCs and other hardware add to it. We quote your shop before anything is bought. Putting your products in is extra, at the same Rs. 10 a product.',
-}
+/** The comparison: true = included, false = not, text = what it is. Columns follow TIERS. */
+export const COMPARE: { what: string; cells: (string | boolean)[] }[] = [
+  { what: 'You pay', cells: ['Rs. 80,000 once', 'Rs. 100,000 once', 'Rs. 50,000 + the plan for 2 years, or Rs. 65,000 + 1 year', 'Rs. 190,000 to 220,000 or more, once'] },
+  { what: 'Till, stock, suppliers, money, reports', cells: [true, true, true, true] },
+  { what: 'Plugins for your kind of shop', cells: [false, true, true, true] },
+  { what: 'Karots Shelf app for your staff', cells: [false, true, true, true] },
+  { what: 'Installation and training', cells: [true, true, true, true] },
+  { what: 'Service plan included', cells: ['First 3 months', 'First 3 months', 'The whole 1 or 2 years', 'First 6 months'] },
+  { what: 'Genuine bugs fixed free, always', cells: [true, true, true, true] },
+  { what: 'PC, printers, scanner, cash drawer', cells: ['You bring them', 'You bring them', 'You bring them', 'We supply and set them up'] },
+  { what: 'Hardware warranty from us', cells: [false, false, false, '6 months'] },
+  { what: 'The licence is fully yours', cells: ['At once', 'At once', 'After the 1 or 2 years', 'At once'] },
+]
 
-/** What every shop gets with either plan. */
-export const INCLUDED = ['Installation and training for you and your staff', '3 months of everything the service plan gives, free', 'Genuine bugs fixed free, always']
+/** Stopping Easy Pay early: the rest of the Karots Suite price. */
+export const EASY_REST = { twoYears: 50000, oneYear: 35000 }
 
 /** A Core shop moving up to Karots Suite pays the difference. */
 export const CORE_TO_SUITE = 20000

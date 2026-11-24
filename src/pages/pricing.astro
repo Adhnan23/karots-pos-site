@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Button from '../components/Button.astro'
 import { CONTACT } from '../data/site'
-import { CASHIER_PC, COMPLETE, CORE_TO_SUITE, EASY_PAY, DISK_YEAR, INCLUDED, PLANS, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, WHO_PAYS, rs } from '../data/pricing'
+import { CASHIER_PC, COMPARE, CORE_TO_SUITE, DISK_YEAR, EASY_REST, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, TIERS, WHO_PAYS, rs } from '../data/pricing'
 import { softwareApplication } from '../lib/jsonld'
 ---
 <Base title="Pricing — Karots Suite" description={`Karots Suite ${rs(100000)} or Core ${rs(80000)}, once. Bugs fixed free, always; 3 months of the service plan free, then ${rs(SERVICE.monthly)} a month if you want it.`} path="/pricing/" jsonLd={[softwareApplication(Astro.site!)]}>
@@ -10,44 +10,44 @@ import { softwareApplication } from '../lib/jsonld'
     <h1>Pricing</h1>
     <p class="lede">Pay once for the software, and it is yours to use for as long as you like. Genuine bugs are fixed free, always. After your first 3 months, the service plan brings support, upgrades and cloud backup if you want them.</p>
 
-    <div class="plans">
-      {PLANS.map((p) => (
-        <section class:list={['plan', { featured: p.featured }]} aria-labelledby={`plan-${p.id}`}>
-          <h2 id={`plan-${p.id}`}>{p.name}</h2>
-          <p class="price"><span class="n">{rs(p.price)}</span> <span class="once">one time</span></p>
-          <p class="line">{p.line}</p>
-          <ul>
-            {[...p.gets, ...INCLUDED].map((g) => <li>{g}</li>)}
-          </ul>
-          {p.without && <p class="without">{p.without}</p>}
-        </section>
+    <ol class="tiers" aria-label="Plans">
+      {TIERS.map((t) => (
+        <li class:list={['tier', { featured: 'featured' in t && t.featured }]}>
+          <h2>{t.name}</h2>
+          <p class="tag">{'from' in t && t.from && <span class="unit">from </span>}<span class="n">{t.price}</span></p>
+          <p class="unit">{t.unit}</p>
+          <p class="for">{t.for}</p>
+        </li>
       ))}
-    </div>
+    </ol>
 
-    <section class="plan complete" aria-labelledby="plan-easy">
-      <div>
-        <h2 id="plan-easy">{EASY_PAY.name}</h2>
-        {EASY_PAY.options.map((o) => (
-          <p class="price"><span class="n">{rs(o.start)}</span> <span class="once">+ the plan for {o.months / 12 === 1 ? '1 year' : `${o.months / 12} years`} ({rs(o.total)} in all)</span></p>
-        ))}
-        <p class="line">{EASY_PAY.line}</p>
-        <p class="without">{EASY_PAY.note}</p>
+    <section class="block" aria-labelledby="compare">
+      <h2 id="compare">Compare plans</h2>
+      <div class="scroll" tabindex="0" aria-label="Plan comparison, scrolls sideways on a phone">
+        <table class="compare stack">
+          <colgroup><col class="what" />{TIERS.map(() => <col />)}</colgroup>
+          <thead><tr><th></th>{TIERS.map((t) => <th scope="col" class:list={{ hl: t.id === 'suite' }}>{t.name}</th>)}</tr></thead>
+          <tbody>
+            {COMPARE.map((r) => (
+              <tr>
+                <th scope="row">{r.what}</th>
+                {r.cells.map((c, i) => (
+                  <td class:list={{ hl: TIERS[i].id === 'suite' }} data-label={TIERS[i].name}>
+                    {c === true ? <span class="yes" role="img" aria-label="Yes"></span> : c === false ? <span class="no" aria-label="No">—</span> : c}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <ul>{EASY_PAY.gets.map((g) => <li>{g}</li>)}</ul>
+      <ul class="know">
+        <li><b>Karots Suite and Core are the software only:</b> you bring your own PC and printers, and their faults are for their seller’s warranty.</li>
+        <li><b>Easy Pay</b> is a combo, not a loan: each month pays for the service you get that month. It comes to Rs. 170,000 in all over 2 years, or Rs. 125,000 over 1 year. Stopping early? Pay the rest of the Karots Suite price ({rs(EASY_REST.twoYears)} on 2 years, {rs(EASY_REST.oneYear)} on 1 year) and it’s yours, or the licence ends after written notice. Your data always stays yours.</li>
+        <li><b>Complete Shop</b> is done end to end: we buy the hardware, set it all up and hand it over ready to sell. The price moves with what you choose (the PC, one 2-in-1 printer or two separate ones, a scanner, a cash drawer) and with extra cashier PCs. We quote your shop before anything is bought. If the hardware we supply breaks in the first 6 months, we sort it out.</li>
+        <li><b>Putting your products in</b> is {rs(PRODUCT_ENTRY)} a product on any plan. Started with Core? Move up to Karots Suite for {rs(CORE_TO_SUITE)}; a Karots Suite shop adds plugins later for free.</li>
+      </ul>
     </section>
-
-    <section class="plan complete" aria-labelledby="plan-complete">
-      <div>
-        <h2 id="plan-complete">{COMPLETE.name}</h2>
-        <p class="price"><span class="once">from</span> <span class="n">{rs(COMPLETE.from)}</span> <span class="once">to {rs(COMPLETE.to)} or more, quoted for your shop</span></p>
-        <p class="line">{COMPLETE.line}</p>
-        <p class="without">{COMPLETE.note}</p>
-      </div>
-      <ul>{COMPLETE.gets.map((g) => <li>{g}</li>)}</ul>
-    </section>
-
-    <p class="entry">Karots Suite and Core are the software only: you bring your own PC and printers, and their faults are for their seller’s warranty.
-      Want us to put your products in? <b>{rs(PRODUCT_ENTRY)} a product.</b> Started with Core? Move up to Karots Suite for <b>{rs(CORE_TO_SUITE)}</b>; a Karots Suite shop adds plugins later for free.</p>
 
     <section class="service" aria-labelledby="service">
       <div>
@@ -63,10 +63,10 @@ import { softwareApplication } from '../lib/jsonld'
     <section class="block" aria-labelledby="who-pays">
       <h2 id="who-pays">Who pays for what</h2>
       <div class="scroll">
-        <table>
+        <table class="stack">
           <thead><tr><th></th><th>First 3 months (6 with Complete Shop)</th><th>With the plan</th><th>Without a plan</th></tr></thead>
           <tbody>
-            {WHO_PAYS.map((r) => <tr><th scope="row">{r.what}</th><td>{r.first}</td><td>{r.plan}</td><td>{r.none}</td></tr>)}
+            {WHO_PAYS.map((r) => <tr><th scope="row">{r.what}</th><td data-label="First 3 months">{r.first}</td><td data-label="With the plan">{r.plan}</td><td data-label="Without a plan">{r.none}</td></tr>)}
           </tbody>
         </table>
       </div>
@@ -93,7 +93,7 @@ import { softwareApplication } from '../lib/jsonld'
       <h2 id="pc">System requirements</h2>
       <p class="sub">The main PC, the one that runs Karots Suite:</p>
       <div class="scroll">
-        <table class="req">
+        <table class="req stack">
           <thead><tr><th></th><th>Minimum</th><th>Recommended</th></tr></thead>
           <tbody>
             {REQUIREMENTS.map((r) => <tr><th scope="row">{r.what}</th><td data-label="Minimum">{r.min}</td><td data-label="Recommended">{r.rec}</td></tr>)}
@@ -117,24 +117,36 @@ import { softwareApplication } from '../lib/jsonld'
 <style>
   .page { padding-block: 2.5rem 4rem }
   .lede { margin-bottom: 2.5rem }
-  .plans { display: grid; gap: 1rem; margin-bottom: 1.25rem }
-  .plan { padding: 1.75rem 1.5rem; border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line) }
-  .featured { border: 3px solid var(--saffron) }
-  .complete { display: grid; gap: 1.25rem 3rem; margin-bottom: 1.25rem }
-  @media (min-width: 860px) { .complete { grid-template-columns: 1fr 1.2fr; align-items: start } }
-  .plan h2, .service h2 { font-size: 1.6rem; margin-bottom: 0.35rem }
+  .tiers { list-style: none; margin: 0 0 3rem; padding: 0; display: grid; gap: 0.75rem }
+  .tier { padding: 1.25rem 1.25rem 1.4rem; border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line); display: grid; align-content: start; gap: 0.2rem }
+  .tier.featured { border: 3px solid var(--saffron) }
+  .tier h2 { font-size: 1.3rem; margin: 0 0 0.4rem }
+  .tag { margin: 0 }
+  .tier .n { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); white-space: nowrap }
+  .unit { margin: 0; color: var(--muted); font-size: 0.95rem }
+  .for { margin: 0.6rem 0 0 }
+  @media (min-width: 640px) { .tiers { grid-template-columns: 1fr 1fr } }
+  @media (min-width: 1100px) { .tiers { grid-template-columns: repeat(4, 1fr) } }
+  .compare { min-width: 44rem; table-layout: fixed }
+  .compare col.what { width: 13rem }
+  .compare thead th { color: var(--ink); font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: 1.05rem }
+  .compare tbody th { position: sticky; left: 0; background-color: var(--bg) }
+  .compare .hl { background-color: var(--saffron-soft) }
+  .yes { display: inline-block; width: 1rem; height: 0.55rem; margin-top: 0.3em; border-left: 3px solid var(--paid); border-bottom: 3px solid var(--paid); transform: rotate(-45deg) }
+  .no { color: var(--muted) }
+  .know { margin-top: 1.5rem }
+  .service h2 { font-size: 1.6rem; margin-bottom: 0.35rem }
   .price { margin: 0 0 0.25rem; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem }
   .n { font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: clamp(2rem, 1.6rem + 2vw, 2.8rem); line-height: 1.1 }
-  .once, .alt, .line { color: var(--muted) }
-  .line { margin-bottom: 1.25rem }
+  .once, .alt { color: var(--muted) }
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem }
   li { padding-left: 1.7rem; position: relative }
   li::before {
     content: ''; position: absolute; left: 0.1rem; top: 0.35em; width: 1rem; height: 0.55rem;
     border-left: 3px solid var(--paid); border-bottom: 3px solid var(--paid); transform: rotate(-45deg);
   }
-  .without { margin: 1rem 0 0; color: var(--muted) }
-  .entry { margin: 0 0 2.5rem; padding: 1rem 1.25rem; border-radius: var(--r-btn); background-color: var(--saffron-soft); max-width: none }
+  .tier { padding-left: 1.25rem }
+  .tier::before { content: none }
   .service { display: grid; gap: 1.25rem 3rem; padding: 1.75rem 1.5rem; border-radius: var(--r-tile); background-color: var(--ink); color: var(--bg); margin-bottom: 2.5rem }
   .service .once, .service .alt { color: color-mix(in srgb, var(--bg) 70%, transparent) }
   .service .alt { margin: 0 }
@@ -146,21 +158,21 @@ import { softwareApplication } from '../lib/jsonld'
   .scroll { overflow-x: auto }
   table { border-collapse: collapse; width: 100% }
   th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere }
-  @media (max-width: 600px) { table { font-size: 0.85rem } th, td { padding: 0.5rem 0.3rem } }
   thead th { font-size: 0.95rem; color: var(--muted) }
   tbody th { font-weight: 600 }
   .small { color: var(--muted); font-size: 0.95rem }
   .sub { margin: 0 0 0.75rem }
   .req tbody th { width: 9rem }
   @media (max-width: 600px) {
-    .req thead { display: none }
-    .req tr { display: grid; grid-template-columns: 1fr 1fr; gap: 0 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--line) }
-    .req tbody th { grid-column: 1 / -1; width: auto; border: 0; padding: 0 0 0.3rem; font-size: 1rem }
-    .req td { border: 0; padding: 0 }
-    .req td::before { content: attr(data-label); display: block; font-size: 0.8rem; color: var(--muted) }
+    .stack, .compare { min-width: 0; table-layout: auto }
+    .stack colgroup, .stack thead { display: none }
+    .stack tr { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--line) }
+    .stack tbody th { position: static; grid-column: 1 / -1; width: auto; border: 0; padding: 0; font-size: 1rem; background: none }
+    .stack td { border: 0; padding: 0; font-size: 0.95rem; overflow-wrap: normal }
+    .stack td::before { content: attr(data-label); display: block; font-size: 0.8rem; color: var(--muted) }
+    .stack .hl { background: none }
   }
   @media (min-width: 860px) {
-    .plans { grid-template-columns: 1fr 1fr }
     .service { grid-template-columns: 1fr 1.4fr; align-items: center }
   }
 </style>
