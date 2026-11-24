@@ -71,7 +71,7 @@ describe('sales pages', () => {
 
   it('shows the prices (user, 2026-11-22) and the policies (2026-11-24): Suite 100,000, Core 80,000, Core → Suite 20,000, service 5,000 a month or 60,000 a year, entry 10 a product, bugs free always, 3 months of the plan', () => {
     const html = page('/pricing/')!.html
-    for (const n of ['Rs. 100,000', 'Rs. 80,000', 'Rs. 20,000', 'Rs. 5,000', 'Rs. 60,000', 'Rs. 10 a product', 'Genuine bugs fixed free, always', '3 months of everything the service plan gives, free', 'One licence, one PC', 'System requirements', 'Intel Core 2 Duo', '5 GB free on a hard disk', '20 GB free on an SSD', 'Windows 10 (64-bit)', 'Complete Shop', 'Rs. 190,000', '6 months’ warranty on the hardware'])
+    for (const n of ['Rs. 100,000', 'Rs. 80,000', 'Rs. 20,000', 'Rs. 5,000', 'Rs. 60,000', 'Rs. 10 a product', 'Genuine bugs fixed free, always', '3 months of everything the service plan gives, free', 'One licence, one PC', 'System requirements', 'Intel Core 2 Duo', '5 GB free on a hard disk', '20 GB free on an SSD', 'Windows 10 (64-bit)', 'Complete Shop', 'Rs. 190,000', 'Easy Pay', 'Rs. 50,000', 'Rs. 170,000', 'Rs. 65,000', 'Rs. 125,000', '6 months’ warranty on the hardware'])
       expect(html, n).toContain(n)
     for (const n of ['Every new feature', 'Help any time', '3 months’ warranty']) expect(html, n).not.toContain(n)
     const offers = [...html.matchAll(/"price":"(\d+)"/g)].map((m) => m[1])

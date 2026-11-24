@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Button from '../components/Button.astro'
 import { CONTACT } from '../data/site'
-import { CASHIER_PC, COMPLETE, CORE_TO_SUITE, DISK_YEAR, INCLUDED, PLANS, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, WHO_PAYS, rs } from '../data/pricing'
+import { CASHIER_PC, COMPLETE, CORE_TO_SUITE, EASY_PAY, DISK_YEAR, INCLUDED, PLANS, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, WHO_PAYS, rs } from '../data/pricing'
 import { softwareApplication } from '../lib/jsonld'
 ---
 <Base title="Pricing — Karots Suite" description={`Karots Suite ${rs(100000)} or Core ${rs(80000)}, once. Bugs fixed free, always; 3 months of the service plan free, then ${rs(SERVICE.monthly)} a month if you want it.`} path="/pricing/" jsonLd={[softwareApplication(Astro.site!)]}>
@@ -23,6 +23,18 @@ import { softwareApplication } from '../lib/jsonld'
         </section>
       ))}
     </div>
+
+    <section class="plan complete" aria-labelledby="plan-easy">
+      <div>
+        <h2 id="plan-easy">{EASY_PAY.name}</h2>
+        {EASY_PAY.options.map((o) => (
+          <p class="price"><span class="n">{rs(o.start)}</span> <span class="once">+ the plan for {o.months / 12 === 1 ? '1 year' : `${o.months / 12} years`} ({rs(o.total)} in all)</span></p>
+        ))}
+        <p class="line">{EASY_PAY.line}</p>
+        <p class="without">{EASY_PAY.note}</p>
+      </div>
+      <ul>{EASY_PAY.gets.map((g) => <li>{g}</li>)}</ul>
+    </section>
 
     <section class="plan complete" aria-labelledby="plan-complete">
       <div>

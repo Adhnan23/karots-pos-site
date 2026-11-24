@@ -14,6 +14,24 @@ export const PLANS = [
   },
 ]
 
+/** A combo, not credit (user, 2026-11-24): Karots Suite at a lower price with 2 years of the service plan; no interest. */
+export const EASY_PAY = {
+  name: 'Easy Pay',
+  options: [
+    { months: 24, start: 50000, total: 170000, rest: 50000 },
+    { months: 12, start: 65000, total: 125000, rest: 35000 },
+  ],
+  line: 'A combo: Karots Suite for less, with the service plan for 1 or 2 years. No interest and no loan: each month pays for the service you get that month.',
+  gets: [
+    'Everything in Karots Suite',
+    'The service plan for the whole time: support, upgrades, small changes and cloud backup',
+    'Rs. 5,000 a month or Rs. 60,000 a year',
+    'After that the licence is fully yours; keep the plan if you like',
+    'Genuine bugs fixed free, always',
+  ],
+  note: 'Stopping early? Pay the rest of the Karots Suite price (Rs. 50,000 on 2 years, Rs. 35,000 on 1 year) and it’s yours, or the licence ends after written notice. Your data always stays yours.',
+}
+
 /** Karots Suite with the hardware (user, 2026-11-24): quoted per shop, the price moves with the hardware chosen. */
 export const COMPLETE = {
   name: 'Complete Shop', from: 190000, to: 220000,
