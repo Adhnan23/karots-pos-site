@@ -2,6 +2,16 @@
 // Karots Shelf, the staff app that comes with Karots Suite (the Suite's guide: docs/guide/shelf.md).
 import { Image } from 'astro:assets'
 import icon from '../assets/shelf-icon.png'
+import product from '../assets/shelf/product.jpg'
+import stock from '../assets/shelf/stock.jpg'
+import readLabel from '../assets/shelf/read-label.jpg'
+import waiting from '../assets/shelf/waiting.jpg'
+const shots = [
+  { src: product, cap: 'A new product: name, barcode, category and prices, with Identify to fill them in' },
+  { src: stock, cap: 'Its supplier and the stock already on the shelf, with the expiry date' },
+  { src: readLabel, cap: 'Read off the label: tap the line that is the name' },
+  { src: waiting, cap: 'Out of wifi range: it waits on the phone until it can go in' },
+]
 const points = [
   'Scan a barcode with the phone’s camera, and read the name, price or expiry off the label instead of typing.',
   'Set the category, prices, packs and the stock already on the shelf, with batches and expiry dates.',
@@ -20,6 +30,14 @@ const points = [
     </div>
   </div>
   <ul>{points.map((p) => <li>{p}</li>)}</ul>
+  <div class="shots">
+    {shots.map((x) => (
+      <figure>
+        <div class="phone"><Image src={x.src} alt={`Karots Shelf: ${x.cap}`} widths={[240, 360, 480]} sizes="(min-width: 900px) 220px, 45vw" /></div>
+        <figcaption>{x.cap}</figcaption>
+      </figure>
+    ))}
+  </div>
   <p><a href="/guides/shelf/">How Karots Shelf works</a></p>
 </div>
 
@@ -32,6 +50,12 @@ const points = [
   ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem 3rem }
   li { padding-left: 1.4rem; position: relative }
   li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.6rem; height: 0.6rem; border-radius: 3px; background-color: var(--saffron) }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; max-width: 60rem }
+  figure { margin: 0 }
+  .phone { padding: 5px; border-radius: 22px; background-color: #2b2d33; box-shadow: var(--shadow) }
+  .phone :global(img) { display: block; width: 100%; height: auto; border-radius: 17px }
+  figcaption { margin-top: 0.6rem; font-size: 0.9rem; color: var(--muted) }
+  @media (min-width: 900px) { .shots { grid-template-columns: repeat(4, 1fr); gap: 1.5rem } }
   a { font-weight: 700; text-decoration-color: var(--saffron); text-decoration-thickness: 2px }
   @media (min-width: 800px) { ul { grid-template-columns: 1fr 1fr } .head :global(.icon) { width: 96px; height: 96px; border-radius: var(--r-tile) } }
 </style>
