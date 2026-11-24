@@ -23,6 +23,14 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Features', path: '/feature
     <ul class="points">
       {f.points.map((p) => <li>{p}</li>)}
     </ul>
+    {f.more && (
+      <section class="more" aria-labelledby="more">
+        <h2 id="more">More screens</h2>
+        <div class="grid">
+          {f.more.map((m) => <figure><Screen src={m.shot} alt={m.alt} /><figcaption>{m.alt}</figcaption></figure>)}
+        </div>
+      </section>
+    )}
     {f.demos?.map((d) => <Demo kind={d} />)}
     <div class="actions">
       <Button href={`/guides/${f.guide}/`}>Read the full guide</Button>
@@ -38,5 +46,11 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Features', path: '/feature
   .points li { padding-left: 1.4rem; position: relative }
   .points li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.6rem; height: 0.6rem; border-radius: 3px; background-color: var(--saffron) }
   .actions { display: flex; flex-wrap: wrap; gap: 0.75rem }
+  .more { margin: 0 0 3rem }
+  .more h2 { font-size: 1.6rem; margin-bottom: 1.25rem }
+  .grid { display: grid; gap: 1.75rem 1.5rem }
+  figure { margin: 0 }
+  figcaption { margin-top: 0.6rem; color: var(--muted) }
+  @media (min-width: 800px) { .grid { grid-template-columns: 1fr 1fr } }
   @media (min-width: 800px) { .points { grid-template-columns: 1fr 1fr } }
 </style>

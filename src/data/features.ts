@@ -1,5 +1,5 @@
 // The areas the Features pages cover: copy from the Suite's README and guides, in an owner's words.
-export type Feature = { area: string; short: string; demos?: ('lots' | 'packs' | 'pay' | 'credit')[]; title: string; summary: string; shot: string; alt: string; guide: string; points: string[] }
+export type Feature = { area: string; short: string; demos?: ('lots' | 'packs' | 'pay' | 'credit')[]; title: string; summary: string; shot: string; alt: string; guide: string; points: string[]; more?: { shot: string; alt: string }[] }
 
 export const FEATURES: Feature[] = [
   {
@@ -14,6 +14,7 @@ export const FEATURES: Feature[] = [
       'Returns and exchanges from the receipt, with the money and stock put right.',
       'Each screen size gets its own layout, so a small monitor still works.',
     ],
+    more: [{ shot: 'till/returns.jpg', alt: 'A return from the receipt, line by line' }, { shot: 'till/tickets.jpg', alt: 'Tickets a sales person sent to the cashier' }, { shot: 'till/credit.jpg', alt: 'Taking a payment on a customer’s credit' }, { shot: 'till/sell-dark.jpg', alt: 'The till in dark mode' }],
   },
   {
     area: 'stock', short: 'stock and expiry', demos: ['lots', 'packs'], title: 'Know your stock', guide: 'stock',
@@ -26,6 +27,7 @@ export const FEATURES: Feature[] = [
       'Stock-take on a phone or PC, counted shelf by shelf.',
       'Reorder levels worked out from what you actually sell.',
     ],
+    more: [{ shot: 'stock/products.jpg', alt: 'The products list' }, { shot: 'stock/intake.jpg', alt: 'Intake: stock coming in by scan' }, { shot: 'stock/stock-take.jpg', alt: 'A stock-take, counted shelf by shelf' }, { shot: 'stock/categories.jpg', alt: 'Categories' }],
   },
   {
     area: 'purchasing', short: 'suppliers', title: 'Buy from suppliers', guide: 'purchasing',
@@ -37,6 +39,7 @@ export const FEATURES: Feature[] = [
       'What you owe each supplier, paid by cash, bank or cheque.',
       'Damaged or expired goods go back to the supplier for money or credit.',
     ],
+    more: [{ shot: 'purchasing/reorder.jpg', alt: 'The reorder list, by supplier' }, { shot: 'purchasing/purchases.jpg', alt: 'Purchases and deliveries' }, { shot: 'purchasing/returns.jpg', alt: 'Goods sent back to a supplier' }],
   },
   {
     area: 'money', short: 'money', demos: ['credit'], title: 'Follow every rupee', guide: 'money',
@@ -48,6 +51,7 @@ export const FEATURES: Feature[] = [
       'Cheques taken and written, cleared or bounced.',
       'Customer credit with limits, statements and payments.',
     ],
+    more: [{ shot: 'money/tills.jpg', alt: 'Till sessions with counted cash' }, { shot: 'money/lockers.jpg', alt: 'Lockers: the safe, the bank, the card machine' }, { shot: 'money/cheques.jpg', alt: 'Cheques taken and written' }, { shot: 'money/finance.jpg', alt: 'Finance: profit and loss' }],
   },
   {
     area: 'reports', short: 'reports', title: 'See how the shop is doing', guide: 'reports',
@@ -58,6 +62,7 @@ export const FEATURES: Feature[] = [
       'Top products, profit by category, stock value, and what you owe and are owed.',
       'Every report works on a phone and exports to Excel.',
     ],
+    more: [{ shot: 'reports/top-products.jpg', alt: 'Top products' }, { shot: 'reports/profit-by-category.jpg', alt: 'Profit by category' }, { shot: 'reports/peak-hours.jpg', alt: 'The busiest hours of the week' }, { shot: 'reports/index.jpg', alt: 'Every report in one place' }],
   },
   {
     area: 'people', short: 'staff and customers', title: 'Staff and customers', guide: 'people',
@@ -69,6 +74,7 @@ export const FEATURES: Feature[] = [
       'The till locks itself when nobody is using it.',
       'Every change is kept: who did it and when.',
     ],
+    more: [{ shot: 'people/users.jpg', alt: 'Staff logins and what each may do' }, { shot: 'people/activity.jpg', alt: 'Activity: who did what, and when' }],
   },
   {
     area: 'printing', short: 'receipts and labels', title: 'Receipts and labels', guide: 'printing',
@@ -79,6 +85,7 @@ export const FEATURES: Feature[] = [
       'Barcode and price labels for the shelf.',
       'Ask before printing, or print straight away: your choice.',
     ],
+    more: [{ shot: 'printing/labels.jpg', alt: 'Printing price and barcode labels' }, { shot: 'printing/label-styles.jpg', alt: 'Label styles' }],
   },
 ]
 

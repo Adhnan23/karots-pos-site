@@ -5,6 +5,8 @@ import Section from '../components/Section.astro'
 import KindTiles from '../components/KindTiles.astro'
 import FeatureRow from '../components/FeatureRow.astro'
 import Trust from '../components/Trust.astro'
+import HowItConnects from '../components/HowItConnects.astro'
+import ShelfApp from '../components/ShelfApp.astro'
 import Button from '../components/Button.astro'
 import { FEATURES } from '../data/features'
 import { plugins } from '../lib/content'
@@ -26,11 +28,19 @@ const list = await plugins()
     <p class="all"><a href="/features/">All the features</a></p>
   </Section>
 
-  <Section title="Built to be trusted" intro="A shop can't stop because the computer did. These are the things Karots Suite is built never to get wrong." tone="surface">
+  <Section title="How it fits in your shop" intro="One PC runs everything. The rest of the shop reaches it over your own network, with or without the internet.">
+    <HowItConnects />
+  </Section>
+
+  <Section title="Karots Shelf, for setting up your shop" intro="The app your staff use to put your products in when the shop starts, and only then." tone="surface">
+    <ShelfApp />
+  </Section>
+
+  <Section title="Built to be trusted" intro="A shop can't stop because the computer did. These are the things Karots Suite is built never to get wrong.">
     <Trust />
   </Section>
 
-  <Section title="Add what your shop needs" intro="Every shop gets the till, stock, suppliers, money and reports. Plugins add the rest, built into your own copy.">
+  <Section title="Add what your shop needs" intro="Every shop gets the till, stock, suppliers, money and reports. Plugins add the rest, built into your own copy." tone="surface">
     <ul class="plugins">
       {list.map((p) => <li><a href={`/plugins/${p.id}/`}>{p.data.title}</a></li>)}
     </ul>

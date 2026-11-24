@@ -17,6 +17,7 @@ for Rs. 50,000 + the plan for 2 years (Rs. 170,000), or Rs. 65,000 + 1 year (Rs.
 Genuine bugs are fixed free, always. Service plan Rs. 5,000 a month or Rs. 60,000 a year: support, major upgrades, small
 changes, maintenance, cloud backup. One licence = the one PC that runs it. Main PC: 64-bit Windows 10 / 11 or Linux;
 recommended Core i3 2nd gen, 4 GB, 20 GB free SSD, 1366 × 768; minimum Core 2 Duo, 2 GB, 5 GB free hard disk, 1024 × 768.
+More than one device (cashier PCs, phones, Karots Shelf) needs a wifi router or wired network in the shop; no internet needed.
 Products put in for Rs. 10 each. Call +94 76 962 6396.
 `
 

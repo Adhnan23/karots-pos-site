@@ -1,0 +1,37 @@
+---
+// Karots Shelf, the staff app that comes with Karots Suite (the Suite's guide: docs/guide/shelf.md).
+import { Image } from 'astro:assets'
+import icon from '../assets/shelf-icon.png'
+const points = [
+  'Scan a barcode with the phone’s camera, and read the name, price or expiry off the label instead of typing.',
+  'Set the category, prices, packs and the stock already on the shelf, with batches and expiry dates.',
+  'Several people work at once, each under their own name, so you can see who added what.',
+  'Needs the shop’s wifi to send products in, but keeps working where it doesn’t reach: they wait on the phone and go in when it’s back in range.',
+  'Only for the setup: you switch it on for the people helping, and off again when the products are in.',
+]
+---
+<div class="shelf">
+  <div class="head">
+    <Image src={icon} alt="" width={96} height={96} class="icon" />
+    <div>
+      <p class="lede">Starting a shop on Karots Suite means putting in hundreds of products. During that setup, Karots Shelf lets
+        your staff walk the shelves with their own Android phones and put them in one by one, all at the same time.</p>
+      <p class="incl">Comes with Karots Suite, Easy Pay and Complete Shop.</p>
+    </div>
+  </div>
+  <ul>{points.map((p) => <li>{p}</li>)}</ul>
+  <p><a href="/guides/shelf/">How Karots Shelf works</a></p>
+</div>
+
+<style>
+  .shelf { display: grid; gap: 1.5rem; max-width: 60rem }
+  .head { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: start }
+  .head :global(.icon) { border-radius: var(--r-btn); width: 48px; height: 48px }
+  .lede { margin: 0 }
+  .incl { margin: 0.6rem 0 0; font-weight: 700 }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem 3rem }
+  li { padding-left: 1.4rem; position: relative }
+  li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.6rem; height: 0.6rem; border-radius: 3px; background-color: var(--saffron) }
+  a { font-weight: 700; text-decoration-color: var(--saffron); text-decoration-thickness: 2px }
+  @media (min-width: 800px) { ul { grid-template-columns: 1fr 1fr } .head :global(.icon) { width: 96px; height: 96px; border-radius: var(--r-tile) } }
+</style>

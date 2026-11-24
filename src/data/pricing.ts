@@ -17,7 +17,7 @@ export const COMPARE: { what: string; cells: (string | boolean)[] }[] = [
   { what: 'You pay', cells: ['Rs. 80,000 once', 'Rs. 100,000 once', 'Rs. 50,000 + the plan for 2 years, or Rs. 65,000 + 1 year', 'Rs. 190,000 to 220,000 or more, once'] },
   { what: 'Till, stock, suppliers, money, reports', cells: [true, true, true, true] },
   { what: 'Plugins for your kind of shop', cells: [false, true, true, true] },
-  { what: 'Karots Shelf app for your staff', cells: [false, true, true, true] },
+  { what: 'Karots Shelf app, for setting the shop up', cells: [false, true, true, true] },
   { what: 'Installation and training', cells: [true, true, true, true] },
   { what: 'Service plan included', cells: ['First 3 months', 'First 3 months', 'The whole 1 or 2 years', 'First 6 months'] },
   { what: 'Genuine bugs fixed free, always', cells: [true, true, true, true] },
@@ -61,13 +61,13 @@ export const REQUIREMENTS: { what: string; min: string; rec: string }[] = [
   { what: 'Memory', min: '2 GB', rec: '4 GB or more' },
   { what: 'Storage', min: '5 GB free on a hard disk', rec: '20 GB free on an SSD' },
   { what: 'Screen', min: '1024 × 768', rec: '1366 × 768 or larger' },
-  { what: 'Network', min: 'None for one PC. Cashier PCs and phones: the shop’s wired network or wifi', rec: 'The same, plus internet now and then for updates and cloud backup' },
+  { what: 'Network', min: 'One PC alone: none. More devices (cashier PCs, phones, Karots Shelf): a wifi router or wired network in the shop', rec: 'A wifi router in the shop, the main PC on a cable to it, and internet now and then for updates and cloud backup' },
   { what: 'Receipt printer', min: 'Optional', rec: 'An 80 mm thermal receipt printer on USB (tested: Xprinter XP-80T)' },
   { what: 'Power', min: 'A normal socket (a power cut loses no finished sale)', rec: 'A UPS, to keep selling through a power cut' },
 ]
 
 /** A cashier PC only shows the till in a browser from the main PC. */
-export const CASHIER_PC = 'Any PC with Windows 10 or 11 or Linux, 2 GB memory, a 1024 × 768 screen and Chrome, Edge or Firefox from 2023 or later'
+export const CASHIER_PC = 'Any PC with Windows 10 or 11 or Linux, 2 GB memory, a 1024 × 768 screen and Chrome, Edge or Firefox from 2023 or later, on the same wifi or wired network as the main PC'
 
 /** What a year of a busy shop took on the main PC: the program, its database and a week of backups. */
 export const DISK_YEAR = 'about 0.5 GB'
