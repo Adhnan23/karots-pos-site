@@ -3,16 +3,32 @@ export const PLANS = [
   {
     id: 'suite', name: 'Karots Suite', price: 100000, featured: true,
     line: 'Everything, with the plugins your shop wants.',
-    without: '',
+    without: 'Software only: you bring the PC and printers.',
     gets: ['Everything in Core', 'The plugins your kind of shop wants', 'Karots Shelf, the app your staff use to put products in'],
   },
   {
     id: 'core', name: 'Core', price: 80000, featured: false,
     line: 'The whole shop system, without plugins.',
     gets: ['The till, stock and expiry, suppliers, money, reports, staff and printing'],
-    without: 'No plugins and no Karots Shelf app.',
+    without: 'Software only, with no plugins and no Karots Shelf app.',
   },
 ]
+
+/** Karots Suite with the hardware (user, 2026-11-24): quoted per shop, the price moves with the hardware chosen. */
+export const COMPLETE = {
+  name: 'Complete Shop', from: 190000, to: 220000,
+  line: 'Karots Suite with the hardware, done end to end: we buy it, set it all up at your shop and hand it over ready to sell.',
+  gets: [
+    'Everything in Karots Suite',
+    'A PC set up for your shop',
+    'Receipt and label printing: one 2-in-1 printer, or two separate printers',
+    'A barcode scanner and a cash drawer, if you want them',
+    'Installation and training for you and your staff',
+    '6 months of everything the service plan gives, free',
+    '6 months’ warranty on the hardware we supply: if it breaks, we sort it out',
+  ],
+  note: 'The price depends on what you choose: the PC, one printer or two, a scanner, a cash drawer. Extra cashier PCs and other hardware add to it. We quote your shop before anything is bought. Putting your products in is extra, at the same Rs. 10 a product.',
+}
 
 /** What every shop gets with either plan. */
 export const INCLUDED = ['Installation and training for you and your staff', '3 months of everything the service plan gives, free', 'Genuine bugs fixed free, always']
@@ -38,7 +54,8 @@ export const WHO_PAYS: { what: string; first: string; plan: string; none: string
   { what: 'Karots cloud backup', first: 'Included', plan: 'Included', none: 'Stops' },
   { what: 'Moving to a new PC, or reinstalling', first: 'Free', plan: 'Free', none: 'Free' },
   { what: 'Large new features, custom work', first: 'Quoted', plan: 'Quoted', none: 'Quoted' },
-  { what: 'Hardware, and visits to the shop', first: 'Yours / by distance', plan: 'Yours / by distance', none: 'Yours / by distance' },
+  { what: 'Hardware faults', first: 'Yours (Complete Shop: ours for 6 months)', plan: 'Yours', none: 'Yours' },
+  { what: 'Visits to the shop', first: 'By distance', plan: 'By distance', none: 'By distance' },
 ]
 
 /** System requirements, as measured (the Suite's docs/guide/install.md, 2026-11-24). */

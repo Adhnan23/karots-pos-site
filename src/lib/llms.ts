@@ -11,6 +11,8 @@ const ABOUT = `# Karots Suite
 
 Made by Karots, Sri Lanka. Karots Suite Rs. 100,000 once (with the shop's plugins and the Karots Shelf app); Core
 Rs. 80,000 (no plugins or Shelf); both with installation, training and the first 3 months of the service plan free.
+Complete Shop (Karots Suite + PC, printers, scanner, drawer as chosen, set up): about Rs. 190,000 to 220,000 or more,
+quoted per shop, with 6 months of the plan and 6 months' hardware warranty.
 Genuine bugs are fixed free, always. Service plan Rs. 5,000 a month or Rs. 60,000 a year: support, major upgrades, small
 changes, maintenance, cloud backup. One licence = the one PC that runs it. Main PC: 64-bit Windows 10 / 11 or Linux;
 recommended Core i3 2nd gen, 4 GB, 20 GB free SSD, 1366 × 768; minimum Core 2 Duo, 2 GB, 5 GB free hard disk, 1024 × 768.

@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Button from '../components/Button.astro'
 import { CONTACT } from '../data/site'
-import { CASHIER_PC, CORE_TO_SUITE, DISK_YEAR, INCLUDED, PLANS, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, WHO_PAYS, rs } from '../data/pricing'
+import { CASHIER_PC, COMPLETE, CORE_TO_SUITE, DISK_YEAR, INCLUDED, PLANS, PRODUCT_ENTRY, REQUIREMENTS, SERVICE, WHO_PAYS, rs } from '../data/pricing'
 import { softwareApplication } from '../lib/jsonld'
 ---
 <Base title="Pricing — Karots Suite" description={`Karots Suite ${rs(100000)} or Core ${rs(80000)}, once. Bugs fixed free, always; 3 months of the service plan free, then ${rs(SERVICE.monthly)} a month if you want it.`} path="/pricing/" jsonLd={[softwareApplication(Astro.site!)]}>
@@ -24,7 +24,18 @@ import { softwareApplication } from '../lib/jsonld'
       ))}
     </div>
 
-    <p class="entry">Want us to put your products in? <b>{rs(PRODUCT_ENTRY)} a product.</b> Started with Core? Move up to Karots Suite for <b>{rs(CORE_TO_SUITE)}</b>; a Karots Suite shop adds plugins later for free.</p>
+    <section class="plan complete" aria-labelledby="plan-complete">
+      <div>
+        <h2 id="plan-complete">{COMPLETE.name}</h2>
+        <p class="price"><span class="once">from</span> <span class="n">{rs(COMPLETE.from)}</span> <span class="once">to {rs(COMPLETE.to)} or more, quoted for your shop</span></p>
+        <p class="line">{COMPLETE.line}</p>
+        <p class="without">{COMPLETE.note}</p>
+      </div>
+      <ul>{COMPLETE.gets.map((g) => <li>{g}</li>)}</ul>
+    </section>
+
+    <p class="entry">Karots Suite and Core are the software only: you bring your own PC and printers, and their faults are for their seller’s warranty.
+      Want us to put your products in? <b>{rs(PRODUCT_ENTRY)} a product.</b> Started with Core? Move up to Karots Suite for <b>{rs(CORE_TO_SUITE)}</b>; a Karots Suite shop adds plugins later for free.</p>
 
     <section class="service" aria-labelledby="service">
       <div>
@@ -41,7 +52,7 @@ import { softwareApplication } from '../lib/jsonld'
       <h2 id="who-pays">Who pays for what</h2>
       <div class="scroll">
         <table>
-          <thead><tr><th></th><th>First 3 months</th><th>With the plan</th><th>Without a plan</th></tr></thead>
+          <thead><tr><th></th><th>First 3 months (6 with Complete Shop)</th><th>With the plan</th><th>Without a plan</th></tr></thead>
           <tbody>
             {WHO_PAYS.map((r) => <tr><th scope="row">{r.what}</th><td>{r.first}</td><td>{r.plan}</td><td>{r.none}</td></tr>)}
           </tbody>
@@ -97,6 +108,8 @@ import { softwareApplication } from '../lib/jsonld'
   .plans { display: grid; gap: 1rem; margin-bottom: 1.25rem }
   .plan { padding: 1.75rem 1.5rem; border-radius: var(--r-tile); background-color: var(--surface); border: 1px solid var(--line) }
   .featured { border: 3px solid var(--saffron) }
+  .complete { display: grid; gap: 1.25rem 3rem; margin-bottom: 1.25rem }
+  @media (min-width: 860px) { .complete { grid-template-columns: 1fr 1.2fr; align-items: start } }
   .plan h2, .service h2 { font-size: 1.6rem; margin-bottom: 0.35rem }
   .price { margin: 0 0 0.25rem; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem }
   .n { font-family: var(--display); font-stretch: 115%; font-weight: 800; font-size: clamp(2rem, 1.6rem + 2vw, 2.8rem); line-height: 1.1 }
