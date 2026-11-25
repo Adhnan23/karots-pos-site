@@ -9,7 +9,7 @@ export const OG_SHOTS = [
   DEFAULT_OG,
   'appearance/appearance.jpg',
   ...FEATURES.map((f) => f.shot),
-  ...['recharge', 'repairs', 'alternatives', 'clearance', 'productplus', 'requests', 'aicatalog', 'combos', 'documents', 'pharmacy'].map((p) => `plugins/${p}.jpg`),
+  ...['recharge', 'repairs', 'alternatives', 'clearance', 'productplus', 'requests', 'aicatalog', 'combos', 'documents', 'pharmacy', 'catalogue'].map((p) => `plugins/${p}.jpg`),
   ...Object.keys(TOUR).map((k) => `tour/${k}/03-sale-cart.jpg`),
 ].filter((s, i, all) => all.indexOf(s) === i)
 

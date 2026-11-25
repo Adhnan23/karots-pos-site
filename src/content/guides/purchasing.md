@@ -42,6 +42,11 @@ quantities come from the [smart reorder levels](/guides/stock/#smart-reorder-lev
 check the suppliers and make the orders: one purchase order per supplier. **Print** gives a
 paper list to take round.
 
+A product's supplier here is its own (preferred) one, set by hand, by a products sheet or by its first order or
+delivery. With [Product Plus](/plugins/productplus/), a product with none can take one from its Brand or
+Company (**Supplier by field**): it's listed under that supplier, marked "by Brand: …", until an order or delivery gives
+it its own.
+
 With [Alternatives](/plugins/alternatives/), an item whose twin still has stock is hidden as covered, here and on the till's
 Low stock tab, and a low group shows as one block with an order split across its brands. Tick **Show covered** on the till to see them.
 

@@ -54,7 +54,7 @@ describe('links and content pages', () => {
     for (const g of ['till', 'stock', 'purchasing', 'money', 'reports', 'people', 'printing', 'appearance', 'shelf'])
       expect(paths.has(`/guides/${g}/`), g).toBe(true)
     const plugins = [...paths].filter((p) => /^\/plugins\/[^/]+\/$/.test(p))
-    expect(plugins.length).toBe(10)
+    expect(plugins.length).toBe(11)
     expect(paths.has('/guides/')).toBe(true)
     expect(paths.has('/plugins/')).toBe(true)
   })
@@ -71,7 +71,7 @@ describe('sales pages', () => {
 
   it('shows the prices (user, 2026-11-22) and the policies (2026-11-24): Suite 100,000, Core 80,000, Core → Suite 20,000, service 5,000 a month or 60,000 a year, entry 10 a product, bugs free always, 3 months of the plan', () => {
     const html = page('/pricing/')!.html
-    for (const n of ['Rs. 100,000', 'Rs. 80,000', 'Rs. 20,000', 'Rs. 5,000', 'Rs. 60,000', 'Rs. 10 a product', 'Genuine bugs fixed free, always', 'Compare plans', 'First 3 months', 'First 6 months', 'One licence, one PC', 'System requirements', 'Intel Core 2 Duo', '5 GB free on a hard disk', '20 GB free on an SSD', 'Windows 10 (64-bit)', 'a wifi router or wired network in the shop', 'Complete Shop', 'Rs. 190,000', 'Easy Pay', 'Rs. 50,000', 'Rs. 170,000', 'Rs. 65,000', 'Rs. 125,000', 'Hardware warranty from us'])
+    for (const n of ['Rs. 100,000', 'Rs. 80,000', 'Rs. 20,000', 'Rs. 5,000', 'Rs. 60,000', 'Rs. 10 a product', 'Genuine bugs fixed free, always', 'Compare plans', 'First 3 months', 'First 6 months', 'One licence, one PC', 'System requirements', 'Intel Core 2 Duo', '5 GB free on a hard disk', '20 GB free on an SSD', 'Windows 10 (64-bit)', 'a wifi router or wired network in the shop', 'Complete Shop', 'Rs. 190,000', 'Easy Pay', 'Rs. 50,000', 'Rs. 170,000', 'Rs. 65,000', 'Rs. 125,000', 'Hardware warranty from us', 'The Karots catalogue', 'Taken off your PC'])
       expect(html, n).toContain(n)
     for (const n of ['Every new feature', 'Help any time', '3 months’ warranty']) expect(html, n).not.toContain(n)
     const offers = [...html.matchAll(/"price":"(\d+)"/g)].map((m) => m[1])

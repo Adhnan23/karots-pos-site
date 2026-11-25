@@ -38,7 +38,7 @@ export const PRODUCT_ENTRY = 10
 export const SERVICE = {
   monthly: 5000,
   yearly: 60000,
-  gets: ['Technical support and help', 'Major upgrades', 'Small changes made for your shop', 'Ongoing maintenance', 'Karots cloud backup of your shop'],
+  gets: ['Technical support and help', 'Major upgrades', 'Small changes made for your shop', 'Ongoing maintenance', 'Karots cloud backup of your shop', 'The Karots catalogue: 52,000+ real products to make yours from, kept up to date (Catalogue plugin)'],
 }
 
 /** Who pays for what (Shop Rules sections 1–5, 9). */
@@ -48,6 +48,7 @@ export const WHO_PAYS: { what: string; first: string; plan: string; none: string
   { what: 'Major upgrades', first: 'Free', plan: 'Included', none: 'Not included' },
   { what: 'Small changes for your shop', first: 'Free', plan: 'Included', none: 'Quoted' },
   { what: 'Karots cloud backup', first: 'Included', plan: 'Included', none: 'Stops' },
+  { what: 'The Karots catalogue (Catalogue plugin)', first: 'Included', plan: 'Included', none: 'Taken off your PC (products you made stay)' },
   { what: 'Moving to a new PC, or reinstalling', first: 'Free', plan: 'Free', none: 'Free' },
   { what: 'Large new features, custom work', first: 'Quoted', plan: 'Quoted', none: 'Quoted' },
   { what: 'Hardware faults', first: 'Yours (Complete Shop: ours for 6 months)', plan: 'Yours', none: 'Yours' },
